@@ -1,11 +1,11 @@
 # Robots.txt for Ian Gabaraev Portfolio
-# https://iangabaraev.dev
+# https://iangabaraev.com
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://iangabaraev.dev/sitemap.xml
+Sitemap: https://iangabaraev.com/sitemap.xml
 
 # Disallow admin/private paths (none currently)
 # Disallow: /admin/
