@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Download, Terminal } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 const navItems = [
   { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
@@ -19,7 +18,6 @@ const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -29,15 +27,10 @@ const Navbar = () => {
       className={`navbar ${isScrolled ? 'scrolled' : ''}`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.4 }}
     >
       <div className="container navbar-container">
-        <a href="#" className="logo">
-          <Terminal size={24} />
-          <span className="logo-text">
-            ian<span className="logo-accent">.dev</span>
-          </span>
-        </a>
+        <a href="#" className="logo">IG</a>
 
         <div className="nav-links">
           {navItems.map((item) => (
@@ -47,46 +40,29 @@ const Navbar = () => {
           ))}
         </div>
 
-        <a href="/CV_Ian_Gabaraev.pdf" download className="btn btn-primary nav-cta">
-          <Download size={16} />
-          Resume
-        </a>
-
         <button
           className="mobile-toggle"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            className="mobile-menu"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="mobile-link"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {item.label}
-              </a>
-            ))}
-            <a href="/CV_Ian_Gabaraev.pdf" download className="btn btn-primary mobile-cta">
-              <Download size={16} />
-              Download Resume
+      {isMobileMenuOpen && (
+        <div className="mobile-menu">
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="mobile-link"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {item.label}
             </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          ))}
+        </div>
+      )}
     </motion.nav>
   );
 };

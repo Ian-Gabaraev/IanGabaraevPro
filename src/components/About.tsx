@@ -1,135 +1,84 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, Award, BookOpen, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import './About.css';
 
 const About = () => {
+  const skills = [
+    'Python', 'TypeScript', 'React', 'Django', 'FastAPI', 'AWS', 'Azure',
+    'PostgreSQL', 'Docker', 'GraphQL', 'Redis', 'Kafka', 'PyTorch', 'DSP'
+  ];
+
   return (
-    <section id="about" className="section about-section">
+    <section id="about" className="section">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <h2 className="section-title">About Me</h2>
-        </motion.div>
-
-        <div className="about-grid">
-          <motion.div
-            className="about-content"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="about-intro">
-              I'm a <span className="highlight">Lead Software Engineer</span> with over a decade of experience 
-              architecting and building scalable systems that serve millions of users worldwide.
-            </p>
-            
-            <p>
-              My journey spans from crafting Python backends for healthcare giants to leading 
-              cloud migrations across AWS and Azure. I specialize in transforming complex business 
-              requirements into elegant, maintainable code.
-            </p>
-
-            <p>
-              Whether it's optimizing database queries to achieve <span className="highlight">85% performance gains</span>, 
-              building real-time communication platforms connecting patients with interpreters across 
-              <span className="highlight"> 65 languages</span>, or diving into bioinformatics to detect genome errors — 
-              I thrive on challenges that push the boundaries of what's possible.
-            </p>
-
-            <p>
-              When I'm not coding, I'm exploring new technologies, contributing to open source, 
-              and mentoring the next generation of developers.
-            </p>
-
-            <div className="about-highlights">
-              <div className="highlight-item">
-                <span className="highlight-number">10+</span>
-                <span className="highlight-label">Years Experience</span>
-              </div>
-              <div className="highlight-item">
-                <span className="highlight-number">6</span>
-                <span className="highlight-label">Companies</span>
-              </div>
-              <div className="highlight-item">
-                <span className="highlight-number">65</span>
-                <span className="highlight-label">Languages Supported</span>
-              </div>
+          <p className="section-title">About</p>
+          
+          <div className="about-grid">
+            <div className="about-text">
+              <p>
+                Full stack engineer building end-to-end solutions — from React frontends 
+                to Python backends to cloud infrastructure on AWS and Azure. For the past 
+                decade, I've shipped production systems across healthcare, biotech, and education.
+              </p>
+              <p>
+                I architect cloud migrations, design APIs, build real-time UIs, and optimize 
+                distributed systems for scale. At Akvelon, I lead development on Stratus Video, 
+                a telehealth platform serving interpreters across 65 languages worldwide.
+              </p>
+              <p>
+                Outside enterprise work, I build personal projects: NomadAtlas — a React 19 
+                finance dashboard for digital nomads — and ultrasonic bat detection systems 
+                combining DSP with machine learning.
+              </p>
             </div>
-          </motion.div>
-
-          <div className="about-cards">
-            <motion.div
-              className="about-card card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="card-icon">
-                <GraduationCap size={24} />
+            
+            <div className="about-info">
+              <div className="info-block">
+                <h3>Education</h3>
+                <p>Moscow State Institute of International Relations</p>
+                <span>Bachelor's in International Relations</span>
               </div>
-              <h3>Education</h3>
-              <div className="card-content">
-                <span className="degree">Bachelor's in International Relations</span>
-                <span className="institution">Moscow State Institute of International Relations (MGIMO)</span>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="about-card card certification"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <div className="card-icon">
-                <Award size={24} />
-              </div>
-              <h3>Certification</h3>
-              <div className="card-content">
-                <span className="degree">Machine Learning Specialization</span>
-                <span className="institution">Stanford University</span>
+              
+              <div className="info-block">
+                <h3>Certification</h3>
+                <p>Machine Learning Specialization</p>
                 <a 
-                  href="https://www.coursera.org/account/accomplishments/specialization/7DDIBT28LOZT" 
-                  target="_blank" 
+                  href="https://www.coursera.org/account/accomplishments/specialization/7DDIBT28LOZT"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="cert-link"
                 >
-                  <ExternalLink size={14} />
-                  View Certificate
+                  Stanford University <ExternalLink size={12} />
                 </a>
               </div>
-            </motion.div>
-
-            <motion.div
-              className="about-card card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="card-icon">
-                <BookOpen size={24} />
+              
+              <div className="info-block">
+                <h3>Beyond Code</h3>
+                <p>Technical diving, trekking the Himalayas, archeology</p>
+                <a 
+                  href="https://www.pexels.com/@ian-gabaraev-2149212079/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cert-link"
+                >
+                  Photography <ExternalLink size={12} />
+                </a>
               </div>
-              <h3>Methodologies</h3>
-              <div className="card-content">
-                <div className="methodology-tags">
-                  <span>Agile/Scrum</span>
-                  <span>TDD</span>
-                  <span>CI/CD</span>
-                  <span>Design Patterns</span>
-                  <span>Code Review</span>
-                  <span>Mentoring</span>
-                </div>
-              </div>
-            </motion.div>
+            </div>
           </div>
-        </div>
+
+          <div className="skills-list">
+            {skills.map((skill) => (
+              <span key={skill} className="skill-tag">{skill}</span>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
