@@ -1,0 +1,14 @@
+# Robots.txt for Ian Gabaraev Portfolio
+# https://iangabaraev.dev
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://iangabaraev.dev/sitemap.xml
+
+# Disallow admin/private paths (none currently)
+# Disallow: /admin/
+
+# Crawl-delay for politeness (optional)
+Crawl-delay: 1
