@@ -21,11 +21,19 @@ interface Project {
 const projects: Project[] = [
   {
     name: 'NomadAtlas.Dev',
-    tagline: 'Digital Nomad Intelligence Platform',
-    description: 'A comprehensive platform for remote workers and digital nomads, providing real-time data on visa requirements, cost of living, internet speeds, and co-working spaces across 200+ countries. Built with modern React/TypeScript frontend and Python backend.',
+    tagline: 'Your Digital Nomad Command Center',
+    description: 'A personal intelligence platform that grows with you. Tracks expenses, manages budgets, curates favorite places, monitors weather, and recommends your next destination — becoming your single source of truth for the nomadic lifestyle. The more you use it, the smarter it gets.',
     technologies: ['TypeScript', 'React', 'Python', 'FastAPI', 'PostgreSQL', 'Redis', 'Docker', 'AWS'],
     live: 'https://nomadatlas.dev',
     github: 'https://github.com/ian-gabaraev/nomadatlas',
+    featured: true,
+  },
+  {
+    name: 'Bat Sonar Listener',
+    tagline: 'Ultrasonic Bioacoustics & DSP',
+    description: 'Real-time ultrasonic bat call detection and analysis system. Captures frequencies up to 192kHz, applies heterodyne mixing and spectral analysis to identify bat species by their echolocation signatures. Features live spectrogram visualization and call pattern recognition.',
+    technologies: ['Python', 'NumPy', 'SciPy', 'DSP', 'PyAudio', 'Matplotlib', 'Signal Processing'],
+    github: 'https://github.com/Ian-Gabaraev/Bat-Sonar-Listener',
     featured: true,
   },
   {
@@ -34,6 +42,13 @@ const projects: Project[] = [
     description: 'VoIP platform for medical institutions connecting patients with interpreters across 65 languages. Handles thousands of daily video calls with real-time translation.',
     technologies: ['Python', 'Django', 'React', 'FreeSWITCH', 'WebRTC', 'Azure', 'PostgreSQL'],
     featured: true,
+  },
+  {
+    name: 'Bat Sonar Analysis',
+    tagline: 'ML-Powered Species Classification',
+    description: 'Machine learning pipeline for bat species classification from ultrasonic recordings. Implements FFT analysis, mel-frequency cepstral coefficients (MFCC), and neural networks to classify bat calls with high accuracy.',
+    technologies: ['Python', 'PyTorch', 'Librosa', 'MFCC', 'FFT', 'Neural Networks', 'NumPy'],
+    github: 'https://github.com/Ian-Gabaraev/Bat-Sonar',
   },
   {
     name: 'PlayStation4 REST API',

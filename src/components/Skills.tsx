@@ -68,6 +68,8 @@ const skillCategories: SkillCategory[] = [
       { name: 'PyTorch', level: 82 },
       { name: 'NumPy', level: 90 },
       { name: 'Pandas', level: 88 },
+      { name: 'DSP/Signal Processing', level: 85 },
+      { name: 'Librosa/Audio ML', level: 82 },
       { name: 'Data Analysis', level: 85 },
     ],
   },
@@ -86,7 +88,8 @@ const skillCategories: SkillCategory[] = [
 const techStack = [
   'Python', 'TypeScript', 'React', 'Django', 'FastAPI', 'AWS', 'Azure',
   'Docker', 'PostgreSQL', 'MongoDB', 'Redis', 'GraphQL', 'Celery',
-  'RabbitMQ', 'Kafka', 'PyTorch', 'Git', 'Linux', 'Nginx', 'Elixir'
+  'RabbitMQ', 'Kafka', 'PyTorch', 'Git', 'Linux', 'Nginx', 'Elixir',
+  'DSP', 'SciPy', 'Librosa', 'FFT', 'NumPy'
 ];
 
 const Skills = () => {
