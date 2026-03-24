@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 import { getPostBySlug } from '../data/posts';
 import './BlogPost.css';
 
@@ -21,7 +23,14 @@ const BlogPost = () => {
     });
   };
 
-  // Simple markdown-to-HTML conversion for basic formatting
+  const renderMath = (tex: string, displayMode: boolean): string => {
+    try {
+      return katex.renderToString(tex, { displayMode, throwOnError: false });
+    } catch {
+      return tex;
+    }
+  };
+
   const renderContent = (content: string) => {
     const lines = content.split('\n');
     const elements: React.ReactElement[] = [];
@@ -49,6 +58,27 @@ const BlogPost = () => {
 
       if (inCodeBlock) {
         codeContent.push(line);
+        return;
+      }
+
+      // Block math ($$...$$)
+      if (line.startsWith('$$') && line.endsWith('$$') && line.length > 4) {
+        const math = line.slice(2, -2);
+        elements.push(
+          <div key={index} className="math-block" dangerouslySetInnerHTML={{ __html: renderMath(math, true) }} />
+        );
+        return;
+      }
+
+      // HTML tags (img, p with style, etc.) - pass through
+      if (line.trim().startsWith('<')) {
+        elements.push(<div key={index} dangerouslySetInnerHTML={{ __html: line }} />);
+        return;
+      }
+
+      // Horizontal rule
+      if (line.trim() === '---') {
+        elements.push(<hr key={index} />);
         return;
       }
 
@@ -92,6 +122,8 @@ const BlogPost = () => {
   };
 
   const parseInlineMarkdown = (text: string) => {
+    // Process inline math first ($...$) but not $$
+    text = text.replace(/\$([^$]+)\$/g, (_, math) => renderMath(math, false));
     // Bold
     text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     // Inline code
