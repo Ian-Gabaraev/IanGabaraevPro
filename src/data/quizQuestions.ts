@@ -12,6 +12,13 @@ export interface QuizCategory {
   questions: Question[];
 }
 
+export interface QuizDefinition {
+  id: string;
+  title: string;
+  description: string;
+  categories: QuizCategory[];
+}
+
 const jsGotchas: Question[] = [
   {
     question: "What does this code output?",
@@ -920,13 +927,34 @@ export const categories: QuizCategory[] = [
   { id: 'node', label: 'Node.js', questions: node },
 ];
 
+export const quizzes: QuizDefinition[] = [
+  {
+    id: 'frontend',
+    title: 'Frontend Interview',
+    description: 'JavaScript, TypeScript, React & Node.js',
+    categories: categories,
+  },
+];
+
+export function getQuizById(quizId: string): QuizDefinition | undefined {
+  return quizzes.find(q => q.id === quizId);
+}
+
+export function getAllQuestionsForQuiz(quizId: string): Question[] {
+  const quiz = getQuizById(quizId);
+  if (!quiz) return [];
+  return quiz.categories.slice(1).flatMap(c => c.questions);
+}
+
 export function getAllQuestions(): Question[] {
   return categories.slice(1).flatMap(c => c.questions);
 }
 
-export function getQuestionsByCategory(categoryId: string): Question[] {
-  if (categoryId === 'all') return getAllQuestions();
-  const category = categories.find(c => c.id === categoryId);
+export function getQuestionsByCategory(quizId: string, categoryId: string): Question[] {
+  const quiz = getQuizById(quizId);
+  if (!quiz) return [];
+  if (categoryId === 'all') return getAllQuestionsForQuiz(quizId);
+  const category = quiz.categories.find(c => c.id === categoryId);
   return category?.questions || [];
 }
 

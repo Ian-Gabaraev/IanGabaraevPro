@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { categories, getQuestionsByCategory, shuffleArray } from '../data/quizQuestions';
-import type { Question } from '../data/quizQuestions';
+import { quizzes, getQuizById, getQuestionsByCategory, shuffleArray } from '../data/quizQuestions';
+import type { Question, QuizDefinition } from '../data/quizQuestions';
 import './Quiz.css';
 
-type QuizState = 'start' | 'quiz' | 'results';
+type QuizState = 'select-quiz' | 'configure' | 'quiz' | 'results';
 
 const Quiz = () => {
-  const [state, setState] = useState<QuizState>('start');
+  const [state, setState] = useState<QuizState>('select-quiz');
+  const [selectedQuiz, setSelectedQuiz] = useState<QuizDefinition | null>(null);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedSize, setSelectedSize] = useState(10);
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -21,8 +22,18 @@ const Quiz = () => {
   const currentQuestion = questions[currentIndex];
   const progress = questions.length > 0 ? ((currentIndex) / questions.length) * 100 : 0;
 
+  const selectQuiz = (quizId: string) => {
+    const quiz = getQuizById(quizId);
+    if (quiz) {
+      setSelectedQuiz(quiz);
+      setSelectedCategory('all');
+      setState('configure');
+    }
+  };
+
   const startQuiz = () => {
-    let qs = getQuestionsByCategory(selectedCategory);
+    if (!selectedQuiz) return;
+    let qs = getQuestionsByCategory(selectedQuiz.id, selectedCategory);
     qs = shuffleArray(qs);
     if (selectedSize > 0) {
       qs = qs.slice(0, selectedSize);
@@ -57,12 +68,19 @@ const Quiz = () => {
   };
 
   const resetQuiz = () => {
-    setState('start');
+    setState('select-quiz');
+    setSelectedQuiz(null);
     setQuestions([]);
     setCurrentIndex(0);
     setScore(0);
     setAnswered(false);
     setSelectedOption(null);
+  };
+
+  const backToQuizSelect = () => {
+    setState('select-quiz');
+    setSelectedQuiz(null);
+    setSelectedCategory('all');
   };
 
   const getResultMessage = (percentage: number) => {
@@ -85,23 +103,54 @@ const Quiz = () => {
         >
           <h1 className="quiz-title">Self Examination</h1>
           <p className="quiz-subtitle">
-            Test your JavaScript, TypeScript & React knowledge.
+            Test your knowledge with interactive quizzes.
           </p>
 
           <AnimatePresence mode="wait">
-            {state === 'start' && (
+            {state === 'select-quiz' && (
               <motion.div
-                key="start"
+                key="select-quiz"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+              >
+                <h2 className="section-label">Available Quizzes</h2>
+                <div className="quiz-grid">
+                  {quizzes.map(quiz => (
+                    <button
+                      key={quiz.id}
+                      className="quiz-select-card"
+                      onClick={() => selectQuiz(quiz.id)}
+                    >
+                      <h3 className="quiz-select-title">{quiz.title}</h3>
+                      <p className="quiz-select-desc">{quiz.description}</p>
+                      <span className="quiz-select-count">
+                        {quiz.categories.slice(1).reduce((sum, c) => sum + c.questions.length, 0)} questions
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {state === 'configure' && selectedQuiz && (
+              <motion.div
+                key="configure"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 className="quiz-card start-screen"
               >
-                <h2 className="card-heading">Choose a Category</h2>
-                <p className="card-text">Select a topic to quiz yourself on:</p>
+                <button className="back-link" onClick={backToQuizSelect}>
+                  ← Back to quizzes
+                </button>
                 
+                <h2 className="card-heading">{selectedQuiz.title}</h2>
+                <p className="card-text">{selectedQuiz.description}</p>
+
+                <h3 className="card-subheading">Category</h3>
                 <div className="option-buttons">
-                  {categories.map(cat => (
+                  {selectedQuiz.categories.map(cat => (
                     <button
                       key={cat.id}
                       className={`option-btn ${selectedCategory === cat.id ? 'active' : ''}`}
@@ -112,9 +161,7 @@ const Quiz = () => {
                   ))}
                 </div>
 
-                <h2 className="card-heading" style={{ marginTop: '2rem' }}>Quiz Size</h2>
-                <p className="card-text">How many questions?</p>
-                
+                <h3 className="card-subheading">Questions</h3>
                 <div className="option-buttons">
                   {sizes.map(size => (
                     <button
@@ -122,7 +169,7 @@ const Quiz = () => {
                       className={`option-btn ${selectedSize === size ? 'active' : ''}`}
                       onClick={() => setSelectedSize(size)}
                     >
-                      {size === 0 ? 'All Available' : `${size} Questions`}
+                      {size === 0 ? 'All' : size}
                     </button>
                   ))}
                 </div>
@@ -224,7 +271,7 @@ const Quiz = () => {
                 </div>
                 <div className="results-message">{getResultMessage(percentage)}</div>
                 <button className="start-btn" onClick={resetQuiz}>
-                  Try Again
+                  Try Another Quiz
                 </button>
               </motion.div>
             )}
