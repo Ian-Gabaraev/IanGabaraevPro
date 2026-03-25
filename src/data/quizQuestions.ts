@@ -927,12 +927,641 @@ export const categories: QuizCategory[] = [
   { id: 'node', label: 'Node.js', questions: node },
 ];
 
+// AWS DVA-C02 Quiz Questions
+const awsInfrastructure: Question[] = [
+  {
+    question: 'Is IAM a global or regional service?',
+    options: ['Regional', 'Global', 'AZ-specific', 'Edge Location specific'],
+    correct: 1,
+    explanation: 'IAM is a Global service. Users, groups, roles, and policies are not region-specific.'
+  },
+  {
+    question: 'How many Availability Zones does a Region typically have?',
+    options: ['1-2', '2-6', '5-10', '10-15'],
+    correct: 1,
+    explanation: 'Each Region has 2-6 AZs. Each AZ consists of one or more data centers with independent power, networking, and connectivity.'
+  },
+  {
+    question: 'Which of the following is a global AWS service?',
+    options: ['EC2', 'RDS', 'CloudFront', 'EBS'],
+    correct: 2,
+    explanation: 'CloudFront is a global service. IAM, Route 53, CloudFront, and WAF are global services, while EC2, RDS, and EBS are regional.'
+  }
+];
+
+const awsIAM: Question[] = [
+  {
+    question: 'Can an IAM group contain another group?',
+    options: ['Yes, unlimited nesting', 'Yes, up to 3 levels', 'No, groups can only contain users', 'Yes, but only within the same account'],
+    correct: 2,
+    explanation: 'IAM groups can only contain users, not other groups. You cannot nest groups.'
+  },
+  {
+    question: 'What are IAM Roles primarily used for?',
+    options: ['Human users only', 'AWS services and applications', 'Groups of users', 'Password policies'],
+    correct: 1,
+    explanation: 'IAM Roles grant permissions to AWS services (e.g., EC2, Lambda) to perform actions on your behalf.'
+  },
+  {
+    question: 'Which IAM security tool provides a CSV report of all users and their credential status?',
+    options: ['Access Advisor', 'Credentials Report', 'IAM Dashboard', 'Policy Simulator'],
+    correct: 1,
+    explanation: 'The Credentials Report is a CSV of all users and their credential status. Access Advisor shows service access history per user.'
+  }
+];
+
+const awsEC2: Question[] = [
+  {
+    question: "You're trying to SSH into your EC2 and getting a timeout. What's the most likely issue?",
+    options: ['Instance not running', 'Security Group', 'Wrong key pair', 'Instance type'],
+    correct: 1,
+    explanation: "Timeout = Security Group issue. If you get a timeout (not connection refused), it's almost always a security group issue. Check inbound rules for port 22."
+  },
+  {
+    question: 'Which EC2 purchasing option offers up to 90% discount but can be interrupted?',
+    options: ['Reserved Instances', 'On-Demand', 'Spot Instances', 'Dedicated Hosts'],
+    correct: 2,
+    explanation: 'Spot Instances offer up to 90% discount but AWS can reclaim them when the spot price exceeds your bid. Never use for critical workloads.'
+  },
+  {
+    question: 'What is the difference between Dedicated Host and Dedicated Instance?',
+    options: ['No difference', "Dedicated Host gives full server control; Dedicated Instance doesn't", 'Dedicated Instance is cheaper', "Dedicated Host doesn't support Windows"],
+    correct: 1,
+    explanation: 'Dedicated Host gives full server control, see sockets/cores (for BYOL licensing). Dedicated Instance provides dedicated hardware but no host visibility.'
+  },
+  {
+    question: 'Which EC2 instance type prefix is best for compute-intensive workloads like batch processing?',
+    options: ['t3', 'r5', 'c5', 'm5'],
+    correct: 2,
+    explanation: 'C5 (compute-optimized) is best for batch processing, high-performance computing. R5 is memory-optimized, T3/M5 are general purpose.'
+  }
+];
+
+const awsStorage: Question[] = [
+  {
+    question: 'What happens to Instance Store data when you stop an EC2 instance?',
+    options: ['Data is preserved', 'Data is backed up to S3', 'Data is lost', 'Data is encrypted'],
+    correct: 2,
+    explanation: 'Instance Store is ephemeral. Data is lost on stop, terminate, or hardware failure. You are responsible for backups/replication.'
+  },
+  {
+    question: 'Which EBS volume types can be used as boot volumes?',
+    options: ['All types', 'SSD types only (gp2, gp3, io1, io2)', 'HDD types only (st1, sc1)', 'Only gp2'],
+    correct: 1,
+    explanation: 'Only SSD types (gp2, gp3, io1, io2) can be boot volumes. HDD types (st1, sc1) cannot be boot volumes.'
+  },
+  {
+    question: 'What is the maximum IOPS for gp3 volumes?',
+    options: ['3,000', '16,000', '64,000', '256,000'],
+    correct: 1,
+    explanation: 'gp3 can provision up to 16,000 IOPS independently of volume size. io2 Block Express can go up to 256,000 IOPS.'
+  },
+  {
+    question: 'Can you attach an EBS volume to multiple EC2 instances?',
+    options: ['Yes, all types', 'No, never', 'Only io1/io2 with Multi-Attach', 'Only gp3'],
+    correct: 2,
+    explanation: 'Only io1/io2 volumes support Multi-Attach, allowing up to 16 instances in the same AZ.'
+  },
+  {
+    question: 'EFS is compatible with which operating systems?',
+    options: ['Windows and Linux', 'Linux only', 'Windows only', 'MacOS only'],
+    correct: 1,
+    explanation: 'EFS is POSIX-compliant and compatible with Linux only, not Windows.'
+  },
+  {
+    question: 'Is EBS regional or AZ-specific?',
+    options: ['Global', 'Regional', 'AZ-specific', 'Edge Location'],
+    correct: 2,
+    explanation: 'EBS volumes are bound to a single Availability Zone. To use in another AZ, create a snapshot and restore.'
+  }
+];
+
+const awsAMI: Question[] = [
+  {
+    question: 'Are AMIs region-specific or global?',
+    options: ['Global', 'Region-specific', 'AZ-specific', 'Account-specific'],
+    correct: 1,
+    explanation: 'AMIs are region-specific. You must copy an AMI to use it in another region.'
+  }
+];
+
+const awsELBASG: Question[] = [
+  {
+    question: 'What does ELB stand for and is it a load balancer type?',
+    options: ['Elastic Load Balancer - yes, it\'s a LB type', 'Elastic Load Balancing - it\'s the service name, not a LB type', 'Enhanced Load Balancer - legacy LB type', 'Enterprise Load Balancing - premium service'],
+    correct: 1,
+    explanation: 'ELB = Elastic Load Balancing, the service name. Actual LB types are ALB, NLB, GLB, CLB (Classic).'
+  },
+  {
+    question: 'Which load balancer provides a static IP address?',
+    options: ['ALB', 'NLB', 'CLB', 'GLB'],
+    correct: 1,
+    explanation: 'NLB provides one static IP per AZ and supports Elastic IPs. ALB only provides a static DNS hostname.'
+  },
+  {
+    question: 'NLB operates at which OSI layer?',
+    options: ['Layer 3', 'Layer 4', 'Layer 7', 'Layer 2'],
+    correct: 1,
+    explanation: 'NLB operates at Layer 4 (Transport: TCP, UDP). ALB operates at Layer 7 (Application: HTTP, HTTPS).'
+  },
+  {
+    question: 'Will ELB terminate an unhealthy target?',
+    options: ['Yes, immediately', 'Yes, after cooldown', 'No, it only stops routing traffic', 'Yes, after 3 failed checks'],
+    correct: 2,
+    explanation: 'ELB only stops routing traffic to unhealthy targets. ASG with ELB health checks enabled will terminate/replace unhealthy instances.'
+  },
+  {
+    question: 'Is Cross-Zone Load Balancing enabled by default for ALB?',
+    options: ['No', 'Yes, and it\'s free', 'Yes, but it costs extra', 'Only in certain regions'],
+    correct: 1,
+    explanation: 'Cross-Zone Load Balancing is enabled by default for ALB and is free. NLB has it disabled by default and charges if enabled.'
+  },
+  {
+    question: 'What is the default ASG cooldown period?',
+    options: ['60 seconds', '180 seconds', '300 seconds', '600 seconds'],
+    correct: 2,
+    explanation: 'Default cooldown is 300 seconds (5 minutes). It prevents rapid successive scaling actions.'
+  },
+  {
+    question: 'What scaling policy uses ML to predict load patterns?',
+    options: ['Target Tracking', 'Step Scaling', 'Predictive Scaling', 'Scheduled Scaling'],
+    correct: 2,
+    explanation: 'Predictive Scaling uses ML to analyze historical load patterns and pre-provision capacity ahead of predicted spikes.'
+  }
+];
+
+const awsRDS: Question[] = [
+  {
+    question: 'Read Replicas use sync or async replication?',
+    options: ['Synchronous', 'Asynchronous', 'Both', 'Depends on region'],
+    correct: 1,
+    explanation: 'Read Replicas use ASYNC replication. Data is eventually consistent across read replicas.'
+  },
+  {
+    question: 'Multi-AZ uses sync or async replication?',
+    options: ['Synchronous', 'Asynchronous', 'Both', 'Depends on database engine'],
+    correct: 0,
+    explanation: 'Multi-AZ uses SYNC replication. Changes are immediately replicated to standby for disaster recovery.'
+  },
+  {
+    question: 'Can you read from a Multi-AZ standby database?',
+    options: ['Yes', 'No, standby is only for failover', 'Only during maintenance', 'Only with specific engines'],
+    correct: 1,
+    explanation: 'You cannot read from Multi-AZ standby. It\'s only for failover. Use Read Replicas for read scaling.'
+  },
+  {
+    question: "What's the failover time for Aurora?",
+    options: ['Less than 30 seconds', '1-2 minutes', '5 minutes', '10 minutes'],
+    correct: 0,
+    explanation: 'Aurora failover is less than 30 seconds. Aurora maintains 6 copies across 3 AZs.'
+  },
+  {
+    question: 'How do you encrypt an existing unencrypted RDS database?',
+    options: ['Enable encryption in console', 'Snapshot → Copy with encryption → Restore', 'Use AWS CLI to enable', 'Cannot be done'],
+    correct: 1,
+    explanation: 'To encrypt an unencrypted DB: take a snapshot, copy it with encryption enabled, then restore from the encrypted snapshot.'
+  },
+  {
+    question: 'Is RDS Proxy publicly accessible?',
+    options: ['Yes', 'No, VPC only', 'Only with specific configuration', 'Only for Aurora'],
+    correct: 1,
+    explanation: 'RDS Proxy lives inside your VPC only and is never publicly accessible. Great for Lambda connections.'
+  }
+];
+
+const awsLambda: Question[] = [
+  {
+    question: 'What is the maximum Lambda execution timeout?',
+    options: ['5 minutes', '10 minutes', '15 minutes', '30 minutes'],
+    correct: 2,
+    explanation: 'Maximum Lambda timeout is 15 minutes (900 seconds).'
+  },
+  {
+    question: 'What is the maximum Lambda memory allocation?',
+    options: ['3,008 MB', '5,120 MB', '10,240 MB', '16,384 MB'],
+    correct: 2,
+    explanation: 'Maximum Lambda memory is 10,240 MB (10 GB). CPU scales proportionally with memory.'
+  },
+  {
+    question: 'What is the /tmp directory size limit in Lambda?',
+    options: ['512 MB', '1 GB', '5 GB', '10 GB'],
+    correct: 3,
+    explanation: '/tmp storage can be configured from 512 MB up to 10,240 MB (10 GB) for temporary file processing.'
+  },
+  {
+    question: 'How many retries does Lambda do for async invocations?',
+    options: ['0', '1', '2', '3'],
+    correct: 2,
+    explanation: 'Lambda retries async invocations 2 times (3 total attempts). Failed events can go to DLQ or on-failure destination.'
+  },
+  {
+    question: 'How many Lambda Layers can you attach to a function?',
+    options: ['2', '5', '10', 'Unlimited'],
+    correct: 1,
+    explanation: 'You can attach up to 5 layers per function. Total unzipped size must be < 250 MB.'
+  },
+  {
+    question: 'What happens to Lambda when configured in VPC without NAT Gateway?',
+    options: ['Works normally', 'Has no internet access', 'Fails to deploy', 'Can only access S3'],
+    correct: 1,
+    explanation: 'Lambda in VPC has no internet unless you have NAT Gateway. By default, Lambda runs in AWS-managed VPC with internet.'
+  }
+];
+
+const awsAPIGateway: Question[] = [
+  {
+    question: 'What are the three API Gateway endpoint types?',
+    options: ['Public, Private, Internal', 'Edge-optimized, Regional, Private', 'Standard, Premium, Enterprise', 'HTTP, REST, WebSocket'],
+    correct: 1,
+    explanation: 'The three endpoint types are: Edge-optimized (uses CloudFront), Regional, and Private (VPC only via endpoint).'
+  },
+  {
+    question: 'What is the API Gateway default timeout?',
+    options: ['15 seconds', '29 seconds', '60 seconds', '300 seconds'],
+    correct: 1,
+    explanation: 'API Gateway timeout is 29 seconds maximum. Cannot exceed this even if Lambda timeout is higher.'
+  },
+  {
+    question: 'Which API type is cheaper and simpler for basic Lambda integrations?',
+    options: ['REST API', 'HTTP API', 'WebSocket API', 'Private API'],
+    correct: 1,
+    explanation: 'HTTP API is ~70% cheaper than REST API, simpler, and faster. REST API has more features (caching, request validation, usage plans).'
+  },
+  {
+    question: 'What HTTP status code is returned when API Gateway throttles requests?',
+    options: ['400', '403', '429', '503'],
+    correct: 2,
+    explanation: '429 Too Many Requests is returned when throttled. Client should retry with exponential backoff.'
+  }
+];
+
+const awsDynamoDB: Question[] = [
+  {
+    question: 'What are the two capacity modes in DynamoDB?',
+    options: ['Standard and Premium', 'Provisioned and On-Demand', 'Reserved and Spot', 'Basic and Advanced'],
+    correct: 1,
+    explanation: 'Provisioned (set RCU/WCU) and On-Demand (pay per request) are the two capacity modes.'
+  },
+  {
+    question: 'What is the maximum item size in DynamoDB?',
+    options: ['64 KB', '256 KB', '400 KB', '1 MB'],
+    correct: 2,
+    explanation: 'Maximum item size is 400 KB per item.'
+  },
+  {
+    question: "What's the difference between Query and Scan?",
+    options: ['No difference', 'Query uses partition key efficiently; Scan reads entire table', 'Scan is faster', "Query doesn't use indexes"],
+    correct: 1,
+    explanation: 'Query efficiently uses partition key (and optionally sort key). Scan reads entire table and is expensive - avoid in production.'
+  },
+  {
+    question: 'When can a Local Secondary Index (LSI) be created?',
+    options: ['Anytime', 'Only at table creation', 'Only after table has data', 'Only when table is empty'],
+    correct: 1,
+    explanation: 'LSI must be created at table creation. GSI can be added anytime. LSI shares table throughput; GSI has separate throughput.'
+  },
+  {
+    question: 'What is DAX (DynamoDB Accelerator)?',
+    options: ['Backup service', 'In-memory cache for DynamoDB', 'Analytics tool', 'Migration service'],
+    correct: 1,
+    explanation: 'DAX is an in-memory cache providing microsecond latency (vs milliseconds). It\'s a drop-in replacement with the same API.'
+  },
+  {
+    question: 'How many RCU are needed for 1 strongly consistent read per second of a 4 KB item?',
+    options: ['0.5', '1', '2', '4'],
+    correct: 1,
+    explanation: '1 RCU = 1 strongly consistent read/sec for items up to 4 KB. Eventually consistent reads use 0.5 RCU.'
+  }
+];
+
+const awsS3: Question[] = [
+  {
+    question: 'What is the maximum object size in S3?',
+    options: ['100 GB', '1 TB', '5 TB', 'Unlimited'],
+    correct: 2,
+    explanation: 'Maximum object size is 5 TB. Use multipart upload for objects > 100 MB (required > 5 GB).'
+  },
+  {
+    question: 'What is S3 Transfer Acceleration?',
+    options: ['Faster deletion of objects', 'Uses CloudFront edge locations to speed up uploads', 'Compresses objects automatically', 'Replicates to multiple regions'],
+    correct: 1,
+    explanation: 'S3 Transfer Acceleration uses CloudFront edge locations to speed up uploads over long distances.'
+  },
+  {
+    question: "What's the difference between S3 Standard-IA and S3 One Zone-IA?",
+    options: ['No difference', 'Standard-IA is Multi-AZ; One Zone-IA is single AZ', 'One Zone-IA is more durable', "Standard-IA doesn't support versioning"],
+    correct: 1,
+    explanation: 'Standard-IA stores data across multiple AZs. One Zone-IA is single AZ, cheaper, but data is lost if AZ fails.'
+  },
+  {
+    question: 'Which S3 encryption type provides audit trail in CloudTrail?',
+    options: ['SSE-S3', 'SSE-KMS', 'SSE-C', 'Client-side'],
+    correct: 1,
+    explanation: 'SSE-KMS provides audit trail because each encryption/decryption is a KMS API call logged in CloudTrail.'
+  },
+  {
+    question: 'What is S3 Object Lock?',
+    options: ['Password protection', 'WORM model preventing deletion/modification', 'Access control list', 'Cross-region lock'],
+    correct: 1,
+    explanation: 'S3 Object Lock implements WORM (Write Once Read Many), preventing object deletion/modification for a retention period.'
+  }
+];
+
+const awsSQSSNS: Question[] = [
+  {
+    question: 'What is the default visibility timeout for SQS?',
+    options: ['15 seconds', '30 seconds', '60 seconds', '5 minutes'],
+    correct: 1,
+    explanation: 'Default visibility timeout is 30 seconds. This is the time a message is hidden after being read.'
+  },
+  {
+    question: 'What is the maximum retention period for SQS messages?',
+    options: ['1 day', '7 days', '14 days', '30 days'],
+    correct: 2,
+    explanation: 'Maximum retention is 14 days. Default is 4 days.'
+  },
+  {
+    question: "What's the difference between Standard and FIFO SQS queues?",
+    options: ['No difference', 'Standard: unlimited throughput, at-least-once; FIFO: 300 msg/s, exactly-once, strict ordering', 'FIFO has better throughput', 'Standard guarantees ordering'],
+    correct: 1,
+    explanation: 'Standard has unlimited throughput with best-effort ordering. FIFO guarantees order and exactly-once delivery at 300 msg/s (3000 with batching).'
+  },
+  {
+    question: 'What is the SNS + SQS fan-out pattern?',
+    options: ['SNS topic receives from multiple SQS queues', 'SNS topic pushes to multiple SQS queues for parallel processing', 'SQS queues send to SNS', 'SNS replaces SQS'],
+    correct: 1,
+    explanation: 'Fan-out: SNS topic pushes to multiple SQS queues. Enables parallel processing with different consumption rates.'
+  },
+  {
+    question: 'What is a Dead Letter Queue (DLQ)?',
+    options: ['Queue for deleted messages', 'Queue for messages that failed processing after max retries', 'Backup queue', 'Priority queue'],
+    correct: 1,
+    explanation: 'DLQ stores messages that failed processing after maxReceiveCount attempts. Helps debug failures.'
+  }
+];
+
+const awsCICD: Question[] = [
+  {
+    question: 'What is the buildspec.yml file?',
+    options: ['CodeDeploy configuration', 'CodeBuild configuration defining build phases and artifacts', 'CodePipeline configuration', 'CloudFormation template'],
+    correct: 1,
+    explanation: 'buildspec.yml is CodeBuild configuration. It defines build phases (install, pre_build, build, post_build) and artifacts.'
+  },
+  {
+    question: 'What is the appspec.yml file used for?',
+    options: ['CodeBuild', 'CodeDeploy lifecycle hooks and file mappings', 'CodePipeline', 'CodeCommit'],
+    correct: 1,
+    explanation: 'appspec.yml is CodeDeploy configuration. It defines deployment lifecycle hooks and file mappings.'
+  },
+  {
+    question: 'What deployment types does CodeDeploy support for Lambda?',
+    options: ['In-place and Blue/Green', 'AllAtOnce, Canary, Linear', 'Rolling only', 'Immutable only'],
+    correct: 1,
+    explanation: 'Lambda deployments: AllAtOnce (immediate), Canary (x% then 100%), Linear (x% every n minutes).'
+  },
+  {
+    question: 'What deployment types does CodeDeploy support for EC2?',
+    options: ['AllAtOnce only', 'In-place and Blue/Green', 'Canary and Linear', 'Rolling only'],
+    correct: 1,
+    explanation: 'EC2/On-premises: In-place (rolling update) and Blue/Green (traffic shift to new instances via ASG swap).'
+  }
+];
+
+const awsCloudFormation: Question[] = [
+  {
+    question: 'What is the intrinsic function to reference another resource in CloudFormation?',
+    options: ['!GetAtt', '!Ref', '!Sub', '!Import'],
+    correct: 1,
+    explanation: '!Ref (or Ref:) returns the physical ID of the resource or parameter value.'
+  },
+  {
+    question: 'What does !GetAtt do in CloudFormation?',
+    options: ['References a parameter', 'Gets an attribute from a resource', 'Imports from another stack', 'Joins strings'],
+    correct: 1,
+    explanation: '!GetAtt gets an attribute from a resource, e.g., !GetAtt MyBucket.Arn returns the bucket\'s ARN.'
+  },
+  {
+    question: 'What is AWS SAM?',
+    options: ['Security management service', 'Simplified CloudFormation for serverless', 'Server application model', 'Storage access management'],
+    correct: 1,
+    explanation: 'SAM = Serverless Application Model. It\'s simplified CloudFormation for Lambda, API Gateway, DynamoDB.'
+  },
+  {
+    question: 'What command packages and deploys a SAM application?',
+    options: ['sam create && sam run', 'sam build && sam deploy', 'sam package && sam install', 'sam init && sam start'],
+    correct: 1,
+    explanation: 'sam build compiles/packages, then sam deploy (or sam deploy --guided for interactive) deploys to AWS.'
+  }
+];
+
+const awsCloudWatch: Question[] = [
+  {
+    question: 'What is the minimum resolution for CloudWatch custom metrics?',
+    options: ['1 second', '10 seconds', '30 seconds', '1 minute'],
+    correct: 0,
+    explanation: 'High-resolution metrics support 1 second resolution. Standard resolution is 1 minute.'
+  },
+  {
+    question: 'How long are CloudWatch Logs retained by default?',
+    options: ['7 days', '30 days', '90 days', 'Forever'],
+    correct: 3,
+    explanation: 'CloudWatch Logs never expire by default. You must configure a retention policy (1 day to 10 years) to auto-delete.'
+  },
+  {
+    question: 'Which EC2 metric is NOT included by default and requires CloudWatch Agent?',
+    options: ['CPU Utilization', 'Network In/Out', 'Memory Utilization', 'Disk Read/Write Operations'],
+    correct: 2,
+    explanation: 'Memory and disk space usage require CloudWatch Agent. Default metrics include CPU, network, and disk operations.'
+  }
+];
+
+const awsXRay: Question[] = [
+  {
+    question: 'What is X-Ray used for?',
+    options: ['Log aggregation', 'Distributed tracing and performance analysis', 'Security scanning', 'Cost optimization'],
+    correct: 1,
+    explanation: 'X-Ray provides distributed tracing to visualize requests through your application and debug latency issues.'
+  },
+  {
+    question: 'What are X-Ray annotations vs metadata?',
+    options: ['No difference', 'Annotations are indexed/searchable; metadata is not', 'Metadata is searchable; annotations are not', 'Annotations are for errors only'],
+    correct: 1,
+    explanation: 'Annotations are indexed key-value pairs that are searchable. Metadata is non-indexed additional data.'
+  }
+];
+
+const awsCognito: Question[] = [
+  {
+    question: "What's the difference between Cognito User Pools and Identity Pools?",
+    options: ['No difference', 'User Pools: authentication (JWT tokens); Identity Pools: authorization (AWS credentials)', 'Identity Pools: authentication; User Pools: authorization', 'User Pools for mobile only'],
+    correct: 1,
+    explanation: 'User Pools handle authentication (sign-up, sign-in, JWT tokens). Identity Pools handle authorization (exchange tokens for temporary AWS credentials).'
+  },
+  {
+    question: 'How do you authenticate API Gateway with Cognito?',
+    options: ['IAM roles', 'Cognito User Pool Authorizer', 'API keys', 'Lambda authorizer only'],
+    correct: 1,
+    explanation: 'Use Cognito User Pool Authorizer to validate JWT tokens from User Pool. API Gateway also supports Lambda and IAM authorizers.'
+  }
+];
+
+const awsKMS: Question[] = [
+  {
+    question: 'What are the two types of KMS keys?',
+    options: ['Public and Private', 'AWS managed and Customer managed', 'Symmetric and Asymmetric', 'Standard and Premium'],
+    correct: 1,
+    explanation: 'AWS managed keys (aws/service-name, free, auto-rotation) and Customer managed keys (you control rotation, policies, cost per key).'
+  },
+  {
+    question: 'What is envelope encryption?',
+    options: ['Encrypting email attachments', 'Data encrypted with data key, data key encrypted with KMS key', 'Double encryption with two KMS keys', 'Encryption at rest and in transit'],
+    correct: 1,
+    explanation: 'Envelope encryption: Data is encrypted with a Data Encryption Key (DEK), and the DEK is encrypted with a KMS key. Used for data > 4 KB.'
+  },
+  {
+    question: 'What does the GenerateDataKey API return?',
+    options: ['Only encrypted data key', 'Plaintext data key and encrypted copy', 'KMS key ID', 'Random bytes'],
+    correct: 1,
+    explanation: 'GenerateDataKey returns both plaintext DEK and encrypted DEK. Use plaintext to encrypt data, store encrypted key with data.'
+  }
+];
+
+const awsEventBridge: Question[] = [
+  {
+    question: 'What is EventBridge (formerly CloudWatch Events)?',
+    options: ['Log aggregation service', 'Serverless event bus routing events to targets', 'Message queue', 'Notification service'],
+    correct: 1,
+    explanation: 'EventBridge is a serverless event bus. Route events from AWS services, SaaS apps, custom apps to targets (Lambda, SQS, etc.).'
+  },
+  {
+    question: 'What are the two types of EventBridge rules?',
+    options: ['Standard and FIFO', 'Event Pattern and Schedule', 'Push and Pull', 'Sync and Async'],
+    correct: 1,
+    explanation: 'Event Pattern rules match events by pattern (source, detail-type, etc.). Schedule rules use cron or rate expressions.'
+  }
+];
+
+const awsStepFunctions: Question[] = [
+  {
+    question: 'What is the maximum duration for Standard Step Functions?',
+    options: ['5 minutes', '15 minutes', '1 hour', '1 year'],
+    correct: 3,
+    explanation: 'Standard workflows can run up to 1 year. Express workflows are limited to 5 minutes but handle high-volume events.'
+  },
+  {
+    question: 'Which Step Functions state type allows branching based on conditions?',
+    options: ['Task', 'Choice', 'Parallel', 'Map'],
+    correct: 1,
+    explanation: 'Choice state enables branching based on conditions. Task executes work, Parallel runs branches simultaneously, Map iterates over arrays.'
+  }
+];
+
+const awsKinesis: Question[] = [
+  {
+    question: "What's the difference between Kinesis Data Streams and Firehose?",
+    options: ['No difference', 'Streams: real-time, provision shards; Firehose: near real-time, auto-scaling', 'Firehose is faster', "Streams doesn't retain data"],
+    correct: 1,
+    explanation: 'Data Streams: ~200ms latency, provision shards, custom consumers, 1-365 day retention. Firehose: 60-900s buffer, auto-scales, built-in destinations.'
+  },
+  {
+    question: 'What is the write capacity per Kinesis shard?',
+    options: ['500 KB/s', '1 MB/s', '2 MB/s', '5 MB/s'],
+    correct: 1,
+    explanation: 'Each shard supports 1 MB/s (or 1,000 records/s) write and 2 MB/s read.'
+  }
+];
+
+const awsContainers: Question[] = [
+  {
+    question: "What's the difference between ECS EC2 and Fargate launch types?",
+    options: ['No difference', 'EC2: you manage instances; Fargate: serverless', 'Fargate is cheaper', "EC2 doesn't support Docker"],
+    correct: 1,
+    explanation: 'EC2 launch type: you manage EC2 instances. Fargate: serverless, AWS manages infrastructure, pay per vCPU + memory.'
+  },
+  {
+    question: "What's the difference between ECS Task Role and Task Execution Role?",
+    options: ['No difference', 'Task Role: app permissions; Execution Role: ECS agent permissions', 'Execution Role: app permissions; Task Role: ECS agent permissions', 'Task Role is for EC2 only'],
+    correct: 1,
+    explanation: 'Task Role = what the container application can do (S3, DynamoDB access). Execution Role = what ECS agent can do (pull images, send logs).'
+  }
+];
+
+const awsElastiCache: Question[] = [
+  {
+    question: "What's the difference between Redis and Memcached in ElastiCache?",
+    options: ['No difference', 'Redis: Multi-AZ, persistence, complex data; Memcached: simple, multi-threaded', 'Memcached supports replication', "Redis doesn't support clustering"],
+    correct: 1,
+    explanation: 'Redis: Multi-AZ, auto failover, replication, persistence, complex data structures. Memcached: simple key-value, multi-threaded, horizontal scaling.'
+  },
+  {
+    question: 'What is Lazy Loading (Cache-Aside) pattern?',
+    options: ['Write to cache on every DB write', 'Check cache first, fetch from DB on miss, store in cache', 'Pre-load all data into cache', 'Write to cache only'],
+    correct: 1,
+    explanation: 'Lazy Loading: App checks cache → on miss, fetches from DB → stores in cache → returns. Only requested data is cached.'
+  },
+  {
+    question: 'What is the main drawback of Lazy Loading?',
+    options: ['Cache is always stale', 'Cache miss requires 3 network calls', 'Cannot handle large data', 'Requires more memory'],
+    correct: 1,
+    explanation: 'Cache miss = 3 network calls (check cache, query DB, write to cache). Also, data can become stale without TTL.'
+  }
+];
+
+const awsBeanstalk: Question[] = [
+  {
+    question: 'Which Elastic Beanstalk deployment policy has zero downtime and creates a new ASG?',
+    options: ['All at once', 'Rolling', 'Rolling with additional batch', 'Immutable'],
+    correct: 3,
+    explanation: 'Immutable: creates new ASG with new instances, swaps when healthy. No downtime, easy rollback. Blue/Green uses separate environments.'
+  },
+  {
+    question: 'What file extension is used for Elastic Beanstalk configuration?',
+    options: ['.yml', '.json', '.config', '.xml'],
+    correct: 2,
+    explanation: '.ebextensions/*.config files customize environment with option_settings, packages, container_commands, etc.'
+  }
+];
+
+export const awsCategories: QuizCategory[] = [
+  { id: 'all', label: 'All Topics', questions: [] },
+  { id: 'infrastructure', label: 'Infrastructure', questions: awsInfrastructure },
+  { id: 'iam', label: 'IAM', questions: awsIAM },
+  { id: 'ec2', label: 'EC2', questions: awsEC2 },
+  { id: 'storage', label: 'Storage', questions: awsStorage },
+  { id: 'ami', label: 'AMI', questions: awsAMI },
+  { id: 'elb-asg', label: 'ELB & ASG', questions: awsELBASG },
+  { id: 'rds', label: 'RDS & Aurora', questions: awsRDS },
+  { id: 'lambda', label: 'Lambda', questions: awsLambda },
+  { id: 'api-gateway', label: 'API Gateway', questions: awsAPIGateway },
+  { id: 'dynamodb', label: 'DynamoDB', questions: awsDynamoDB },
+  { id: 's3', label: 'S3', questions: awsS3 },
+  { id: 'sqs-sns', label: 'SQS & SNS', questions: awsSQSSNS },
+  { id: 'cicd', label: 'CI/CD', questions: awsCICD },
+  { id: 'cloudformation', label: 'CloudFormation & SAM', questions: awsCloudFormation },
+  { id: 'cloudwatch', label: 'CloudWatch', questions: awsCloudWatch },
+  { id: 'xray', label: 'X-Ray', questions: awsXRay },
+  { id: 'cognito', label: 'Cognito', questions: awsCognito },
+  { id: 'kms', label: 'KMS', questions: awsKMS },
+  { id: 'eventbridge', label: 'EventBridge', questions: awsEventBridge },
+  { id: 'step-functions', label: 'Step Functions', questions: awsStepFunctions },
+  { id: 'kinesis', label: 'Kinesis', questions: awsKinesis },
+  { id: 'containers', label: 'Containers', questions: awsContainers },
+  { id: 'elasticache', label: 'ElastiCache', questions: awsElastiCache },
+  { id: 'beanstalk', label: 'Elastic Beanstalk', questions: awsBeanstalk },
+];
+
 export const quizzes: QuizDefinition[] = [
   {
     id: 'frontend',
     title: 'Frontend Interview',
     description: 'JavaScript, TypeScript, React & Node.js',
     categories: categories,
+  },
+  {
+    id: 'aws-dva',
+    title: 'AWS DVA-C02',
+    description: 'AWS Developer Associate Certification',
+    categories: awsCategories,
   },
 ];
 
