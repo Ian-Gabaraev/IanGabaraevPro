@@ -9,6 +9,72 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: 'the-tale-of-an-unknown-bat-part-1',
+    title: 'The Tale of an Unknown Bat #1: Field Recording in Vietnamese Caves',
+    date: '2026-03-25',
+    excerpt: 'Hunting for bat calls with a 256kHz ultrasonic microphone — from neighborhood parks to pitch-black caves in the Marble Mountains.',
+    tags: ['Python', 'DSP', 'Machine Learning', 'Bioacoustics', 'Wildlife', 'Series', 'Field Recording'],
+    content: `
+# The Tale of an Unknown Bat #1: Field Recording in Vietnamese Caves
+
+*Part 2 of the BatSonar series*
+
+---
+
+As with any machine learning project — **data is king**, and having plenty of it can make the journey significantly smoother.
+
+For BatSonar, the data primarily consists of WAVE files capturing bat vocalizations recorded using an ultrasonic microphone. This is a niche piece of tech you won't find at your local electronics store. I sourced mine — a **Pettersson Elektronik U256** — all the way from Uppsala, Sweden, and had it shipped to Da Nang, Vietnam.
+
+The U256 offers a sampling rate of **256 kHz**, providing a comfortable and reliable target frequency range just below the Nyquist limit — around **20–105 kHz**. This range is ample for most bat species.
+
+## Scouting Locations
+
+With the microphone in hand, I mapped out my local area and identified three "prime" locations for recording:
+
+- A **neighborhood park** with a pond and a golf course
+- A **sprawling rice field** about 20 km away in Hoi An
+- A **massive cave** at the base of the Marble Mountains
+
+---
+
+## First Stop: The Park
+
+I started at the park around 6 p.m., a time I had noted as prime bat-spotting from seeing them zip past my window at dusk. It was drizzling lightly, but I figured the rain wouldn't be an issue.
+
+Once there, I plugged in the mic and began monitoring. The mic captured a medley of sounds — cicadas, crickets, and frogs — but nothing ultrasonic.
+
+A bit discouraged, I scanned the skies and noticed enormous birds circling silently and ominously overhead. Could these predators be keeping the bats away? Perhaps.
+
+I decided to call it a night at the park and headed for my next destination.
+
+---
+
+## Into the Cave
+
+I arrived at the cave entrance around 8 p.m. It was technically "closed" but with no physical barriers, I ventured inside.
+
+It was dark — no, **pitch black** — and the echo of raindrops sounded like distant fireworks in the cavern's halls. Navigating a narrow passage, I emerged into a vast chamber, dimly lit by a single candle near a statue of Lady Buddha.
+
+*(As I'd learned during a recent visit to the Marble Mountains, the Vietnamese often depict Buddha as female — a fascinating cultural nuance.)*
+
+I set up the mic, hit "record," and voilà — there it was on the sonogram: the characteristic **"triangles"** of bat calls. The bats were definitely here, chattering away, possibly gossiping about the intruder who dared enter their lair.
+
+Curious, I explored deeper into the cave, where the chambers grew increasingly larger. After two solid hours of recording bat vocalizations, I decided to call it a night.
+
+On my way out, I bumped into a security guard making his rounds. The mutual surprise of encountering someone in such a setting at that hour made the interaction feel oddly surreal.
+
+---
+
+## A Mind-Blowing Discovery
+
+The following day would prove unforgettable.
+
+As much as I would love to dive into it all today, let me pause at a cliffhanger.
+
+*Next up: What I found when I analyzed the recordings — and why it changed everything.*
+    `.trim(),
+  },
+  {
     slug: 'the-bat-sonar-project-introduction',
     title: 'The Bat Sonar Project: Hearing What We Cannot',
     date: '2026-03-25',
@@ -127,17 +193,17 @@ The **sampling rate** $S_r$ is the number of samples taken per second. Higher $S
 
 The **Nyquist theorem** states that to accurately sample a signal, $S_r$ must be at least 2x the highest frequency:
 
-$$S_r = max(F) \\times 2$$
+$$S_r = max(F) \times 2$$
 
-$$F_n = \\frac{S_r}{2}$$
+$$F_n = \frac{S_r}{2}$$
 
 In practice, allow more headroom:
 
-$$S_r = F_n \\times 2.5$$
+$$S_r = F_n \times 2.5$$
 
 For bat calls at 80kHz:
 
-$$80 \\times 2.5 = 200kHz$$
+$$80 \times 2.5 = 200kHz$$
 
 ### Bit Depth and File Size
 
@@ -145,7 +211,7 @@ $$80 \\times 2.5 = 200kHz$$
 
 File size calculation:
 
-$$size(bytes) = \\frac{S_r \\times Q \\times C \\times T}{8}$$
+$$size(bytes) = \frac{S_r \times Q \times C \times T}{8}$$
 
 Where C is channels and T is duration in seconds.
 
@@ -153,7 +219,7 @@ Where C is channels and T is duration in seconds.
 
 Any real audio is a product of many sine waves combined. The formula:
 
-$$A \\times sin(2\\pi ft + \\phi)$$
+$$A \times sin(2\pi ft + \phi)$$
 
 Where A is amplitude, f is frequency, t is time, and φ is phase.
 
@@ -165,7 +231,7 @@ Quantization maps analog values to discrete levels. With Q=8 bits, you get $2^8 
 
 When source and listener move relative to each other, frequency appears to change:
 
-$$\\Delta f = \\frac{(c + v)}{c} \\times f$$
+$$\Delta f = \frac{(c + v)}{c} \times f$$
 
 Where c is speed of sound (m/s), v is source velocity (m/s), and f is emitted frequency.
 
@@ -308,21 +374,6 @@ Bats echolocate at frequencies between 20kHz and 120kHz — well above human hea
 
 ### 1. Audio Capture
 Using PyAudio to capture audio at 192kHz. This requires a microphone that can handle ultrasonic frequencies.
-
-\`\`\`python
-import pyaudio
-import numpy as np
-
-RATE = 192000
-CHUNK = 4096
-
-p = pyaudio.PyAudio()
-stream = p.open(format=pyaudio.paFloat32,
-                channels=1,
-                rate=RATE,
-                input=True,
-                frames_per_buffer=CHUNK)
-\`\`\`
 
 ### 2. Heterodyne Mixing
 Shift ultrasonic frequencies down to the audible range by mixing with a reference frequency.
