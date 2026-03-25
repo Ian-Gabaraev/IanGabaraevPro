@@ -40,6 +40,7 @@ const Navbar = () => {
           <a href="#experience" className="nav-link" onClick={(e) => handleHashClick(e, '#experience')}>Experience</a>
           <a href="#projects" className="nav-link" onClick={(e) => handleHashClick(e, '#projects')}>Projects</a>
           <Link to="/blog" className="nav-link">Blog</Link>
+          <Link to="/quiz" className="nav-link">Quiz</Link>
           <a href="#contact" className="nav-link" onClick={(e) => handleHashClick(e, '#contact')}>Contact</a>
         </div>
 
@@ -58,6 +59,7 @@ const Navbar = () => {
           <a href="#experience" className="mobile-link" onClick={() => { setIsMobileMenuOpen(false); if (!isHome) window.location.href = '/#experience'; }}>Experience</a>
           <a href="#projects" className="mobile-link" onClick={() => { setIsMobileMenuOpen(false); if (!isHome) window.location.href = '/#projects'; }}>Projects</a>
           <Link to="/blog" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
+          <Link to="/quiz" className="mobile-link" onClick={() => setIsMobileMenuOpen(false)}>Quiz</Link>
           <a href="#contact" className="mobile-link" onClick={() => { setIsMobileMenuOpen(false); if (!isHome) window.location.href = '/#contact'; }}>Contact</a>
         </div>
       )}
