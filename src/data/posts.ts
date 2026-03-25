@@ -13,7 +13,7 @@ export const posts: BlogPost[] = [
     title: 'Building NomadAtlas: A Finance Dashboard for Digital Nomads',
     date: '2026-03-20',
     excerpt: 'How I built a personal finance and lifestyle dashboard using React 19, Vite, and real-time APIs.',
-    tags: ['React', 'TypeScript', 'Vite', 'Side Projects'],
+    tags: ['React', 'TypeScript', 'Nomad Atlas', 'Digital Nomad'],
     content: `
 # Building NomadAtlas: A Finance Dashboard for Digital Nomads
 
