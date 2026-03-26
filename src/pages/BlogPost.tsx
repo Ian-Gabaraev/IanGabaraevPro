@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import { getPostBySlug } from '../data/posts';
@@ -104,6 +105,30 @@ const BlogPost = () => {
 
   return (
     <article className="blog-post-page">
+      <Helmet>
+        <title>{post.title} | Ian Gabaraev</title>
+        <meta name="description" content={post.excerpt} />
+        <link rel="canonical" href={`https://iangabaraev.com/blog/${post.slug}`} />
+        <meta property="og:title" content={`${post.title} | Ian Gabaraev`} />
+        <meta property="og:description" content={post.excerpt} />
+        <meta property="og:url" content={`https://iangabaraev.com/blog/${post.slug}`} />
+        <meta property="og:type" content="article" />
+        <meta property="article:published_time" content={post.date} />
+        <meta property="article:author" content="Ian Gabaraev" />
+        {post.tags.map(tag => (
+          <meta key={tag} property="article:tag" content={tag} />
+        ))}
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": post.title,
+          "description": post.excerpt,
+          "datePublished": post.date,
+          "author": { "@type": "Person", "name": "Ian Gabaraev", "url": "https://iangabaraev.com" },
+          "publisher": { "@type": "Person", "name": "Ian Gabaraev" },
+          "mainEntityOfPage": `https://iangabaraev.com/blog/${post.slug}`
+        })}</script>
+      </Helmet>
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

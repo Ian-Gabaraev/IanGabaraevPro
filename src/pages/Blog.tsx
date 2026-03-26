@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { getAllPosts } from '../data/posts';
 import './Blog.css';
@@ -43,6 +44,23 @@ const Blog = () => {
 
   return (
     <section className="blog-page">
+      <Helmet>
+        <title>Blog | Ian Gabaraev — Software Engineering, DSP & Machine Learning</title>
+        <meta name="description" content="Articles by Ian Gabaraev on software engineering, full stack development, bioacoustics, DSP, machine learning, React, Python, and cloud architecture." />
+        <link rel="canonical" href="https://iangabaraev.com/blog" />
+        <meta property="og:title" content="Blog | Ian Gabaraev" />
+        <meta property="og:description" content="Articles on software engineering, full stack development, bioacoustics, DSP, machine learning, and cloud architecture." />
+        <meta property="og:url" content="https://iangabaraev.com/blog" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Ian Gabaraev's Blog",
+          "description": "Articles on software engineering, full stack development, bioacoustics, DSP, and machine learning.",
+          "url": "https://iangabaraev.com/blog",
+          "author": { "@type": "Person", "name": "Ian Gabaraev" }
+        })}</script>
+      </Helmet>
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

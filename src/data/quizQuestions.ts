@@ -1,8 +1,10 @@
 export interface Question {
   question: string;
   code?: string;
-  options: string[];
-  correct: number;
+  options?: string[];
+  correct?: number;
+  type?: 'choice' | 'code-input';
+  answer?: string;
   explanation: string;
 }
 
@@ -462,6 +464,18 @@ const react: Question[] = [
     explanation: "useEffect(() => {}, []) runs only once when the component mounts. It's similar to componentDidMount in class components."
   },
   {
+    question: "How many times will cacheLocation execute on a single page load, and what will it cache the first few times?",
+    code: `export function useGetLocation({ longitude, latitude }: GeoLocation): EssentialLocation {\nconst [country, setCountry] = useState("");\nconst [city, setCity] = useState("");\nconst [district, setDistrict] = useState("");\nconst [countryCode, setCountryCode] = useState("");\n\nuseEffect(() => {\n// ... fetches location data from API or cache\n// ... calls setCountry(), setCity(), setDistrict(), setCountryCode()\n\n}, [latitude, longitude]);\ncacheLocation({ city, country, district, countryCode });\n\nreturn { city, country, district, countryCode };\n}`, 
+    options: [
+      "Once, with the resolved location data.",
+      "Twice — once with empty strings, once with the real data.",
+      "Many times — first with empty strings, then again with real data — once for every re-render of the component caused by any state change in any hook.",
+      "It won't execute at all because it's outside the useEffect.",
+    ],
+    correct: 2,
+    explanation: "cacheLocation is in the render body of the hook, not inside useEffect. The render body runs on every render, not just once. Every setState call — from this hook or any sibling hook in the same component — triggers a re-render, and each re-render executes cacheLocation again."
+  },
+  {
     question: "What causes a React component to re-render?",
     options: [
       'Only state changes',
@@ -918,12 +932,1314 @@ const node: Question[] = [
   }
 ];
 
+const tsAdvanced: Question[] = [
+  {
+    question: "What does this generic function signature mean?",
+    code: `function getProperty<T, K extends keyof T>(obj: T, key: K): T[K]`,
+    options: [
+      'K can be any string',
+      'K is constrained to keys of T, return type is the value type at that key',
+      'T must extend K',
+      'Returns a union of all values in T'
+    ],
+    correct: 1,
+    explanation: 'K extends keyof T constrains K to only valid keys of T. T[K] is an indexed access type — the return type matches the property type at key K.'
+  },
+  {
+    question: "What does ReturnType<T> do?",
+    code: `function greet() { return "hello" }\ntype R = ReturnType<typeof greet>`,
+    options: [
+      'R is void',
+      'R is "hello"',
+      'R is string',
+      'R is Function'
+    ],
+    correct: 1,
+    explanation: 'ReturnType<T> extracts the return type of a function type. Since greet returns a string literal with const inference from typeof, R is "hello" — the literal type.'
+  },
+  {
+    question: "What does Parameters<T> extract?",
+    code: `function add(a: number, b: string): void {}\ntype P = Parameters<typeof add>`,
+    options: [
+      '[number, string]',
+      '{a: number, b: string}',
+      'number | string',
+      'void'
+    ],
+    correct: 0,
+    explanation: 'Parameters<T> extracts the parameter types of a function as a tuple. Parameters<typeof add> gives [number, string].'
+  },
+  {
+    question: "What is a conditional type?",
+    code: `type IsString<T> = T extends string ? "yes" : "no"`,
+    options: [
+      'A type that changes at runtime',
+      'A type that resolves differently based on the type argument',
+      'An if-else statement for variables',
+      'A type guard'
+    ],
+    correct: 1,
+    explanation: 'Conditional types use T extends U ? X : Y syntax. The type resolves to X or Y depending on whether T satisfies the condition at compile time.'
+  },
+  {
+    question: "What does 'infer' do in conditional types?",
+    code: `type UnwrapPromise<T> = T extends Promise<infer U> ? U : T`,
+    options: [
+      'It creates a new variable at runtime',
+      'It extracts/infers a type from a pattern match',
+      'It validates the type is correct',
+      'It makes the type optional'
+    ],
+    correct: 1,
+    explanation: 'infer introduces a type variable U that TypeScript infers from the pattern. UnwrapPromise<Promise<string>> extracts string. UnwrapPromise<number> stays number.'
+  },
+  {
+    question: "What is a discriminated union?",
+    code: `type Shape =\n  | { kind: "circle"; radius: number }\n  | { kind: "square"; side: number }`,
+    options: [
+      'A union of unrelated types',
+      'A union where a common literal property enables type narrowing',
+      'A union that discriminates against undefined',
+      'An enum alternative'
+    ],
+    correct: 1,
+    explanation: 'Discriminated unions use a common literal property (here "kind") as a tag. TypeScript can narrow the union in switch/if blocks based on that tag.'
+  },
+  {
+    question: "What does the 'satisfies' operator do?",
+    code: `const config = {\n  width: 100,\n  color: "red"\n} satisfies Record<string, string | number>`,
+    options: [
+      'Same as "as" — it casts the type',
+      'Validates the type while preserving the narrower inferred type',
+      'Makes the object readonly',
+      'Creates a runtime check'
+    ],
+    correct: 1,
+    explanation: 'satisfies checks that a value matches a type WITHOUT widening it. config.color stays "red" (not string | number). "as" would lose the narrow type.'
+  },
+  {
+    question: "What is the 'never' type used for?",
+    options: [
+      'Variables that are undefined',
+      'Represents values that never occur — exhaustiveness checks, impossible states',
+      'Same as void',
+      'Variables that are null'
+    ],
+    correct: 1,
+    explanation: 'never represents the type of values that never occur. Use it for exhaustive switch cases (default: const _: never = value), functions that always throw, or impossible states.'
+  },
+  {
+    question: "What does Extract<T, U> do?",
+    code: `type T = Extract<"a" | "b" | "c", "a" | "c" | "d">`,
+    options: [
+      '"a" | "b" | "c" | "d"',
+      '"a" | "c"',
+      '"b"',
+      '"d"'
+    ],
+    correct: 1,
+    explanation: 'Extract<T, U> pulls out members of T that are assignable to U. Here it extracts "a" | "c" — the members common to both unions.'
+  },
+  {
+    question: "What does Exclude<T, U> do?",
+    code: `type T = Exclude<"a" | "b" | "c", "a">`,
+    options: [
+      '"a"',
+      '"b" | "c"',
+      '"a" | "b" | "c"',
+      'never'
+    ],
+    correct: 1,
+    explanation: 'Exclude<T, U> removes from T all members assignable to U. Exclude<"a" | "b" | "c", "a"> gives "b" | "c".'
+  },
+  {
+    question: "What does NonNullable<T> do?",
+    code: `type T = NonNullable<string | null | undefined>`,
+    options: [
+      'string | null | undefined',
+      'string',
+      'null | undefined',
+      'never'
+    ],
+    correct: 1,
+    explanation: 'NonNullable<T> removes null and undefined from a union type. It is equivalent to Exclude<T, null | undefined>.'
+  },
+  {
+    question: "What does Awaited<T> do?",
+    code: `type A = Awaited<Promise<Promise<string>>>`,
+    options: [
+      'Promise<string>',
+      'Promise<Promise<string>>',
+      'string',
+      'unknown'
+    ],
+    correct: 2,
+    explanation: 'Awaited<T> recursively unwraps Promise types, just like await does at runtime. It unwraps nested promises down to the final resolved value type.'
+  },
+  {
+    question: "What is a mapped type?",
+    code: `type Optional<T> = { [K in keyof T]?: T[K] }`,
+    options: [
+      'A type that maps arrays',
+      'A type that transforms each property of another type',
+      'A runtime map function for types',
+      'Same as Record<K, V>'
+    ],
+    correct: 1,
+    explanation: 'Mapped types iterate over keys of a type with [K in keyof T] and transform each property. This is how Partial, Required, and Readonly are implemented.'
+  },
+  {
+    question: "What is a template literal type?",
+    code: `type EventName = \`on\${\"Click\" | \"Hover\"}\``,
+    options: [
+      '"onClick" | "onHover"',
+      '"on" | "Click" | "Hover"',
+      'string',
+      'Error — template literals cannot be used in types'
+    ],
+    correct: 0,
+    explanation: 'Template literal types combine string literals using template syntax. TypeScript distributes unions, producing all combinations: "onClick" | "onHover".'
+  },
+  {
+    question: "What are function overloads in TypeScript?",
+    code: `function parse(input: string): number\nfunction parse(input: number): string\nfunction parse(input: string | number) {\n  return typeof input === "string" ? Number(input) : String(input)\n}`,
+    options: [
+      'Multiple implementations of the same function',
+      'Multiple type signatures with one implementation — callers see the overloads',
+      'A way to make functions generic',
+      'Deprecated in favor of generics'
+    ],
+    correct: 1,
+    explanation: 'Overloads declare multiple call signatures. The implementation signature is hidden from callers. TypeScript resolves which overload matches at the call site.'
+  },
+  {
+    question: "What does 'readonly' do on a tuple?",
+    code: `function process(items: readonly [string, number]) {}`,
+    options: [
+      'Items can be reassigned but not mutated',
+      'The tuple cannot be mutated — no push, pop, or index assignment',
+      'Only the first element is readonly',
+      'Same as const'
+    ],
+    correct: 1,
+    explanation: 'readonly on a tuple (or array) prevents mutations: no push, pop, splice, or indexed assignment. The structure and values are fixed.'
+  },
+];
+
+const reactAdvanced: Question[] = [
+  {
+    question: "When should you use useReducer instead of useState?",
+    options: [
+      'Always — useReducer replaces useState',
+      'When state logic is complex, involves multiple sub-values, or next state depends on previous',
+      'Only for global state',
+      'Only with context'
+    ],
+    correct: 1,
+    explanation: 'useReducer shines with complex state logic (multiple related values, state machines). It centralizes update logic and makes state transitions explicit and testable.'
+  },
+  {
+    question: "What does useTransition do?",
+    code: `const [isPending, startTransition] = useTransition()`,
+    options: [
+      'Animates components',
+      'Marks state updates as non-urgent so urgent updates (typing) stay responsive',
+      'Transitions between routes',
+      'Delays rendering until data is loaded'
+    ],
+    correct: 1,
+    explanation: 'useTransition marks updates as transitions (low priority). React keeps the UI responsive for urgent updates (input) while the transition renders in the background.'
+  },
+  {
+    question: "What does useDeferredValue do?",
+    code: `const deferredQuery = useDeferredValue(query)`,
+    options: [
+      'Debounces the value',
+      'Returns a deferred copy of the value that lags behind during urgent updates',
+      'Caches the previous value',
+      'Delays the value by a fixed time'
+    ],
+    correct: 1,
+    explanation: 'useDeferredValue returns a copy that "lags behind" the current value during urgent updates. It is similar to useTransition but for values you cannot wrap in startTransition.'
+  },
+  {
+    question: "What does useId return?",
+    code: `const id = useId()`,
+    options: [
+      'A random UUID',
+      'A unique, stable ID safe for SSR hydration',
+      'The component\'s key prop',
+      'A sequential counter'
+    ],
+    correct: 1,
+    explanation: 'useId generates a unique ID that is stable across server and client renders, avoiding hydration mismatches. Use for accessibility attributes (htmlFor, aria-describedby).'
+  },
+  {
+    question: "What is a custom hook?",
+    options: [
+      'A hook that requires a library',
+      'A function starting with "use" that composes other hooks to extract reusable logic',
+      'A class method',
+      'A hook defined in node_modules'
+    ],
+    correct: 1,
+    explanation: 'Custom hooks are functions prefixed with "use" that call other hooks. They extract reusable stateful logic from components without changing the component hierarchy.'
+  },
+  {
+    question: "What is an Error Boundary?",
+    options: [
+      'A try/catch block in JSX',
+      'A class component that catches JS errors in its child tree and shows a fallback UI',
+      'A hook for error handling',
+      'A browser API for React errors'
+    ],
+    correct: 1,
+    explanation: 'Error Boundaries are class components using componentDidCatch / getDerivedStateFromError. They catch rendering, lifecycle, and constructor errors in children. They do NOT catch event handler or async errors.'
+  },
+  {
+    question: "What are React Portals?",
+    code: `createPortal(<Modal />, document.getElementById("modal-root"))`,
+    options: [
+      'A way to render components lazily',
+      'A way to render children into a DOM node outside the parent hierarchy',
+      'A routing mechanism',
+      'A way to share state between components'
+    ],
+    correct: 1,
+    explanation: 'Portals render children into a different DOM node while keeping them in the React tree (events still bubble through React parents). Common for modals, tooltips, toasts.'
+  },
+  {
+    question: "What does forwardRef do?",
+    code: `const Input = forwardRef<HTMLInputElement, Props>((props, ref) => (\n  <input ref={ref} {...props} />\n))`,
+    options: [
+      'Passes props to children automatically',
+      'Allows parent components to pass a ref to a child\'s DOM element',
+      'Forwards events from child to parent',
+      'Creates a higher-order component'
+    ],
+    correct: 1,
+    explanation: 'forwardRef lets a component expose a DOM node (or imperative handle) to its parent via ref. Without it, ref on a custom component does nothing.'
+  },
+  {
+    question: "What is useImperativeHandle used for?",
+    code: `useImperativeHandle(ref, () => ({\n  focus: () => inputRef.current?.focus(),\n  clear: () => { inputRef.current!.value = '' }\n}))`,
+    options: [
+      'Replacing useState',
+      'Customizing the instance value exposed to parent via ref',
+      'Handling imperative DOM mutations',
+      'Creating event handlers'
+    ],
+    correct: 1,
+    explanation: 'useImperativeHandle customizes what the parent sees through ref. Instead of the raw DOM node, you expose a limited API. Always pair with forwardRef.'
+  },
+  {
+    question: "What is hydration in React?",
+    options: [
+      'Fetching data for components',
+      'Attaching event listeners and state to server-rendered HTML to make it interactive',
+      'Caching components in memory',
+      'Converting JSX to HTML'
+    ],
+    correct: 1,
+    explanation: 'Hydration is the process where React attaches to server-rendered HTML, adding event listeners and making it interactive without re-rendering the DOM from scratch.'
+  },
+  {
+    question: "What causes a hydration mismatch?",
+    options: [
+      'Slow network',
+      'Server-rendered HTML differs from what client-side React would render',
+      'Missing keys',
+      'Using useEffect'
+    ],
+    correct: 1,
+    explanation: 'Hydration mismatches occur when server HTML differs from client render (e.g., using Date.now(), window checks, or browser-only APIs during render). React warns and re-renders.'
+  },
+  {
+    question: "What is the difference between SSR, CSR, and RSC?",
+    options: [
+      'They are all the same',
+      'CSR renders in browser; SSR renders HTML on server then hydrates; RSC runs components on server without sending their JS to client',
+      'SSR is faster than CSR always',
+      'RSC replaces SSR entirely'
+    ],
+    correct: 1,
+    explanation: 'CSR: all rendering in browser. SSR: HTML rendered on server, hydrated on client (still ships JS). RSC (React Server Components): components run on server, zero client JS, can be mixed with client components.'
+  },
+  {
+    question: "What does Suspense do beyond React.lazy?",
+    code: `<Suspense fallback={<Spinner />}>\n  <AsyncComponent />\n</Suspense>`,
+    options: [
+      'Nothing — it only works with React.lazy',
+      'Shows fallback while children suspend (data fetching, lazy loading, or any thrown promise)',
+      'Adds error handling',
+      'Makes children render faster'
+    ],
+    correct: 1,
+    explanation: 'Suspense shows a fallback while any child "suspends" — this includes lazy components, data fetching (with Suspense-enabled libraries like React Query, Relay), and use() hook.'
+  },
+  {
+    question: "What are synthetic events in React?",
+    options: [
+      'Custom events created by the developer',
+      'Wrapper objects around native browser events that provide a consistent cross-browser API',
+      'Events that only work in development mode',
+      'Events dispatched by React Router'
+    ],
+    correct: 1,
+    explanation: 'React wraps native browser events in SyntheticEvent objects for cross-browser consistency. They have the same interface as native events but are pooled (historically) and normalized.'
+  },
+  {
+    question: "What is the render props pattern?",
+    code: `<Mouse render={mouse => (\n  <Cat position={mouse} />\n)} />`,
+    options: [
+      'Passing JSX as a prop instead of children',
+      'A component shares its internal state via a function prop that returns JSX',
+      'A way to override render method',
+      'Deprecated and removed'
+    ],
+    correct: 1,
+    explanation: 'Render props is a pattern where a component calls a function prop (often "render" or "children") to share state. Largely replaced by custom hooks, but still valid and asked about.'
+  },
+  {
+    question: "What is React.Children.map used for?",
+    code: `React.Children.map(children, child => \n  React.cloneElement(child, { className: "styled" })\n)`,
+    options: [
+      'Iterating over an array',
+      'Safely iterating over children prop, handling single child, array, or fragments',
+      'Creating child components',
+      'Filtering DOM nodes'
+    ],
+    correct: 1,
+    explanation: 'React.Children utilities safely iterate over the children prop regardless of its shape (single element, array, or fragment). Regular array methods would break on a single child.'
+  },
+];
+
+const css: Question[] = [
+  {
+    question: "What is CSS specificity order from lowest to highest?",
+    options: [
+      'class → element → id → inline',
+      'element → class → id → inline → !important',
+      'id → class → element → inline',
+      'inline → id → class → element'
+    ],
+    correct: 1,
+    explanation: 'Specificity: element/pseudo-element (0,0,1) < class/attribute/pseudo-class (0,1,0) < id (1,0,0) < inline style < !important. More specific selectors win.'
+  },
+  {
+    question: "What is the CSS box model?",
+    options: [
+      'margin → padding → border → content',
+      'content → padding → border → margin (inside out)',
+      'border → margin → padding → content',
+      'content → margin → padding → border'
+    ],
+    correct: 1,
+    explanation: 'From inside out: content → padding → border → margin. box-sizing: border-box includes padding and border in the width/height.'
+  },
+  {
+    question: "What does box-sizing: border-box do?",
+    options: [
+      'Adds a box around the border',
+      'Width and height include content + padding + border (not just content)',
+      'Removes the margin',
+      'Makes the element inline'
+    ],
+    correct: 1,
+    explanation: 'border-box makes width/height include padding and border. Without it (content-box), a 200px wide element with 20px padding is actually 240px wide.'
+  },
+  {
+    question: "When does z-index NOT work?",
+    options: [
+      'On elements with display: block',
+      "On elements without a position value other than static (or without a stacking context)",
+      'On flex children',
+      'On elements with overflow: hidden'
+    ],
+    correct: 1,
+    explanation: 'z-index only works on positioned elements (relative, absolute, fixed, sticky) or flex/grid children. On static elements, z-index is ignored. Also, z-index only competes within the same stacking context.'
+  },
+  {
+    question: "What creates a new stacking context?",
+    options: [
+      'Any element with z-index',
+      'position + z-index, opacity < 1, transform, filter, will-change, and more',
+      'Only position: fixed',
+      'Only the root element'
+    ],
+    correct: 1,
+    explanation: 'Stacking contexts are created by: position + z-index (not auto), opacity < 1, transform, filter, will-change, isolation: isolate, and more. Children cannot escape their parent stacking context.'
+  },
+  {
+    question: "What is the main axis in flexbox by default?",
+    options: [
+      'Vertical (top to bottom)',
+      'Horizontal (left to right)',
+      'Depends on the browser',
+      'Diagonal'
+    ],
+    correct: 1,
+    explanation: 'By default, flex-direction: row makes the main axis horizontal. justify-content works on the main axis, align-items works on the cross axis.'
+  },
+  {
+    question: "What is the difference between justify-content and align-items?",
+    options: [
+      'No difference',
+      'justify-content: main axis; align-items: cross axis',
+      'justify-content: vertical; align-items: horizontal',
+      'They both work on the main axis'
+    ],
+    correct: 1,
+    explanation: 'justify-content distributes space along the main axis (row = horizontal). align-items positions items along the cross axis (row = vertical).'
+  },
+  {
+    question: "When would you use CSS Grid over Flexbox?",
+    options: [
+      'Never — Flexbox handles everything',
+      'For two-dimensional layouts (rows AND columns simultaneously)',
+      'Only for tables',
+      'Grid is slower and should be avoided'
+    ],
+    correct: 1,
+    explanation: 'Flexbox is one-dimensional (row OR column). Grid is two-dimensional (rows AND columns). Use Grid for page layouts, card grids, complex arrangements. Use Flex for linear layouts.'
+  },
+  {
+    question: "What does position: sticky do?",
+    options: [
+      'Same as position: fixed',
+      'Toggles between relative and fixed based on scroll position',
+      'Sticks the element to the bottom',
+      'Makes the element unmovable'
+    ],
+    correct: 1,
+    explanation: 'sticky acts as relative until the element reaches a scroll threshold, then acts as fixed. Requires top/bottom/left/right to define the threshold. Parent must be scrollable.'
+  },
+  {
+    question: "What is the difference between em and rem?",
+    options: [
+      'No difference',
+      'em is relative to parent font-size; rem is relative to root (html) font-size',
+      'rem is relative to parent; em is relative to root',
+      'em is absolute; rem is relative'
+    ],
+    correct: 1,
+    explanation: 'em compounds — 1.5em inside 1.5em = 2.25× root size. rem always references the root html font-size. Prefer rem for consistent sizing, em for component-relative scaling.'
+  },
+  {
+    question: "What are CSS custom properties (variables)?",
+    code: `:root { --primary: #3b82f6; }\n.btn { color: var(--primary); }`,
+    options: [
+      'Sass variables compiled to CSS',
+      'Native CSS variables scoped to the cascade, readable by JS',
+      'Constants that cannot change',
+      'A PostCSS feature'
+    ],
+    correct: 1,
+    explanation: 'CSS custom properties are native variables that cascade and inherit. Unlike Sass vars, they are live, can be scoped to selectors, updated from JS, and used in media queries.'
+  },
+  {
+    question: "What does 'display: none' vs 'visibility: hidden' do?",
+    options: [
+      'Same thing',
+      'display:none removes from layout entirely; visibility:hidden hides but keeps space',
+      'visibility:hidden removes from layout; display:none keeps space',
+      'Both remove the element from the DOM'
+    ],
+    correct: 1,
+    explanation: 'display:none removes the element from the layout flow (takes no space). visibility:hidden hides it visually but the element still occupies space. Neither removes from DOM.'
+  },
+  {
+    question: "How do CSS Modules prevent style conflicts?",
+    options: [
+      'They use Shadow DOM',
+      'They scope class names by generating unique hashes at build time',
+      'They use !important on everything',
+      'They inline all styles'
+    ],
+    correct: 1,
+    explanation: 'CSS Modules generate unique class names (e.g., .button_a3x2k) at build time, scoping styles to the importing component. Eliminates global name collisions without runtime cost.'
+  },
+];
+
+const testing: Question[] = [
+  {
+    question: "What is the core philosophy of React Testing Library?",
+    options: [
+      'Test implementation details',
+      'Test the way users interact with your UI — find by role, text, label',
+      'Test every component in isolation',
+      'Maximize code coverage'
+    ],
+    correct: 1,
+    explanation: 'RTL philosophy: test behavior, not implementation. Query by role/text/label (how users see it), not by class name or test ID. If you refactor without changing behavior, tests should still pass.'
+  },
+  {
+    question: "Which query should you prefer in React Testing Library?",
+    options: [
+      'getByTestId',
+      'getByRole or getByLabelText',
+      'querySelector',
+      'getByClassName'
+    ],
+    correct: 1,
+    explanation: 'Prefer accessible queries: getByRole > getByLabelText > getByPlaceholderText > getByText > getByTestId. This ensures your UI is accessible by design.'
+  },
+  {
+    question: "What does 'act()' do in React tests?",
+    options: [
+      'Mocks a component',
+      'Wraps code that triggers state updates so React processes them before assertions',
+      'Simulates user actions',
+      'Asserts component output'
+    ],
+    correct: 1,
+    explanation: 'act() ensures all state updates, effects, and re-renders are processed before you make assertions. RTL\'s render, fireEvent, and userEvent wrap act() automatically.'
+  },
+  {
+    question: "What is the difference between fireEvent and userEvent?",
+    options: [
+      'No difference',
+      'userEvent simulates real user interactions (typing, clicking); fireEvent dispatches raw DOM events',
+      'fireEvent is more accurate',
+      'userEvent is deprecated'
+    ],
+    correct: 1,
+    explanation: 'userEvent simulates full interaction sequences (focus → keyDown → input → keyUp → change). fireEvent dispatches single raw events. Prefer userEvent for realistic tests.'
+  },
+  {
+    question: "How do you test a custom hook?",
+    options: [
+      'Call it directly in the test',
+      "Use renderHook() from @testing-library/react",
+      'Mount a dummy component',
+      'Hooks cannot be unit tested'
+    ],
+    correct: 1,
+    explanation: 'renderHook() wraps your hook in a test component automatically. It returns { result, rerender } so you can inspect result.current and trigger re-renders.'
+  },
+  {
+    question: "What should you mock in component tests?",
+    options: [
+      'Everything — all dependencies and children',
+      'External boundaries: API calls, timers, browser APIs — NOT internal components',
+      'Nothing — use real implementations only',
+      'All hooks'
+    ],
+    correct: 1,
+    explanation: 'Mock at the boundary: HTTP calls (msw or jest.mock fetch), timers (jest.useFakeTimers), localStorage. Keep internal components real. Over-mocking makes tests brittle and meaningless.'
+  },
+  {
+    question: "What does jest.fn() do?",
+    options: [
+      'Creates a new function',
+      'Creates a mock function that tracks calls, arguments, and return values',
+      'Runs a function in jest',
+      'Fixes a flaky function'
+    ],
+    correct: 1,
+    explanation: 'jest.fn() creates a mock that records calls. Check with: expect(fn).toHaveBeenCalledWith(args), .toHaveBeenCalledTimes(n), fn.mock.calls, fn.mock.results.'
+  },
+  {
+    question: "What is a snapshot test?",
+    options: [
+      'A screenshot comparison test',
+      'Serializes component output and compares to saved snapshot file — breaks on any change',
+      'A test that runs once',
+      'A performance benchmark'
+    ],
+    correct: 1,
+    explanation: 'Snapshot tests serialize rendered output to a file. Any change (even whitespace) fails the test until you update the snapshot. Useful but fragile — prefer specific assertions.'
+  },
+  {
+    question: "How do you test async behavior?",
+    code: `const button = screen.getByRole("button")\nawait userEvent.click(button)\nconst message = await screen.findByText("Success")`,
+    options: [
+      'Use setTimeout in the test',
+      'Use findBy queries (which wait with retry) or waitFor()',
+      'Wrap everything in await',
+      'Async testing is not possible in jest'
+    ],
+    correct: 1,
+    explanation: 'findBy* queries retry until the element appears (default 1s timeout). waitFor() retries an assertion. Both handle async state updates, API calls, and loading states.'
+  },
+  {
+    question: "What is MSW (Mock Service Worker)?",
+    options: [
+      'A testing framework',
+      'A library that intercepts HTTP requests at the network level for realistic API mocking',
+      'A browser extension',
+      'A Jest plugin'
+    ],
+    correct: 1,
+    explanation: 'MSW intercepts fetch/XHR requests at the service worker level. Tests use real fetch calls, only the network is mocked. Works in both tests and browser dev environments.'
+  },
+];
+
+const webAPIs: Question[] = [
+  {
+    question: "What is CORS and why does it exist?",
+    options: [
+      'A CSS framework',
+      'Cross-Origin Resource Sharing — browser security that blocks requests to different origins unless the server allows it',
+      'A React optimization',
+      'A Node.js package'
+    ],
+    correct: 1,
+    explanation: 'CORS prevents malicious sites from making requests to other origins on your behalf. The server must include Access-Control-Allow-Origin headers to permit cross-origin requests.'
+  },
+  {
+    question: "What triggers a CORS preflight request?",
+    options: [
+      'Every cross-origin request',
+      'Custom headers, methods other than GET/HEAD/POST, or non-simple Content-Types trigger an OPTIONS preflight',
+      'Only POST requests',
+      'Only when cookies are sent'
+    ],
+    correct: 1,
+    explanation: 'Simple requests (GET/POST/HEAD with standard headers and certain Content-Types) go directly. Everything else triggers an OPTIONS preflight to check server permissions first.'
+  },
+  {
+    question: "What is the difference between localStorage, sessionStorage, and cookies?",
+    options: [
+      'No difference',
+      'localStorage persists forever; sessionStorage clears on tab close; cookies can be sent with requests and have expiration',
+      'Cookies are larger than localStorage',
+      'sessionStorage persists between sessions'
+    ],
+    correct: 1,
+    explanation: 'localStorage: ~5MB, persists until cleared. sessionStorage: ~5MB, tab-scoped, cleared on tab close. Cookies: ~4KB, sent with every HTTP request, have expiration, can be HttpOnly/Secure.'
+  },
+  {
+    question: "What is the Intersection Observer API?",
+    options: [
+      'A way to observe DOM mutations',
+      'An API that asynchronously observes when elements enter/exit the viewport',
+      'A way to detect click intersections',
+      'A React hook'
+    ],
+    correct: 1,
+    explanation: 'IntersectionObserver efficiently detects when elements enter or leave the viewport (or a parent). Use for lazy loading images, infinite scroll, and triggering animations on scroll.'
+  },
+  {
+    question: "What does AbortController do?",
+    code: `const controller = new AbortController()\nfetch(url, { signal: controller.signal })\ncontroller.abort()`,
+    options: [
+      'Aborts the JavaScript runtime',
+      'Cancels in-flight fetch requests and other async operations',
+      'Stops event propagation',
+      'Clears timeouts'
+    ],
+    correct: 1,
+    explanation: 'AbortController provides a signal to cancel fetch requests, event listeners, or any API that accepts an AbortSignal. Essential for cleanup in React useEffect.'
+  },
+  {
+    question: "What is the History API used for in SPAs?",
+    code: `history.pushState({}, "", "/about")`,
+    options: [
+      'Tracking user analytics',
+      'Updating the URL bar without triggering a full page reload — enables client-side routing',
+      'Storing browser history in localStorage',
+      'Going back in time'
+    ],
+    correct: 1,
+    explanation: 'pushState/replaceState change the URL without reloading. React Router and other SPA routers use this API to sync URL with component state.'
+  },
+  {
+    question: "What does requestAnimationFrame do?",
+    options: [
+      'Requests the next animation from CSS',
+      'Schedules a callback before the next browser repaint (~60fps), optimal for visual updates',
+      'Pauses animations',
+      'Creates a CSS animation'
+    ],
+    correct: 1,
+    explanation: 'requestAnimationFrame calls your function before the next repaint. Use it for smooth animations, scroll-based effects, and batching DOM reads/writes. More efficient than setInterval.'
+  },
+  {
+    question: "What is a Service Worker?",
+    options: [
+      'A web server written in JavaScript',
+      'A script that runs in the background, enabling offline support, caching, and push notifications',
+      'A React background thread',
+      'A database API'
+    ],
+    correct: 1,
+    explanation: 'Service Workers are background scripts that intercept network requests, enable offline caching (PWA), and handle push notifications. They run separate from the main thread.'
+  },
+  {
+    question: "What does structuredClone do?",
+    code: `const copy = structuredClone(original)`,
+    options: [
+      'Same as spread operator',
+      'Creates a deep copy of an object including nested structures, Maps, Sets, Dates',
+      'Creates a shallow copy',
+      'Clones DOM elements'
+    ],
+    correct: 1,
+    explanation: 'structuredClone does a deep copy handling nested objects, arrays, Maps, Sets, Dates, RegExp, and more. Unlike JSON.parse(JSON.stringify()), it handles circular references.'
+  },
+  {
+    question: "What is the difference between querySelector and getElementById?",
+    options: [
+      'No difference',
+      'getElementById is faster for ID lookups; querySelector accepts any CSS selector but is slightly slower',
+      'querySelector only works in React',
+      'getElementById is deprecated'
+    ],
+    correct: 1,
+    explanation: 'getElementById looks up by ID only (fastest). querySelector accepts any CSS selector (flexible but slower). querySelectorAll returns all matches. In React, prefer refs over direct DOM access.'
+  },
+];
+
+const asyncPatterns: Question[] = [
+  {
+    question: "What is the difference between Promise.all, Promise.allSettled, Promise.race, and Promise.any?",
+    options: [
+      'They all do the same thing',
+      'all: all must resolve (or one rejects); allSettled: waits for all regardless; race: first to settle; any: first to resolve',
+      'race is fastest, all is slowest',
+      'any and all are identical'
+    ],
+    correct: 1,
+    explanation: 'Promise.all rejects on first rejection. allSettled waits for all (returns status per promise). race settles with first result (resolve or reject). any resolves with first success (ignores rejections until all fail).'
+  },
+  {
+    question: "What is the difference between debounce and throttle?",
+    options: [
+      'No difference',
+      'Debounce waits for inactivity then fires; throttle fires at regular intervals during activity',
+      'Throttle waits for inactivity; debounce fires at intervals',
+      'Both delay events by a fixed time'
+    ],
+    correct: 1,
+    explanation: 'Debounce: waits until user stops (e.g., search input — wait 300ms after last keystroke). Throttle: fires at most once per interval (e.g., scroll handler — at most once per 100ms).'
+  },
+  {
+    question: "What is a race condition in React?",
+    code: `useEffect(() => {\n  fetch(\`/api/\${id}\`).then(r => r.json()).then(setData)\n}, [id])`,
+    options: [
+      'A performance issue',
+      'When a slow response for a previous request overwrites data from a newer, faster request',
+      'Two components rendering at the same time',
+      'A memory leak'
+    ],
+    correct: 1,
+    explanation: 'If id changes quickly, old fetch responses may arrive after newer ones and overwrite the correct data. Fix with AbortController cleanup in useEffect or a stale request flag.'
+  },
+  {
+    question: "How do you fix the race condition above?",
+    code: `useEffect(() => {\n  const controller = new AbortController()\n  fetch(\`/api/\${id}\`, { signal: controller.signal })\n    .then(r => r.json()).then(setData)\n    .catch(e => { if (e.name !== "AbortError") throw e })\n  return () => controller.abort()\n}, [id])`,
+    options: [
+      'Use setTimeout to delay requests',
+      'AbortController cancels the previous fetch when id changes, preventing stale data',
+      'Use Promise.race',
+      'This code has a bug'
+    ],
+    correct: 1,
+    explanation: 'The cleanup function aborts the previous fetch when id changes. The new effect starts a fresh fetch. AbortError is caught and ignored since it is expected behavior.'
+  },
+  {
+    question: "What does the 'for await...of' syntax do?",
+    code: `for await (const chunk of readableStream) {\n  process(chunk)\n}`,
+    options: [
+      'Same as for...of',
+      'Iterates over async iterables, awaiting each value in sequence',
+      'Runs all iterations in parallel',
+      'Only works with arrays'
+    ],
+    correct: 1,
+    explanation: 'for await...of iterates async iterables (async generators, ReadableStreams), awaiting each yielded promise. Each iteration starts after the previous completes.'
+  },
+  {
+    question: "What is Promise.withResolvers()?",
+    code: `const { promise, resolve, reject } = Promise.withResolvers()`,
+    options: [
+      'Creates three separate promises',
+      'Creates a promise with externally accessible resolve/reject functions',
+      'A polyfill for Promise.all',
+      'Deprecated API'
+    ],
+    correct: 1,
+    explanation: 'Promise.withResolvers() (ES2024) returns a promise and its resolve/reject functions. Eliminates the common pattern of extracting them from the constructor callback.'
+  },
+];
+
+const security: Question[] = [
+  {
+    question: "What is XSS (Cross-Site Scripting)?",
+    options: [
+      'A CSS framework vulnerability',
+      'An attack where malicious scripts are injected into trusted websites and executed in users\' browsers',
+      'A server-side attack',
+      'A network protocol vulnerability'
+    ],
+    correct: 1,
+    explanation: 'XSS injects malicious JavaScript that runs in other users\' browsers. Can steal cookies, tokens, or perform actions as the user. Three types: stored, reflected, DOM-based.'
+  },
+  {
+    question: "How does React protect against XSS by default?",
+    options: [
+      'It does not protect against XSS',
+      'JSX automatically escapes embedded values before rendering them as text',
+      'It uses a Web Application Firewall',
+      'It sanitizes all HTTP responses'
+    ],
+    correct: 1,
+    explanation: 'React auto-escapes values in JSX: {userInput} renders as text, not HTML. The major exception is dangerouslySetInnerHTML, which bypasses escaping — never use with untrusted data.'
+  },
+  {
+    question: "What is dangerouslySetInnerHTML and when is it dangerous?",
+    code: `<div dangerouslySetInnerHTML={{ __html: userContent }} />`,
+    options: [
+      'It is always safe in React',
+      'It renders raw HTML — dangerous with untrusted input because it bypasses React\'s XSS protection',
+      'It is deprecated',
+      'It only works with sanitized content'
+    ],
+    correct: 1,
+    explanation: 'dangerouslySetInnerHTML renders raw HTML, bypassing React\'s escaping. With untrusted data, it enables XSS. Always sanitize with DOMPurify or similar before using it.'
+  },
+  {
+    question: "What is CSRF (Cross-Site Request Forgery)?",
+    options: [
+      'A type of XSS',
+      'An attack that tricks a logged-in user\'s browser into making unwanted requests to a trusted site',
+      'Forging SSL certificates',
+      'A DNS attack'
+    ],
+    correct: 1,
+    explanation: 'CSRF tricks your browser into making authenticated requests (because cookies are sent automatically). Mitigated with CSRF tokens, SameSite cookies, and checking Origin/Referer headers.'
+  },
+  {
+    question: "What does the Content-Security-Policy header do?",
+    options: [
+      'Encrypts page content',
+      'Restricts which sources can load scripts, styles, images, etc. — mitigates XSS',
+      'Blocks all JavaScript',
+      'Validates HTML'
+    ],
+    correct: 1,
+    explanation: 'CSP whitelists trusted sources for scripts, styles, images, etc. script-src \'self\' only allows scripts from your domain. A strong CSP significantly reduces XSS impact.'
+  },
+  {
+    question: "What is the difference between HttpOnly, Secure, and SameSite cookie flags?",
+    options: [
+      'They all do the same thing',
+      'HttpOnly: no JS access; Secure: HTTPS only; SameSite: controls cross-origin sending',
+      'They are deprecated',
+      'Only HttpOnly matters'
+    ],
+    correct: 1,
+    explanation: 'HttpOnly prevents document.cookie access (mitigates XSS token theft). Secure ensures HTTPS-only transmission. SameSite (Strict/Lax/None) controls if cookies are sent cross-origin (mitigates CSRF).'
+  },
+  {
+    question: "Why should you never store JWTs in localStorage?",
+    options: [
+      'localStorage is too slow',
+      'XSS can read localStorage — any injected script can steal the token',
+      'localStorage has a size limit',
+      'JWTs are too large'
+    ],
+    correct: 1,
+    explanation: 'localStorage is accessible to any JS on the page. A single XSS vulnerability exposes the token. Prefer HttpOnly cookies (not accessible from JS) for sensitive tokens.'
+  },
+  {
+    question: "What is input sanitization vs validation?",
+    options: [
+      'Same thing',
+      'Validation checks if input is correct format; sanitization cleans/strips dangerous content',
+      'Sanitization is server-only',
+      'Validation is client-only'
+    ],
+    correct: 1,
+    explanation: 'Validation: "Is this a valid email?" (reject bad input). Sanitization: "Strip script tags from this HTML" (clean dangerous content). Do both — validation first, sanitization as defense-in-depth.'
+  },
+];
+
+const a11y: Question[] = [
+  {
+    question: "What are ARIA attributes?",
+    options: [
+      'A CSS framework',
+      'Accessible Rich Internet Applications — attributes that provide semantic meaning to assistive technologies',
+      'A React testing library',
+      'Animation properties'
+    ],
+    correct: 1,
+    explanation: 'ARIA attributes (role, aria-label, aria-hidden, etc.) communicate widget roles and states to screen readers. First rule: use semantic HTML before reaching for ARIA.'
+  },
+  {
+    question: "What is the first rule of ARIA?",
+    options: [
+      'Always use ARIA on every element',
+      'Don\'t use ARIA if a native HTML element or attribute already does the job',
+      'ARIA must be used on all interactive elements',
+      'Use role="button" on every clickable element'
+    ],
+    correct: 1,
+    explanation: '<button> is better than <div role="button" tabindex="0">. Native elements have built-in keyboard handling, focus management, and screen reader support. ARIA is a last resort.'
+  },
+  {
+    question: "What is semantic HTML and why does it matter?",
+    options: [
+      'Using divs for everything with descriptive class names',
+      'Using elements that describe their meaning — nav, main, article, header — for accessibility and SEO',
+      'HTML written by language experts',
+      'HTML with comments explaining each element'
+    ],
+    correct: 1,
+    explanation: 'Semantic elements (nav, main, article, section, header, footer, aside) convey meaning to screen readers, search engines, and developers. A <nav> is immediately understood; a <div class="nav"> is not.'
+  },
+  {
+    question: "How should you handle focus management in a modal?",
+    options: [
+      'No special handling needed',
+      'Trap focus inside the modal, return focus to the trigger element on close',
+      'Remove all focus styles',
+      'Use autofocus on every element'
+    ],
+    correct: 1,
+    explanation: 'Modal focus management: 1) Move focus into modal on open. 2) Trap Tab/Shift+Tab within the modal. 3) Close on Escape. 4) Return focus to the trigger element. This keeps keyboard users from getting lost.'
+  },
+  {
+    question: "What does tabindex do?",
+    code: `<div tabindex="0">Focusable</div>\n<div tabindex="-1">Programmatically focusable only</div>`,
+    options: [
+      'Sets the tab width',
+      '0: element is focusable via Tab; -1: focusable via JS only (not in Tab order)',
+      'Negative values make elements unfocusable',
+      'Higher numbers get focus first'
+    ],
+    correct: 1,
+    explanation: 'tabindex="0" adds to natural tab order. tabindex="-1" allows focus via JS (.focus()) but not Tab. Avoid tabindex > 0 — it overrides natural order and causes confusion.'
+  },
+  {
+    question: "Why should you never remove focus outlines without replacement?",
+    code: `*:focus { outline: none } /* BAD */`,
+    options: [
+      'It breaks animations',
+      'Keyboard users lose their only visual indicator of where focus is on the page',
+      'It slows down the page',
+      'It causes layout shifts'
+    ],
+    correct: 1,
+    explanation: 'Focus outlines are essential for keyboard users. If you remove them for aesthetics, ALWAYS add a custom focus style (:focus-visible is preferred — only shows for keyboard navigation).'
+  },
+  {
+    question: "What does aria-live do?",
+    code: `<div aria-live="polite">Status: Loading...</div>`,
+    options: [
+      'Makes content animated',
+      'Announces dynamic content changes to screen readers without focus change',
+      'Keeps the element always visible',
+      'Updates the page title'
+    ],
+    correct: 1,
+    explanation: 'aria-live regions announce content changes to screen readers. "polite" waits for the user to be idle, "assertive" interrupts immediately. Essential for toast messages, loading states, form errors.'
+  },
+  {
+    question: "What is the purpose of alt text on images?",
+    options: [
+      'SEO only',
+      'Provides text alternative for screen readers and when images fail to load',
+      'Captions displayed below images',
+      'Tooltip on hover'
+    ],
+    correct: 1,
+    explanation: 'alt text describes an image for screen readers and broken images. Decorative images should have empty alt="" to be skipped. Informative images need descriptive alt text.'
+  },
+];
+
+const performance: Question[] = [
+  {
+    question: "What are Core Web Vitals?",
+    options: [
+      'A React performance library',
+      'Google metrics: LCP (loading), INP (interactivity), CLS (visual stability)',
+      'Browser memory limits',
+      'JavaScript execution benchmarks'
+    ],
+    correct: 1,
+    explanation: 'LCP (Largest Contentful Paint): < 2.5s. INP (Interaction to Next Paint): < 200ms. CLS (Cumulative Layout Shift): < 0.1. These are Google ranking signals and UX benchmarks.'
+  },
+  {
+    question: "What is virtualization (windowing)?",
+    options: [
+      'Running React in a virtual machine',
+      'Rendering only visible items in a long list, replacing DOM nodes as user scrolls',
+      'Using the Virtual DOM more efficiently',
+      'Server-side rendering'
+    ],
+    correct: 1,
+    explanation: 'Virtualization renders only visible rows (e.g., 20 of 10,000). As the user scrolls, off-screen items are removed and new ones are added. Libraries: react-window, react-virtuoso, TanStack Virtual.'
+  },
+  {
+    question: "What is code splitting?",
+    options: [
+      'Writing code in multiple files',
+      'Breaking the bundle into smaller chunks loaded on demand to reduce initial load time',
+      'Splitting components into smaller components',
+      'Using Git branches'
+    ],
+    correct: 1,
+    explanation: 'Code splitting uses dynamic import() to create separate bundle chunks. React.lazy + Suspense, route-based splitting, and lazy loading large libraries all reduce initial load.'
+  },
+  {
+    question: "What is the difference between eager and lazy loading?",
+    options: [
+      'No difference',
+      'Eager loads everything upfront; lazy defers loading until needed (on demand)',
+      'Lazy is always better',
+      'Eager is asynchronous'
+    ],
+    correct: 1,
+    explanation: 'Eager loading fetches resources immediately. Lazy loading defers until needed (e.g., images below fold, route components not yet visited). Lazy loading reduces initial page weight.'
+  },
+  {
+    question: "What does the loading='lazy' attribute do on images?",
+    code: `<img src="photo.jpg" loading="lazy" alt="Photo" />`,
+    options: [
+      'Makes the image load slower',
+      'Defers loading until the image is near the viewport — native browser lazy loading',
+      'Compresses the image',
+      'Adds a placeholder'
+    ],
+    correct: 1,
+    explanation: 'Native lazy loading defers fetching off-screen images until the user scrolls near them. No JavaScript needed. Do NOT lazy-load above-the-fold images (LCP images).'
+  },
+  {
+    question: "Why should you avoid layout thrashing?",
+    options: [
+      'It is a security risk',
+      'Alternating reads and writes to DOM forces the browser to recalculate layout repeatedly, causing jank',
+      'It breaks CSS animations',
+      'It uses too much memory'
+    ],
+    correct: 1,
+    explanation: 'Reading layout properties (offsetHeight) then writing (style.height) in a loop forces synchronous reflows each iteration. Batch reads, then batch writes, or use requestAnimationFrame.'
+  },
+  {
+    question: "What does React.memo NOT protect against?",
+    options: [
+      'Prop changes',
+      'Internal state changes and context changes — the component still re-renders for these',
+      'Parent re-renders',
+      'Nothing — it prevents all re-renders'
+    ],
+    correct: 1,
+    explanation: 'React.memo only skips re-renders from parent when props are the same. If the component\'s own state changes or a consumed context changes, it still re-renders.'
+  },
+  {
+    question: "What is the purpose of a web worker?",
+    options: [
+      'A service worker alternative',
+      'Runs JavaScript in a background thread to avoid blocking the main thread',
+      'A build tool',
+      'A testing framework'
+    ],
+    correct: 1,
+    explanation: 'Web Workers run CPU-intensive JS in a background thread (parsing, image processing, etc.). They communicate with the main thread via postMessage and cannot access the DOM.'
+  },
+];
+
+const jsAdvanced: Question[] = [
+  {
+    question: "What is a Proxy in JavaScript?",
+    code: `const handler = {\n  get(target, prop) {\n    return prop in target ? target[prop] : "default"\n  }\n}\nconst obj = new Proxy({}, handler)`,
+    options: [
+      'A network proxy',
+      'A wrapper that intercepts and customizes operations on objects (get, set, delete, etc.)',
+      'A copy of an object',
+      'A pattern for async operations'
+    ],
+    correct: 1,
+    explanation: 'Proxy intercepts fundamental operations (get, set, has, delete, etc.) on an object. Used for validation, logging, reactive systems (Vue 3 uses Proxy for reactivity).'
+  },
+  {
+    question: "What is the difference between WeakMap and Map?",
+    options: [
+      'WeakMap is slower',
+      'WeakMap keys must be objects and are weakly held — garbage collected when no other reference exists',
+      'Map cannot store objects',
+      'No practical difference'
+    ],
+    correct: 1,
+    explanation: 'WeakMap keys are weakly referenced — if no other reference to the key exists, the entry is garbage collected. Keys must be objects. Not iterable. Used for private data and caching without memory leaks.'
+  },
+  {
+    question: "What does Object.freeze do vs Object.seal?",
+    options: [
+      'Same thing',
+      'freeze: no add/delete/modify; seal: no add/delete but CAN modify existing properties',
+      'seal is deeper than freeze',
+      'freeze is recursive'
+    ],
+    correct: 1,
+    explanation: 'Object.freeze: cannot add, remove, or change properties (shallow). Object.seal: cannot add or remove but CAN change existing values. Neither is deep — nested objects are not affected.'
+  },
+  {
+    question: "What is a Symbol used for?",
+    code: `const id = Symbol("id")\nconst user = { [id]: 123, name: "Ian" }`,
+    options: [
+      'A special number type',
+      'A unique, immutable primitive used for private-like properties and avoiding name collisions',
+      'A way to create constants',
+      'A string alternative'
+    ],
+    correct: 1,
+    explanation: 'Every Symbol() is unique. Properties keyed by Symbols are not enumerable in for...in or Object.keys(). Used for "hidden" properties, well-known protocols (Symbol.iterator), and avoiding collisions.'
+  },
+  {
+    question: "What makes an object iterable?",
+    code: `const range = {\n  [Symbol.iterator]() {\n    let i = 0\n    return { next: () => ({ value: i++, done: i > 3 }) }\n  }\n}`,
+    options: [
+      'Having a length property',
+      'Implementing the Symbol.iterator protocol — returning an object with a next() method',
+      'Being an array',
+      'Having a forEach method'
+    ],
+    correct: 1,
+    explanation: 'Any object with a [Symbol.iterator] method is iterable. The method returns an iterator with next() → { value, done }. This enables for...of, spread, destructuring, and Array.from().'
+  },
+  {
+    question: "What causes memory leaks in JavaScript?",
+    options: [
+      'Using too many variables',
+      'Forgotten timers/listeners, closures holding references, detached DOM nodes, global variables',
+      'Not using garbage collection',
+      'Using const instead of let'
+    ],
+    correct: 1,
+    explanation: 'Common leaks: setInterval never cleared, event listeners never removed, closures capturing large objects, detached DOM nodes still referenced, accidental globals. Use DevTools heap profiling to find them.'
+  },
+  {
+    question: "What is the difference between for...in and for...of?",
+    options: [
+      'No difference',
+      'for...in iterates over enumerable property KEYS (strings); for...of iterates over iterable VALUES',
+      'for...of works on objects; for...in works on arrays',
+      'for...in is faster'
+    ],
+    correct: 1,
+    explanation: 'for...in: iterates string keys (including inherited enumerable props) — use for objects. for...of: iterates values of iterables (arrays, strings, Maps, Sets) — never use on plain objects.'
+  },
+  {
+    question: "What is optional chaining and nullish coalescing?",
+    code: `const city = user?.address?.city ?? "Unknown"`,
+    options: [
+      'Same as && and ||',
+      '?. safely accesses nested props (returns undefined if null/undefined); ?? provides fallback only for null/undefined (not falsy)',
+      '?. throws on undefined; ?? catches errors',
+      'New React syntax'
+    ],
+    correct: 1,
+    explanation: '?. short-circuits to undefined on null/undefined access (no TypeError). ?? differs from || because it only falls back on null/undefined — 0 ?? "default" gives 0, but 0 || "default" gives "default".'
+  },
+  {
+    question: "What does structuredClone NOT handle?",
+    options: [
+      'Nested objects',
+      'Functions, DOM nodes, and objects with prototype chains',
+      'Arrays',
+      'Dates'
+    ],
+    correct: 1,
+    explanation: 'structuredClone cannot clone functions, DOM nodes, Error objects, or objects with class prototypes (they lose their prototype). It handles plain objects, arrays, Maps, Sets, Dates, RegExp, Blobs.'
+  },
+];
+
+const codeInput: Question[] = [
+  {
+    type: 'code-input',
+    question: "Write an arrow function that takes two numbers and returns their sum.",
+    answer: `const sum = (a: number, b: number): number => a + b`,
+    explanation: 'Arrow function with implicit return: const sum = (a: number, b: number): number => a + b. No curly braces means the expression is returned automatically.'
+  },
+  {
+    type: 'code-input',
+    question: "Write a generic identity function in TypeScript.",
+    answer: `function identity<T>(value: T): T { return value }`,
+    explanation: 'A generic identity function: function identity<T>(value: T): T { return value }. The type parameter T is inferred from the argument.'
+  },
+  {
+    type: 'code-input',
+    question: "Write a type that extracts the resolved type from a Promise.",
+    answer: `type Unwrap<T> = T extends Promise<infer U> ? U : T`,
+    explanation: 'Use conditional types with infer: type Unwrap<T> = T extends Promise<infer U> ? U : T. Unwrap<Promise<string>> gives string.'
+  },
+  {
+    type: 'code-input',
+    question: "Write a custom hook that tracks window width.",
+    answer: `function useWindowWidth() {\n  const [width, setWidth] = useState(window.innerWidth)\n  useEffect(() => {\n    const handler = () => setWidth(window.innerWidth)\n    window.addEventListener("resize", handler)\n    return () => window.removeEventListener("resize", handler)\n  }, [])\n  return width\n}`,
+    explanation: 'A custom hook combining useState + useEffect with proper cleanup. The event listener is added on mount and removed on unmount via the cleanup function.'
+  },
+  {
+    type: 'code-input',
+    question: "Write a debounce function in TypeScript.",
+    answer: `function debounce<T extends (...args: any[]) => void>(fn: T, ms: number) {\n  let timer: ReturnType<typeof setTimeout>\n  return (...args: Parameters<T>) => {\n    clearTimeout(timer)\n    timer = setTimeout(() => fn(...args), ms)\n  }\n}`,
+    explanation: 'Debounce clears the previous timer on each call, only firing after ms of inactivity. Uses generics for type safety, ReturnType for the timer, and Parameters to preserve the original argument types.'
+  },
+  {
+    type: 'code-input',
+    question: "Fetch data in a useEffect with proper AbortController cleanup.",
+    answer: `useEffect(() => {\n  const controller = new AbortController()\n  fetch(url, { signal: controller.signal })\n    .then(r => r.json())\n    .then(setData)\n    .catch(e => { if (e.name !== \"AbortError\") setError(e) })\n  return () => controller.abort()\n}, [url])`,
+    explanation: 'Create AbortController, pass signal to fetch, abort in the cleanup function. Catch AbortError separately — it is expected when the effect re-runs or the component unmounts.'
+  },
+  {
+    type: 'code-input',
+    question: "Write a TypeScript discriminated union for an API response (loading, success, error).",
+    answer: `type ApiState<T> =\n  | { status: \"loading\" }\n  | { status: \"success\"; data: T }\n  | { status: \"error\"; error: string }`,
+    explanation: 'A discriminated union with "status" as the tag. TypeScript narrows the type in switch/if blocks — if status === "success", you can access data. If "error", you can access error.'
+  },
+  {
+    type: 'code-input',
+    question: "Write a type-safe event handler for an input onChange in React.",
+    answer: `const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n  setValue(e.target.value)\n}`,
+    explanation: 'React.ChangeEvent<HTMLInputElement> provides type-safe access to e.target.value. Each HTML element has its own event type. For forms: React.FormEvent<HTMLFormElement>.'
+  },
+  {
+    type: 'code-input',
+    question: "Write a generic React component that renders a list of items with a render prop.",
+    answer: `function List<T>({ items, renderItem }: {\n  items: T[]\n  renderItem: (item: T) => React.ReactNode\n}) {\n  return <>{items.map((item, i) => <div key={i}>{renderItem(item)}</div>)}</>\n}`,
+    explanation: 'Generic component with a render prop. T is inferred from the items array. The caller decides how each item is rendered while the List handles iteration.'
+  },
+  {
+    type: 'code-input',
+    question: "Write a throttle function in TypeScript.",
+    answer: `function throttle<T extends (...args: any[]) => void>(fn: T, ms: number) {\n  let last = 0\n  return (...args: Parameters<T>) => {\n    const now = Date.now()\n    if (now - last >= ms) {\n      last = now\n      fn(...args)\n    }\n  }\n}`,
+    explanation: 'Throttle tracks the last invocation time and only fires if enough time has passed. Unlike debounce, it fires immediately on first call and at regular intervals during sustained activity.'
+  },
+  {
+    type: 'code-input',
+    question: "Write a type that makes specific properties of T required while keeping the rest optional.",
+    answer: `type RequireKeys<T, K extends keyof T> = Omit<Partial<T>, K> & Required<Pick<T, K>>`,
+    explanation: 'Combine utility types: make everything Partial, Omit the required keys from that, then intersect with Required<Pick<T, K>> to force those specific keys to be required.'
+  },
+  {
+    type: 'code-input',
+    question: "Write a React component with forwardRef that exposes a focus() method via useImperativeHandle.",
+    answer: `const FancyInput = forwardRef<{ focus: () => void }, Props>((props, ref) => {\n  const inputRef = useRef<HTMLInputElement>(null)\n  useImperativeHandle(ref, () => ({\n    focus: () => inputRef.current?.focus()\n  }))\n  return <input ref={inputRef} {...props} />\n})`,
+    explanation: 'forwardRef passes the ref from parent. useImperativeHandle customizes what the parent sees — here only a focus() method, not the raw DOM node. This is a clean API boundary.'
+  },
+];
+
 export const categories: QuizCategory[] = [
   { id: 'all', label: 'All Topics', questions: [] },
   { id: 'js-gotchas', label: 'JS Gotchas', questions: jsGotchas },
   { id: 'js-concepts', label: 'JS Concepts', questions: jsConcepts },
+  { id: 'js-advanced', label: 'JS Advanced', questions: jsAdvanced },
+  { id: 'async', label: 'Async Patterns', questions: asyncPatterns },
   { id: 'typescript', label: 'TypeScript', questions: typescript },
+  { id: 'ts-advanced', label: 'TS Advanced', questions: tsAdvanced },
   { id: 'react', label: 'React', questions: react },
+  { id: 'react-advanced', label: 'React Advanced', questions: reactAdvanced },
+  { id: 'css', label: 'CSS & Styling', questions: css },
+  { id: 'testing', label: 'Testing', questions: testing },
+  { id: 'web-apis', label: 'Web APIs & Browser', questions: webAPIs },
+  { id: 'security', label: 'Security', questions: security },
+  { id: 'a11y', label: 'Accessibility', questions: a11y },
+  { id: 'performance', label: 'Performance', questions: performance },
+  { id: 'code-input', label: 'Write Code', questions: codeInput },
   { id: 'node', label: 'Node.js', questions: node },
 ];
 

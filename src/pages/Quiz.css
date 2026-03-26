@@ -410,4 +410,80 @@
   .results-score {
     font-size: 3rem;
   }
+
+  .code-textarea {
+    font-size: 0.8rem;
+  }
+}
+
+/* Code Input */
+.code-input-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.code-textarea {
+  width: 100%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  resize: vertical;
+  line-height: 1.6;
+  tab-size: 2;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.code-textarea:focus {
+  border-color: var(--text-secondary);
+}
+
+.code-textarea.submitted {
+  opacity: 0.7;
+}
+
+.code-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.submit-code-btn {
+  align-self: flex-end;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.submit-code-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.submit-code-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.reference-answer {
+  margin-top: 0.5rem;
+}
+
+.reference-label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.reference-code {
+  border-left: 3px solid #22c55e;
 }

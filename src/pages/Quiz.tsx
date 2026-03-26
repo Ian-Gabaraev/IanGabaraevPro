@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { quizzes, getQuizById, getQuestionsByCategory, shuffleArray } from '../data/quizQuestions';
 import type { Question, QuizDefinition } from '../data/quizQuestions';
@@ -16,6 +17,8 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [answered, setAnswered] = useState(false);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [codeAnswer, setCodeAnswer] = useState('');
+  const [codeSubmitted, setCodeSubmitted] = useState(false);
 
   const sizes = [10, 20, 30, 0]; // 0 = all
 
@@ -57,6 +60,12 @@ const Quiz = () => {
     }
   };
 
+  const submitCode = () => {
+    if (codeSubmitted) return;
+    setCodeSubmitted(true);
+    setAnswered(true);
+  };
+
   const nextQuestion = () => {
     if (currentIndex + 1 >= questions.length) {
       setState('results');
@@ -64,6 +73,8 @@ const Quiz = () => {
       setCurrentIndex(i => i + 1);
       setAnswered(false);
       setSelectedOption(null);
+      setCodeAnswer('');
+      setCodeSubmitted(false);
     }
   };
 
@@ -75,6 +86,8 @@ const Quiz = () => {
     setScore(0);
     setAnswered(false);
     setSelectedOption(null);
+    setCodeAnswer('');
+    setCodeSubmitted(false);
   };
 
   const backToQuizSelect = () => {
@@ -95,6 +108,30 @@ const Quiz = () => {
 
   return (
     <section className="quiz-page">
+      <Helmet>
+        <title>Quiz | Test Your Frontend & AWS Skills | Ian Gabaraev</title>
+        <meta name="description" content="Free interactive quizzes on JavaScript, TypeScript, React, Node.js, CSS, and AWS. Test your frontend development and cloud skills with 200+ questions." />
+        <link rel="canonical" href="https://iangabaraev.com/quiz" />
+        <meta property="og:title" content="Quiz | Test Your Frontend & AWS Skills" />
+        <meta property="og:description" content="Free interactive quizzes on JavaScript, TypeScript, React, Node.js, and AWS. 200+ questions to test your skills." />
+        <meta property="og:url" content="https://iangabaraev.com/quiz" />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Quiz",
+          "name": "Frontend & AWS Developer Quiz",
+          "description": "Interactive quizzes covering JavaScript, TypeScript, React, Node.js, CSS, accessibility, performance, security, and AWS cloud services.",
+          "url": "https://iangabaraev.com/quiz",
+          "author": { "@type": "Person", "name": "Ian Gabaraev" },
+          "educationalLevel": "Intermediate",
+          "about": [
+            { "@type": "Thing", "name": "JavaScript" },
+            { "@type": "Thing", "name": "TypeScript" },
+            { "@type": "Thing", "name": "React" },
+            { "@type": "Thing", "name": "AWS" }
+          ]
+        })}</script>
+      </Helmet>
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -205,31 +242,60 @@ const Quiz = () => {
                     <pre className="code-block">{currentQuestion.code}</pre>
                   )}
 
-                  <div className="options">
-                    {currentQuestion.options.map((option, index) => {
-                      const letters = ['A', 'B', 'C', 'D'];
-                      let className = 'option';
-                      if (answered) {
-                        className += ' disabled';
-                        if (index === currentQuestion.correct) {
-                          className += ' correct';
-                        } else if (index === selectedOption) {
-                          className += ' incorrect';
-                        }
-                      }
-                      return (
+                  {currentQuestion.type === 'code-input' ? (
+                    <div className="code-input-section">
+                      <textarea
+                        className={`code-textarea${codeSubmitted ? ' submitted' : ''}`}
+                        value={codeAnswer}
+                        onChange={e => setCodeAnswer(e.target.value)}
+                        placeholder="Type your code here..."
+                        rows={6}
+                        spellCheck={false}
+                        disabled={codeSubmitted}
+                      />
+                      {!codeSubmitted && (
                         <button
-                          key={index}
-                          className={className}
-                          onClick={() => selectOption(index)}
-                          disabled={answered}
+                          className="submit-code-btn"
+                          onClick={submitCode}
+                          disabled={codeAnswer.trim().length === 0}
                         >
-                          <span className="option-letter">{letters[index]}</span>
-                          <span className="option-text">{option}</span>
+                          Submit Answer
                         </button>
-                      );
-                    })}
-                  </div>
+                      )}
+                      {codeSubmitted && currentQuestion.answer && (
+                        <div className="reference-answer">
+                          <div className="reference-label">Reference Answer</div>
+                          <pre className="code-block reference-code">{currentQuestion.answer}</pre>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="options">
+                      {currentQuestion.options?.map((option, index) => {
+                        const letters = ['A', 'B', 'C', 'D'];
+                        let className = 'option';
+                        if (answered) {
+                          className += ' disabled';
+                          if (index === currentQuestion.correct) {
+                            className += ' correct';
+                          } else if (index === selectedOption) {
+                            className += ' incorrect';
+                          }
+                        }
+                        return (
+                          <button
+                            key={index}
+                            className={className}
+                            onClick={() => selectOption(index)}
+                            disabled={answered}
+                          >
+                            <span className="option-letter">{letters[index]}</span>
+                            <span className="option-text">{option}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
 
                   {answered && (
                     <motion.div
