@@ -56,7 +56,7 @@ I did, however, see potential.
 
 **It is gorgeous.** The nature is mind-blowing, and no matter where you are, you have dozens of hiking options.
 
-**It is affordable.** In many places, teahouses provide free accommodation as long as you order food. Prices per night can range from $5 to $50. A full three-course meal typically costs between $5 and $15.
+**It is affordable.** In many places, teahouses provide free accommodation as long as you order food. Prices per night can range from USD 5 to USD 50. A full three-course meal typically costs between USD 5 and USD 15.
 
 **There is internet access.** Even teahouses offer Wi-Fi, and 5G was available in most places except the deeper valleys. It was fast enough to browse Instagram and upload stories. More importantly, it is fast enough to check your Jira board, answer Slack messages, and keep working remotely.
 
