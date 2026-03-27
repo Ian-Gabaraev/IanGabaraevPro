@@ -32,6 +32,12 @@ const routes = [
     og: { type: 'article' },
   },
   {
+    path: '/blog/why-bats-a-scuba-divers-path-to-bioacoustics',
+    title: "Why Bats? A Scuba Diver's Path to Bioacoustics | Ian Gabaraev",
+    description: 'From hunting in darkness underwater to building ultrasonic bat detectors in Vietnamese caves — the science of echolocation.',
+    og: { type: 'article' },
+  },
+  {
     path: '/blog/ultrasonic-bat-detection',
     title: 'Building a Real-Time Ultrasonic Bat Detector with Python | Ian Gabaraev',
     description: 'Capturing bat calls at 192kHz and using DSP techniques for species identification.',
