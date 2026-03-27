@@ -24,7 +24,8 @@ Digital nomads tend to follow the same overused, over-Instagrammed map as millio
 
 That is only natural. Most decisions we make as digital nomads are second-hand. When you work remotely, keep fixed hours, and live by deadlines, you want to land and get straight to work. You cannot fully mix adventure and work on a whim. And if you think you can, you either have too much free time on your hands or you need to revisit your definition of adventure.
 
-<img src="/images/nepal/nepal-1.webp" alt="Trekking trail in the Annapurna region of Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<img src="/images/nepal/nepal-1.webp" alt="Ian Gabaraev on a trekking trail in the Annapurna region of Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Warming up in the harsh high altitude sun. I grew out a massive beard by the end of the trek</p>
 
 One of the foundational ideas behind [Nomad Atlas](https://nomadatlas.dev) is helping you make safe, calculated travel decisions for yourself. The app does not simply look at what other digital nomads are doing. It looks at how you have lived your nomad life and how you felt along the way. So if you visited Rwanda and felt good there, do not be surprised if one day [Nomad Atlas](https://nomadatlas.dev) sends you a notification: "Hey, your stay in Phuket is coming to an end. How about flying to Rwanda?"
 
@@ -39,6 +40,7 @@ In October 2024, my girlfriend and I went to a mall in Kuala Lumpur looking for 
 November came fast. There were reports of devastating floods in our destination, and we hesitated. Neither of us had ever been there before. But the flights were already booked, so after a sleepless night, we drove to KLIA, passport in hand and walkie-talkie on the belt.
 
 <img src="/images/nepal/nepal-2.webp" alt="Mountain village along the Annapurna Circuit trek" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">A view of Manaslu on the way back</p>
 
 We landed in Kathmandu on a perfect, clear, sunny day. The next morning, we took a grueling 12-hour drive to Besisahar, followed by another two-hour bumpy ride to the nearest village on the Annapurna Circuit route.
 
@@ -49,6 +51,8 @@ I did, however, see potential.
 ## Why Nepal Works for Remote Work
 
 <img src="/images/nepal/nepal-4.webp" alt="Teahouse accommodation in the Himalayan mountains" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">A regular teahouse will have lodging, internet and warm food</p>
+
 
 **It is gorgeous.** The nature is mind-blowing, and no matter where you are, you have dozens of hiking options.
 
@@ -63,6 +67,7 @@ I did, however, see potential.
 ## Would You Be Brave Enough?
 
 <img src="/images/nepal/nepal-6.webp" alt="View from the Annapurna Circuit in Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Aerial view of Annapurna II - DJI Mini 4 Pro</p>
 
 So here is the question: would you ever be brave enough to give it a chance?
 
