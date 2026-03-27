@@ -26,6 +26,12 @@ const routes = [
     og: { type: 'website' },
   },
   {
+    path: '/blog/nepal-the-digital-nomad-destination-nobody-talks-about',
+    title: 'The Himalayas Called — And I Answered with a Laptop | Ian Gabaraev',
+    description: 'Nepal is gorgeous, affordable, connected, and serene. Why almost nobody considers it a remote work destination — and why they should.',
+    og: { type: 'article' },
+  },
+  {
     path: '/blog/building-nomadatlas',
     title: 'Building NomadAtlas: A Finance Dashboard for Digital Nomads | Ian Gabaraev',
     description: 'How I built a personal finance and lifestyle dashboard using React 19, Vite, and real-time APIs.',
