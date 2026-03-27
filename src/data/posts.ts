@@ -14,17 +14,17 @@ export const posts: BlogPost[] = [
     slug: 'nepal-pros',
     title: 'The Himalayas Called — And I Answered with a Laptop',
     date: '2026-03-27',
-    excerpt: 'Nepal is gorgeous, affordable, connected, and serene. Why almost nobody considers it a remote work destination — and why they should.',
-    tags: ['Digital Nomad', 'Nomad Atlas', 'React', 'TypeScript'],
+    excerpt: 'Remote work in Nepal sounds insane — until you try it. Affordable, connected, serene, and utterly unlike any digital nomad destination you have been to.',
+    tags: ['Digital Nomad', 'Nomad Atlas', 'React', 'TypeScript', 'Remote Work', 'Nepal'],
     content: `
 # The Himalayas Called — And I Answered with a Laptop
 
 <img src="/images/nepal/nepal-6.webp" alt="Panoramic view of the Himalayan mountains in Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
 <p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Aerial view of Annapurna II peak, Nepal. Want to be on the top of your game - at the top of the world?</p>
 
-Digital nomads tend to follow the same overused, over-Instagrammed map as millions of others: Europe, Asia, and maybe Africa if they are feeling adventurous. Some might go to the Middle East, only to decide the culture is "too hard" to adapt to.
+Digital nomads tend to follow the same overused, over-Instagrammed map as millions of others: Bali, Lisbon, Chiang Mai, maybe Medellín if they are feeling adventurous. Some might go to the Middle East, only to decide the culture is "too hard" to adapt to.
 
-That is only natural. Most decisions we make as digital nomads are second-hand. When you work remotely, keep fixed hours, and live by deadlines, you want to land and get straight to work. You cannot fully mix adventure and work on a whim. And if you think you can, you either have too much free time on your hands or you need to revisit your definition of adventure.
+That is only natural. Most decisions we make as remote workers are second-hand. When you work remotely from abroad, keep fixed hours, and live by deadlines, you want to land and get straight to work. You cannot fully mix adventure and remote work on a whim. And if you think you can, you either have too much free time on your hands or you need to revisit your definition of adventure.
 
 <img src="/images/nepal/nepal-1.webp" alt="Ian Gabaraev on a trekking trail in the Annapurna region of Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
 <p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Warming up in the harsh high altitude sun. I grew out a massive beard by the end of the trek</p>
@@ -33,7 +33,7 @@ One of the foundational ideas behind [Nomad Atlas](https://nomadatlas.dev) is he
 
 Africa, in particular, is a special place for digital nomads. It deserves more thought before you pull the trigger. And do not get me wrong: if you approach it responsibly, it could easily become your home base.
 
-Today, though, I want to talk about another place. A place many people visit, but almost no one seriously considers as a digital nomad hub. A country that is both challenging and deeply rewarding. It may frighten you or make you fall in love, but it will not leave you indifferent.
+Today, though, I want to talk about another place. A place many people visit, but almost no one seriously considers as a digital nomad hub — or a viable remote work destination. Nepal does not appear on any "best countries for digital nomads" list. It has no digital nomad visa. It has no coworking spaces outside Kathmandu and Pokhara. And yet — it may frighten you or make you fall in love, but it will not leave you indifferent.
 
 ## Buying Columbia Gear in Kuala Lumpur
 
@@ -52,28 +52,30 @@ I did, however, see potential.
 
 ## Why Nepal Works for Remote Work
 
-<img src="/images/nepal/nepal-4.webp" alt="Teahouse accommodation in the Himalayan mountains" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<img src="/images/nepal/nepal-4.webp" alt="Teahouse accommodation in the Himalayan mountains with Wi-Fi for remote work" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
 <p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">A regular teahouse will have lodging, internet and warm food</p>
 
 
-**It is gorgeous.** The nature is mind-blowing, and no matter where you are, you have dozens of hiking options.
+**It is gorgeous.** The nature is mind-blowing, and no matter where you are, you have dozens of hiking options after your workday ends.
 
-**It is affordable.** In many places, teahouses provide free accommodation as long as you order food. Prices per night can range from USD 5 to USD 50. A full three-course meal typically costs between USD 5 and USD 15.
+**The cost of living in Nepal is absurdly low.** In many places, teahouses provide free accommodation as long as you order food. Prices per night range from USD 5 to USD 50. A full three-course meal costs between USD 5 and USD 15. For digital nomads used to paying $2,000/month for a studio in Lisbon or Bangkok, Nepal feels like a different economic universe.
 
-**There is internet access.** Even teahouses offer Wi-Fi, and 5G was available in most places except the deeper valleys. It was fast enough to browse Instagram and upload stories. More importantly, it is fast enough to check your Jira board, answer Slack messages, and keep working remotely.
+**The internet in Nepal is better than you think.** Even remote teahouses offer Wi-Fi, and Nepal Telecom's 5G was available in most places except the deeper valleys. It was fast enough to browse Instagram and upload stories. More importantly, the Wi-Fi speed in Nepal is sufficient to check your Jira board, join Zoom calls, answer Slack messages, and keep working remotely from the Himalayas.
 
 <img src="/images/nepal/nepal-5.webp" alt="Scenic mountain landscape along the trekking route in Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
 
-**It is serene.** And that matters. One of the biggest problems with popular digital nomad destinations is exactly that: they are too popular. You end up competing for housing, dealing with noise, and trying to take your daily stand-up call while someone nearby is throwing a party. In the Himalayas, there is none of that. It is secluded, quiet, and almost completely free of distractions.
+**It is serene.** And that matters more than coworking spaces or fast coffee shops. One of the biggest problems with popular digital nomad destinations is exactly that: they are too popular. You end up competing for housing, dealing with noise, and trying to take your daily stand-up call while someone nearby is throwing a party. In the Himalayas, there is none of that. Nepal offers something no coworking space in Canggu ever will: complete, undisturbed focus.
 
 ## Would You Be Brave Enough?
 
 <img src="/images/nepal/nepal-3.webp" alt="View from the Annapurna Circuit in Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
 <p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The basin of an ancient lake / sea. Around Chame, Manang</p>
 
-So here is the question: would you ever be brave enough to give it a chance?
+So here is the question: would you ever be brave enough to try remote work in Nepal?
 
-Because if you do, [Nomad Atlas](https://nomadatlas.dev) will do its best to give you smart recommendations, help you make better travel decisions, and warn you about severe weather before it becomes your problem.
+Nepal does not yet have a dedicated digital nomad visa — you will enter on a standard tourist visa, which is straightforward and available on arrival. That alone puts it ahead of many countries that make visa processes a nightmare for location-independent workers.
+
+If you do decide to go, [Nomad Atlas](https://nomadatlas.dev) will do its best to give you smart recommendations, help you make better travel decisions, and warn you about severe weather before it becomes your problem.
     `.trim(),
   },
   {
@@ -351,8 +353,8 @@ I'm building a neural network classifier using spectrograms to automate species 
     slug: 'nepal-five-reasons-it-wont-work',
     title: 'Beautiful, Brutal, Honest — The Other Side of Nepal',
     date: '2026-03-31',
-    excerpt: 'Nepal is stunning. It is also dangerous, polluted, heartbreaking, and boring after dark. Here are five reasons it will never be a mainstream digital nomad destination.',
-    tags: ['Digital Nomad', 'Nomad Atlas', 'React', 'TypeScript', 'Series'],
+    excerpt: 'Nepal is stunning. It is also dangerous, polluted, heartbreaking, and boring after dark. Five reasons remote work in Nepal will never go mainstream.',
+    tags: ['Digital Nomad', 'Nomad Atlas', 'React', 'TypeScript', 'Series', 'Remote Work', 'Nepal'],
     content: `
 # Beautiful, Brutal, Honest — The Other Side of Nepal
 
@@ -361,7 +363,7 @@ I'm building a neural network classifier using spectrograms to automate species 
 
 In the [previous article](/blog/nepal-the-digital-nomad-destination-nobody-talks-about), I talked about Nepal as a potential digital nomad work base. I listed a number of reasons why one could be tempted to give this mountainous, landlocked, beach-club-less nation — the opposite of what your typical DN wants — a chance to host them for a while.
 
-It would be naive to think of myself as a purveyor of truth here. I did not discover Nepal, and I was definitely not the first person to see it in that light. There are good reasons — at least five — why Nepal will never work for a majority of digital nomads. So to set things straight and give you the full picture, I am going to cover the other side of the story.
+It would be naive to think of myself as a purveyor of truth here. I did not discover Nepal, and I was definitely not the first person to see it in that light. There are good reasons — at least five — why remote work in Nepal will never work for the majority of digital nomads. So to set things straight and to give anyone planning to work remotely from Nepal the full picture, I am going to cover the other side of the story.
 
 ## A Side Story to Set This Up
 
@@ -373,7 +375,7 @@ That is also the first reason why Nepal — particularly Kathmandu — will stru
 
 ## Reason 1: The Air Will Wreck You
 
-The air in Kathmandu is bad. We were there for three days total, in a relatively decent area. Even then, I was coughing up black residue for a week after returning to Kuala Lumpur. The air is visibly unhealthy — dark, sticky, acrid fumes that concentrate in the busier streets. They say lungs do not feel pain. Mine would like a word.
+The air quality in Kathmandu is among the worst in Asia. We were there for three days total, in a relatively decent area. Even then, I was coughing up black residue for a week after returning to Kuala Lumpur. The air is visibly unhealthy — dark, sticky, acrid fumes that concentrate in the busier streets. They say lungs do not feel pain. Mine would like a word. If you are considering living in Kathmandu as a digital nomad, invest in a proper N95 mask — not a suggestion, a necessity.
 
 <video src="https://media.iangabaraev.com/media/nepal2-trail-clip.mp4" autoplay loop muted playsinline style="width:100%;border-radius:8px;margin:1.5rem 0;"></video>
 <p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">A view you will not find on any Instagram reel — because the people who make it here do not care about reels.</p>
@@ -409,7 +411,7 @@ That, except for the crime, may not affect you directly. But you are going to wi
 
 ## Reason 5: After Dark, There Is Nothing
 
-If you are a nomad, you know how the days go. By the end of the workday, you want to decompress. In Bangkok, you have a thousand options: hit a mall, eat Pad Thai on a rooftop, catch a fight at Lumpinee, go on a shopping spree in Sukhumvit. In Kathmandu at 8 PM — I do not think there is much for you. You may try, but the stress of navigating the city after dark will quickly steal your enthusiasm. You may have better luck in Pokhara.
+If you are a remote worker abroad, you know how the days go. By the end of the workday, you want to decompress. In Bangkok, you have a thousand options: hit a mall, eat Pad Thai on a rooftop, catch a fight at Lumpinee, go on a shopping spree in Sukhumvit. In Kathmandu at 8 PM — I do not think there is much for you. The nightlife in Nepal is effectively nonexistent compared to other digital nomad hotspots. You may try, but the stress of navigating the city after dark will quickly steal your enthusiasm. Pokhara has a slightly better scene — lakeside cafes, a handful of bars — but nothing approaching what you would find in a typical nomad destination.
 
 However, in the [previous article](/blog/nepal-the-digital-nomad-destination-nobody-talks-about), I talked about the national reserve areas specifically. There, at night, there is zero to do.
 
@@ -429,7 +431,7 @@ If astrophotography is your thing, I may have just sold you on the idea of going
 
 ## The Verdict
 
-Nepal is not a digital nomad destination. Not in the way Bali, Lisbon, or Bangkok are. It does not have the infrastructure, the safety net, or the creature comforts. But it has something those places will never have: an unfiltered, unkempt, unapologetic honesty. It does not try to sell itself to you. It just exists — and if you can handle what it is, it will give you something no co-working space ever will.
+Nepal is not a digital nomad destination — not in the way Bali, Lisbon, or Bangkok are. It has no digital nomad visa program, limited coworking infrastructure, unreliable roads, and a cost of living that is low for a reason. But it has something those places will never have: an unfiltered, unkempt, unapologetic honesty. Nepal does not try to sell itself to you. It just exists — and if you can handle what it is, working remotely from the Himalayas will give you something no coworking space ever will.
 
 Read the first part of this series: [The Himalayas Called — And I Answered with a Laptop](/blog/nepal-the-digital-nomad-destination-nobody-talks-about).
     `.trim(),
