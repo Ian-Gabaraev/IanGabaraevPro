@@ -11,7 +11,7 @@ export interface BlogPost {
 export const posts: BlogPost[] = [
   {
     favorite: true,
-    slug: 'nepal-the-digital-nomad-destination-nobody-talks-about',
+    slug: 'nepal-pros',
     title: 'The Himalayas Called — And I Answered with a Laptop',
     date: '2026-03-27',
     excerpt: 'Nepal is gorgeous, affordable, connected, and serene. Why almost nobody considers it a remote work destination — and why they should.',
