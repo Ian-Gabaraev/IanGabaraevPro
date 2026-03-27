@@ -5,10 +5,12 @@ export interface BlogPost {
   excerpt: string;
   tags: string[];
   content: string;
+  favorite?: boolean;
 }
 
 export const posts: BlogPost[] = [
   {
+    favorite: true,
     slug: 'nepal-the-digital-nomad-destination-nobody-talks-about',
     title: 'The Himalayas Called — And I Answered with a Laptop',
     date: '2026-03-27',
@@ -351,5 +353,9 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
 }
 
 export function getAllPosts(): BlogPost[] {
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return posts.sort((a, b) => {
+    if (a.favorite && !b.favorite) return -1;
+    if (!a.favorite && b.favorite) return 1;
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
 }

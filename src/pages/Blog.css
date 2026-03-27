@@ -70,11 +70,23 @@
 }
 
 .post-card {
+  position: relative;
   padding: 1.5rem;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background: var(--bg-secondary);
   transition: border-color 0.2s ease;
+}
+
+.post-card-favorite {
+  border-color: var(--text-secondary);
+}
+
+.favorite-star {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #eab308;
 }
 
 .post-card:hover {

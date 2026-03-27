@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
+import { Star } from 'lucide-react';
 import { getAllPosts } from '../data/posts';
 import './Blog.css';
 
@@ -93,11 +94,12 @@ const Blog = () => {
             {filteredPosts.map((post, index) => (
               <motion.article
                 key={post.slug}
-                className="post-card"
+                className={`post-card${post.favorite ? ' post-card-favorite' : ''}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
               >
+                {post.favorite && <Star className="favorite-star" size={18} fill="currentColor" />}
                 <Link to={`/blog/${post.slug}`} className="post-link">
                   <time className="post-date">{formatDate(post.date)}</time>
                   <h2 className="post-title">{post.title}</h2>
