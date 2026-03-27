@@ -47,12 +47,6 @@ const routes = [
     og: { type: 'article' },
   },
   {
-    path: '/blog/cloudflare-pages-and-the-art-of-not-overthinking-deployment',
-    title: 'Cloudflare Pages and the Art of Not Overthinking Deployment | Ian Gabaraev',
-    description: 'Zero config, free SSL, global edge network, and a generous free tier. Cloudflare Pages does not get the attention it deserves.',
-    og: { type: 'article' },
-  },
-  {
     path: '/blog/building-nomadatlas',
     title: 'Building NomadAtlas: A Finance Dashboard for Digital Nomads | Ian Gabaraev',
     description: 'How I built a personal finance and lifestyle dashboard using React 19, Vite, and real-time APIs.',
