@@ -346,6 +346,94 @@ Different bat species have distinct call patterns:
 I'm building a neural network classifier using spectrograms to automate species ID. More on that in a future post.
     `.trim(),
   },
+  {
+    favorite: true,
+    slug: 'nepal-five-reasons-it-wont-work',
+    title: 'Beautiful, Brutal, Honest — The Other Side of Nepal',
+    date: '2026-03-31',
+    excerpt: 'Nepal is stunning. It is also dangerous, polluted, heartbreaking, and boring after dark. Here are five reasons it will never be a mainstream digital nomad destination.',
+    tags: ['Digital Nomad', 'Nomad Atlas', 'React', 'TypeScript', 'Series'],
+    content: `
+# Beautiful, Brutal, Honest — The Other Side of Nepal
+
+<img src="https://media.iangabaraev.com/media/nepal2-prayer-wheels.webp" alt="Colorful Buddhist prayer wheels with golden Sanskrit inscriptions at a Himalayan monastery" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Prayer wheels at a monastery along the Annapurna Circuit. The culture is extraordinary — but getting to it is an ordeal in itself.</p>
+
+In the [previous article](/blog/nepal-the-digital-nomad-destination-nobody-talks-about), I talked about Nepal as a potential digital nomad work base. I listed a number of reasons why one could be tempted to give this mountainous, landlocked, beach-club-less nation — the opposite of what your typical DN wants — a chance to host them for a while.
+
+It would be naive to think of myself as a purveyor of truth here. I did not discover Nepal, and I was definitely not the first person to see it in that light. There are good reasons — at least five — why Nepal will never work for a majority of digital nomads. So to set things straight and give you the full picture, I am going to cover the other side of the story.
+
+## A Side Story to Set This Up
+
+As I was developing [Nomad Atlas](https://nomadatlas.dev), I spent quite a bit of time refining the weather card. That little component is a legitimate shapeshifter — it was everything from a "the 70s were calling" textbox to a sleek, glassy, "Apple is suing me" transparent beauty. Visuals aside, I spent even more time deciding what it should display. Beyond current temperature, sunset and sunrise — how do I make it genuinely useful for everyone?
+
+AQI. Air Quality Index. That was the first answer.
+
+That is also the first reason why Nepal — particularly Kathmandu — will struggle to keep an even remotely health-conscious nomad.
+
+## Reason 1: The Air Will Wreck You
+
+The air in Kathmandu is bad. We were there for three days total, in a relatively decent area. Even then, I was coughing up black residue for a week after returning to Kuala Lumpur. The air is visibly unhealthy — dark, sticky, acrid fumes that concentrate in the busier streets. They say lungs do not feel pain. Mine would like a word.
+
+<video src="https://media.iangabaraev.com/media/nepal2-trail-clip.mp4" autoplay loop muted playsinline style="width:100%;border-radius:8px;margin:1.5rem 0;"></video>
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">A view you will not find on any Instagram reel — because the people who make it here do not care about reels.</p>
+
+## Reason 2: Nature Hits Back — Hard
+
+Another metric that went into the weather component of [Nomad Atlas](https://nomadatlas.dev) was severe weather warnings. That is reason number two.
+
+Nepal is prone to every natural cataclysm except those born at sea:
+
+- **Massive earthquakes.** The country sits on a major fault line, and devastating quakes are not a matter of *if* but *when*.
+- **Disastrous floods.** The September 2024 deluge killed at least 200 people and displaced tens of thousands. I was there the following week. They did an impressive job cleaning up, but the impact was impossible to miss.
+- **Waterborne disease.** The first time you see a cold, pristine waterfall, you will naturally want to fill your bottle — especially after a long hike. That is exactly how you end up ruining your trip, or worse, in the ER. Bugs are everywhere: in the food, the water, the animals.
+
+<video src="https://media.iangabaraev.com/media/nepal2-scenery-clip.mp4" autoplay loop muted playsinline style="width:100%;border-radius:8px;margin:1.5rem 0;"></video>
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The scenery is world-class. What surrounds it — less so.</p>
+
+## Reason 3: The Roads Are a Coin Flip
+
+There are no plans yet to implement traffic monitoring in Nomad Atlas, but you would want it if you were in Nepal. The roads are every bit as sketchy as the weather. We took a total of five car rides during our stay. In that time, we narrowly avoided a rockfall, had a full-size bus materialize head-on through thick fog, got stuck in knee-deep mud at 10 PM high in the mountains in pitch darkness — and that was a normal week.
+
+<video src="https://media.iangabaraev.com/media/nepal2-road-clip.mp4" autoplay loop muted playsinline style="width:100%;border-radius:8px;margin:1.5rem 0;"></video>
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">A typical stretch of road. This is the good part.</p>
+
+## Reason 4: It Will Break Your Heart
+
+Are you a sensitive soul? Do you not have a thick skin? Nepal will test you. It is one of the poorest nations in the world, and that comes with consequences. Violent crime is not unheard of. Petty theft is common. Education rates are low. Jobs — practically nonexistent outside the capital.
+
+That, except for the crime, may not affect you directly. But you are going to witness child labor, forced marriages, and exploitation — regardless of where you are. Up in the mountains, you will see a scene that makes your blood boil: a Nepali porter carrying an entire studio apartment's worth of supplies on his back for 30 dollars a day, while his "customer" loiters behind with a cigarette, shouting encouragement.
+
+<img src="https://media.iangabaraev.com/media/nepal2-trail-rest.webp" alt="Ian Gabaraev resting on a rustic wooden bench along the Annapurna Circuit trail" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Taking a breather on one of the trail's hand-built shelters. Walkie-talkie on the chest — essential gear, not a fashion choice.</p>
+
+## Reason 5: After Dark, There Is Nothing
+
+If you are a nomad, you know how the days go. By the end of the workday, you want to decompress. In Bangkok, you have a thousand options: hit a mall, eat Pad Thai on a rooftop, catch a fight at Lumpinee, go on a shopping spree in Sukhumvit. In Kathmandu at 8 PM — I do not think there is much for you. You may try, but the stress of navigating the city after dark will quickly steal your enthusiasm. You may have better luck in Pokhara.
+
+However, in the [previous article](/blog/nepal-the-digital-nomad-destination-nobody-talks-about), I talked about the national reserve areas specifically. There, at night, there is zero to do.
+
+<img src="https://media.iangabaraev.com/media/nepal2-ukulele-teahouse.webp" alt="Ian Gabaraev playing ukulele inside a Himalayan teahouse with mountain view through the window" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Evening entertainment in a teahouse: a borrowed ukulele and a dartboard. This is peak nightlife on the Circuit.</p>
+
+Unless — and if this is the case, you can thank me later — you are into astrophotography.
+
+## The One Exception: Bortle Zero Skies
+
+The mountains of Nepal are Bortle Class 1 at best — functionally Bortle 0. There is no light pollution. None. The sky is a vault of stars so dense it does not look real. For anyone into deep-sky imaging, this is one of the last accessible gold mines on Earth.
+
+<img src="https://media.iangabaraev.com/media/nepal2-orion-nebula.webp" alt="Deep-sky astrophotograph of the Orion Nebula and surrounding star field taken from the Himalayas" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The Orion Nebula region captured from the Annapurna Circuit. No tracking mount — just stacked handheld exposures and dark Himalayan skies.</p>
+
+If astrophotography is your thing, I may have just sold you on the idea of going — instead of talking you out of it.
+
+## The Verdict
+
+Nepal is not a digital nomad destination. Not in the way Bali, Lisbon, or Bangkok are. It does not have the infrastructure, the safety net, or the creature comforts. But it has something those places will never have: an unfiltered, unkempt, unapologetic honesty. It does not try to sell itself to you. It just exists — and if you can handle what it is, it will give you something no co-working space ever will.
+
+Read the first part of this series: [The Himalayas Called — And I Answered with a Laptop](/blog/nepal-the-digital-nomad-destination-nobody-talks-about).
+    `.trim(),
+  },
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

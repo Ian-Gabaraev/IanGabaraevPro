@@ -33,3 +33,5 @@ yarn-error.log*
 
 # Temporary
 temp/
+
+venv/
