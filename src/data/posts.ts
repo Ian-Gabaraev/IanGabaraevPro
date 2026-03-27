@@ -9,6 +9,67 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: 'nepal-the-digital-nomad-destination-nobody-talks-about',
+    title: 'The Himalayas Called — And I Answered with a Laptop',
+    date: '2026-03-27',
+    excerpt: 'Nepal is gorgeous, affordable, connected, and serene. Why almost nobody considers it a remote work destination — and why they should.',
+    tags: ['Digital Nomad', 'Nomad Atlas', 'React', 'TypeScript'],
+    content: `
+# The Himalayas Called — And I Answered with a Laptop
+
+<img src="/images/nepal/nepal-3.webp" alt="Panoramic view of the Himalayan mountains in Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The Annapurna Circuit, Nepal — probably not your typical coworking space</p>
+
+Digital nomads tend to follow the same overused, over-Instagrammed map as millions of others: Europe, Asia, and maybe Africa if they are feeling adventurous. Some might go to the Middle East, only to decide the culture is "too hard" to adapt to.
+
+That is only natural. Most decisions we make as digital nomads are second-hand. When you work remotely, keep fixed hours, and live by deadlines, you want to land and get straight to work. You cannot fully mix adventure and work on a whim. And if you think you can, you either have too much free time on your hands or you need to revisit your definition of adventure.
+
+<img src="/images/nepal/nepal-1.webp" alt="Trekking trail in the Annapurna region of Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+
+One of the foundational ideas behind [Nomad Atlas](https://nomadatlas.dev) is helping you make safe, calculated travel decisions for yourself. The app does not simply look at what other digital nomads are doing. It looks at how you have lived your nomad life and how you felt along the way. So if you visited Rwanda and felt good there, do not be surprised if one day [Nomad Atlas](https://nomadatlas.dev) sends you a notification: "Hey, your stay in Phuket is coming to an end. How about flying to Rwanda?"
+
+Africa, in particular, is a special place for digital nomads. It deserves more thought before you pull the trigger. And do not get me wrong: if you approach it responsibly, it could easily become your home base.
+
+Today, though, I want to talk about another place. A place many people visit, but almost no one seriously considers as a digital nomad hub. A country that is both challenging and deeply rewarding. It may frighten you or make you fall in love, but it will not leave you indifferent.
+
+## Buying Columbia Gear in Kuala Lumpur
+
+In October 2024, my girlfriend and I went to a mall in Kuala Lumpur looking for Columbia gear. We found the store on the ground floor and left an hour later with large shopping bags. We each bought a new pair of hiking boots and a puffer jacket. The rest of the gear, we decided, could wait until arrival.
+
+November came fast. There were reports of devastating floods in our destination, and we hesitated. Neither of us had ever been there before. But the flights were already booked, so after a sleepless night, we drove to KLIA with our backpacks full of gear.
+
+<img src="/images/nepal/nepal-2.webp" alt="Mountain village along the Annapurna Circuit trek" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+
+We landed in Kathmandu on a perfect, clear, sunny day. The next morning, we took a grueling 12-hour drive to Besisahar, followed by another two-hour bumpy ride to the nearest village on the Annapurna Circuit route.
+
+Over the course of 25 days, I did not see a single digital nomad there.
+
+I did, however, see potential.
+
+## Why Nepal Works for Remote Work
+
+<img src="/images/nepal/nepal-4.webp" alt="Teahouse accommodation in the Himalayan mountains" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+
+**It is gorgeous.** The nature is mind-blowing, and no matter where you are, you have dozens of hiking options.
+
+**It is affordable.** In many places, teahouses provide free accommodation as long as you order food. Prices per night can range from $5 to $50. A full three-course meal typically costs between $5 and $15.
+
+**There is internet access.** Even teahouses offer Wi-Fi, and 5G was available in most places except the deeper valleys. It was fast enough to browse Instagram and upload stories. More importantly, it is fast enough to check your Jira board, answer Slack messages, and keep working remotely.
+
+<img src="/images/nepal/nepal-5.webp" alt="Scenic mountain landscape along the trekking route in Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+
+**It is serene.** And that matters. One of the biggest problems with popular digital nomad destinations is exactly that: they are too popular. You end up competing for housing, dealing with noise, and trying to take your daily stand-up call while someone nearby is throwing a party. In the Himalayas, there is none of that. It is secluded, quiet, and almost completely free of distractions.
+
+## Would You Be Brave Enough?
+
+<img src="/images/nepal/nepal-6.webp" alt="View from the Annapurna Circuit in Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+
+So here is the question: would you ever be brave enough to give it a chance?
+
+Because if you do, [Nomad Atlas](https://nomadatlas.dev) will do its best to give you smart recommendations, help you make better travel decisions, and warn you about severe weather before it becomes your problem.
+    `.trim(),
+  },
+  {
     slug: 'why-bats-a-scuba-divers-path-to-bioacoustics',
     title: 'Why Bats? A Scuba Diver\'s Path to Bioacoustics',
     date: '2026-03-25',
