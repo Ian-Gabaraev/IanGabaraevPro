@@ -17,7 +17,7 @@ export const posts: BlogPost[] = [
     content: `
 # The Himalayas Called — And I Answered with a Laptop
 
-<img src="/images/nepal/nepal-3.webp" alt="Panoramic view of the Himalayan mountains in Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<img src="/images/nepal/nepal-6.webp" alt="Panoramic view of the Himalayan mountains in Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
 <p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The Annapurna Circuit, Nepal — probably not your typical coworking space</p>
 
 Digital nomads tend to follow the same overused, over-Instagrammed map as millions of others: Europe, Asia, and maybe Africa if they are feeling adventurous. Some might go to the Middle East, only to decide the culture is "too hard" to adapt to.
@@ -66,7 +66,7 @@ I did, however, see potential.
 
 ## Would You Be Brave Enough?
 
-<img src="/images/nepal/nepal-6.webp" alt="View from the Annapurna Circuit in Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<img src="/images/nepal/nepal-3.webp" alt="View from the Annapurna Circuit in Nepal" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
 <p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Aerial view of Annapurna II - DJI Mini 4 Pro</p>
 
 So here is the question: would you ever be brave enough to give it a chance?
