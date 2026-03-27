@@ -23,6 +23,11 @@
   gap: 32px;
 }
 
+.project-link {
+  color: #fff;
+  font-weight: 600;
+}
+
 .info-block h3 {
   font-size: 0.75rem;
   font-weight: 600;

@@ -60,6 +60,21 @@
   color: var(--text-primary);
 }
 
+.nav-link-dot {
+  position: relative;
+}
+
+.nav-link-dot::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+
 .mobile-toggle {
   display: none;
   background: none;

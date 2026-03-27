@@ -36,7 +36,7 @@ Today, though, I want to talk about another place. A place many people visit, bu
 
 In October 2024, my girlfriend and I went to a mall in Kuala Lumpur looking for Columbia gear. We found the store on the ground floor and left an hour later with large shopping bags. We each bought a new pair of hiking boots and a puffer jacket. The rest of the gear, we decided, could wait until arrival.
 
-November came fast. There were reports of devastating floods in our destination, and we hesitated. Neither of us had ever been there before. But the flights were already booked, so after a sleepless night, we drove to KLIA with our backpacks full of gear.
+November came fast. There were reports of devastating floods in our destination, and we hesitated. Neither of us had ever been there before. But the flights were already booked, so after a sleepless night, we drove to KLIA, passport in hand and walkie-talkie on the belt.
 
 <img src="/images/nepal/nepal-2.webp" alt="Mountain village along the Annapurna Circuit trek" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
 
