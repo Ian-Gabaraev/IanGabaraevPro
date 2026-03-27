@@ -3,32 +3,32 @@ import './Experience.css';
 
 const experiences = [
   {
-    company: 'Akvelon / AMN Healthcare',
+    company: 'Akvelon',
     role: 'Lead Software Development Engineer',
     period: '2021 — Present',
-    description: 'Leading development of Stratus Video telehealth platform. Built real-time communication services, led AWS to Azure migration, achieved 85% database performance improvement.',
-    tech: ['Python', 'Django', 'React', 'Azure', 'PostgreSQL', 'FreeSWITCH'],
+    description: 'Implemented real-time communication backends via WebSockets and FreeSWITCH for an enterprise telehealth platform. Drove fundamental core stack upgrades across Django and React/TypeScript. Built internal accounting and reporting tools from scratch. Delivered PostgreSQL query optimizations and schema redesigns that cut infrastructure costs significantly. Configured NGINX reverse proxies and TLS termination for production traffic. Managed Jira-driven sprints, led code reviews, and owned architecture design decisions across the platform. Integrated NewRelic APM for observability and performance monitoring. Maintained and stabilized legacy systems under high operational load.',
+    tech: ['Python', 'Django', 'React', 'TypeScript', 'Azure', 'PostgreSQL', 'FreeSWITCH', 'WebSockets', 'NGINX', 'Redis', 'NewRelic', 'Jira', 'Lua', 'Linux', 'TLS', 'JWT', 'Alembic', 'Copilot'],
   },
   {
     company: 'Quantori / Tessera Therapeutics',
     role: 'Lead Software Development Engineer',
     period: '2021 — 2022',
-    description: 'Built bioinformatics solutions for DNA sequence analysis. Designed serverless architectures for genome error detection.',
-    tech: ['Python', 'AWS Lambda', 'Serverless', 'Benchling API'],
+    description: 'Architected serverless bioinformatics pipelines for DNA sequence analysis and genome error detection. Built event-driven data processing with SQS and Lambda. Designed FastAPI microservices with SQLAlchemy ORM and Alembic migrations. Trained PyTorch models for genomic pattern classification. Managed infrastructure on AWS with CloudWatch monitoring and S3 data lakes.',
+    tech: ['Python', 'FastAPI', 'AWS Lambda', 'SQS', 'PyTorch', 'SQLAlchemy', 'Alembic', 'PostgreSQL', 'Elasticsearch', 'Benchling API', 'Linux', 'JWT'],
   },
   {
     company: 'MST',
     role: 'Team Leader, Backend',
     period: '2020 — 2021',
-    description: 'Led backend development for education platforms and e-commerce systems. Mentored junior developers, conducted technical interviews.',
-    tech: ['Python', 'Flask', 'GraphQL', 'PostgreSQL', 'Redis'],
+    description: 'Led backend development for education platforms and the Panasonic E-Plaza e-commerce system. Designed RESTful and GraphQL APIs with Flask. Managed task pipelines via RabbitMQ and Celery. Integrated Bitrix CRM for client management workflows. Conducted code reviews, mentored junior developers, and led technical interviews. Administered MariaDB and PostgreSQL clusters with Redis caching layers.',
+    tech: ['Python', 'Flask', 'GraphQL', 'PostgreSQL', 'MariaDB', 'Redis', 'RabbitMQ', 'Bitrix', 'jQuery', 'JavaScript', 'NGINX', 'Linux', 'Jira'],
   },
   {
     company: 'Brain Creators',
     role: 'Software Development Engineer',
     period: '2017 — 2019',
-    description: 'Developed RESTful and GraphQL APIs for enterprise clients. Built AWS Lambda functions and designed database schemas.',
-    tech: ['Python', 'Django', 'GraphQL', 'AWS S3', 'MySQL'],
+    description: 'Developed RESTful and GraphQL APIs serving enterprise clients at scale. Built serverless functions on AWS Lambda with SQS-triggered workflows. Designed normalized database schemas and wrote complex SQL for analytics. Implemented streaming data pipelines and JWT-based auth. Deployed and maintained services on Linux with Cloudflare CDN and DDoS protection.',
+    tech: ['Python', 'Django', 'GraphQL', 'AWS Lambda', 'SQS', 'Cloudflare', 'Kotlin', 'MySQL', 'Elasticsearch', 'Streaming', 'JWT', 'Linux', 'NGINX'],
   },
 ];
 

@@ -28,12 +28,12 @@ const About = () => {
               </p>
               <p>
                 I architect cloud migrations, design APIs, build real-time UIs, and optimize 
-                distributed systems for scale. At Akvelon, I lead development on Stratus Video, 
-                a telehealth platform serving interpreters across 65 languages worldwide.
+                distributed systems for scale. At Akvelon, I lead development of an enterprise 
+                telehealth platform serving interpreters across 65 languages worldwide.
               </p>
               <p>
-                Outside enterprise work, I build personal projects: NomadAtlas — a React 19 
-                finance dashboard for digital nomads — and ultrasonic bat detection systems 
+                Outside enterprise work, I build personal projects: <a href='https://nomadatlas.dev' className='project-link'>NomadAtlas</a> — a React 19 
+                finance dashboard for digital nomads — and <a href='https://github.com/Ian-Gabaraev/Bat-Sonar-Listener' className='project-link'>Bat Sonar</a>, the ultrasonic bat detection systems 
                 combining DSP with machine learning.
               </p>
             </div>
