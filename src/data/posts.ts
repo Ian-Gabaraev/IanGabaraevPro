@@ -350,7 +350,7 @@ I'm building a neural network classifier using spectrograms to automate species 
   },
   {
     favorite: true,
-    slug: 'nepal-five-reasons-it-wont-work',
+    slug: 'nepal-cons',
     title: 'Beautiful, Brutal, Honest — The Other Side of Nepal',
     date: '2026-03-31',
     excerpt: 'Nepal is stunning. It is also dangerous, polluted, heartbreaking, and boring after dark. Five reasons remote work in Nepal will never go mainstream.',
