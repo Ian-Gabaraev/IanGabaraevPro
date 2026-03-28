@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, Waves, Mountain, Landmark, Camera } from 'lucide-react';
 import './About.css';
-import { FaUnsplash } from 'react-icons/fa';
 import { SiPexels } from 'react-icons/si';
+import { FaQuora } from 'react-icons/fa6';
+import { SiUnsplash } from 'react-icons/si';
 
 const About = () => {
   const skills = [
@@ -41,7 +42,7 @@ const About = () => {
             </div>
             
             <div className="about-info">
-              <div className="info-block">
+              <div className="info-block">SiUnsplash
                 <h3>Education</h3>
                 <p>Moscow State Institute of International Relations</p>
                 <span>Bachelor's in International Relations</span>
@@ -73,17 +74,25 @@ const About = () => {
                     href="https://unsplash.com/@iangabaraev"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="beyond-link"
+                    className="beyond-link unsplash"
                   >
-                    <FaUnsplash size={16} /> Unsplash
+                    <SiUnsplash size={14} /> Unsplash
                   </a>
                   <a
                     href="https://www.pexels.com/@ian-gabaraev-2149212079/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="beyond-link"
+                    className="beyond-link pexels"
                   >
-                    <SiPexels size={16} /> Pexels
+                    <SiPexels size={14} /> Pexels
+                  </a>
+                  <a
+                    href="https://www.quora.com/profile/Ian-Gabaraev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="beyond-link quora"
+                  >
+                    <FaQuora size={14} /> Quora
                   </a>
                 </div>
               </div>

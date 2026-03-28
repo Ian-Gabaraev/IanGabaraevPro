@@ -93,14 +93,21 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.875rem;
-  color: #92c76b;
+  font-size: 0.900rem;
   transition: color 0.15s ease;
   font-weight: 500;
 }
 
-.beyond-link:hover {
-  color: #7ae42f;
+.quora {
+  color: #f52936;
+}
+
+.unsplash {
+  color: #26bde2;
+}
+
+.pexels {
+  color: #c9f529;
 }
 
 .skills-list {
