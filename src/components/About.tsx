@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Waves, Mountain, Landmark, Camera } from 'lucide-react';
 import './About.css';
+import { FaUnsplash } from 'react-icons/fa';
+import { SiPexels } from 'react-icons/si';
 
 const About = () => {
   const skills = [
@@ -58,17 +60,32 @@ const About = () => {
                 </a>
               </div>
               
-              <div className="info-block">
+              <div className="info-block beyond-code">
                 <h3>Beyond Code</h3>
-                <p>Technical diving, trekking the Himalayas, archeology</p>
-                <a 
-                  href="https://www.pexels.com/@ian-gabaraev-2149212079/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cert-link"
-                >
-                  Photography <ExternalLink size={12} />
-                </a>
+                <div className="beyond-items">
+                  <span className="beyond-item"><Waves size={15} /> Technical Diving</span>
+                  <span className="beyond-item"><Mountain size={15} /> Himalayan Trekking</span>
+                  <span className="beyond-item"><Landmark size={15} /> Archeology</span>
+                  <span className="beyond-item"><Camera size={15} /> Photography</span>
+                </div>
+                <div className="beyond-links">
+                  <a
+                    href="https://unsplash.com/@iangabaraev"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="beyond-link"
+                  >
+                    <FaUnsplash size={16} /> Unsplash
+                  </a>
+                  <a
+                    href="https://www.pexels.com/@ian-gabaraev-2149212079/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="beyond-link"
+                  >
+                    <SiPexels size={16} /> Pexels
+                  </a>
+                </div>
               </div>
             </div>
           </div>
