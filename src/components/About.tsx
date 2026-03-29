@@ -42,7 +42,7 @@ const About = () => {
             </div>
             
             <div className="about-info">
-              <div className="info-block">SiUnsplash
+              <div className="info-block">
                 <h3>Education</h3>
                 <p>Moscow State Institute of International Relations</p>
                 <span>Bachelor's in International Relations</span>
