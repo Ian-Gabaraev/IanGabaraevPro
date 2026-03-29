@@ -13,19 +13,45 @@ const ROOT = join(import.meta.dirname, '..');
 const DIST = join(ROOT, 'dist');
 const BASE_URL = 'https://iangabaraev.com';
 
-// --- Compile and import posts data at build time ---
-const tmpFile = join(DIST, '__posts_tmp.mjs');
+// --- Compile and import content metadata at build time ---
+const tmpPostsFile = join(DIST, '__posts_tmp.mjs');
 buildSync({
   entryPoints: [join(ROOT, 'src/data/posts.ts')],
   bundle: true,
   format: 'esm',
-  outfile: tmpFile,
+  outfile: tmpPostsFile,
   platform: 'node',
 });
-const { posts } = await import(pathToFileURL(tmpFile).href);
-unlinkSync(tmpFile);
+const { posts } = await import(pathToFileURL(tmpPostsFile).href);
+unlinkSync(tmpPostsFile);
+
+const tmpGuidesFile = join(DIST, '__guides_tmp.mjs');
+buildSync({
+  entryPoints: [join(ROOT, 'src/data/guides.ts')],
+  bundle: true,
+  format: 'esm',
+  outfile: tmpGuidesFile,
+  platform: 'node',
+});
+const { guides } = await import(pathToFileURL(tmpGuidesFile).href);
+unlinkSync(tmpGuidesFile);
 
 const template = readFileSync(join(DIST, 'index.html'), 'utf-8');
+
+const guideMarkdownBySlug = new Map(
+  guides.map((guide) => {
+    const fileName = guide.markdownPath.replace(/^\//, '');
+    const markdown = readFileSync(join(DIST, fileName), 'utf-8');
+    return [guide.slug, markdown];
+  })
+);
+
+const guideRoutes = guides.map((guide) => ({
+  path: `/learn/${guide.slug}`,
+  title: `${guide.title} | Ian Gabaraev`,
+  description: guide.excerpt,
+  og: { type: 'article' },
+}));
 
 const routes = [
   {
@@ -40,6 +66,13 @@ const routes = [
     description: 'Free interactive quizzes on JavaScript, TypeScript, React, Node.js, CSS, and AWS. Test your frontend development and cloud skills with 200+ questions.',
     og: { type: 'website' },
   },
+  {
+    path: '/learn',
+    title: 'Learn | Ian Gabaraev',
+    description: 'Learning guides on JavaScript, TypeScript, React, Node.js, and practical full stack engineering topics.',
+    og: { type: 'website' },
+  },
+  ...guideRoutes,
   {
     path: '/blog/nepal-the-digital-nomad-destination-nobody-talks-about',
     title: 'The Himalayas Called — And I Answered with a Laptop | Ian Gabaraev',
@@ -128,6 +161,25 @@ function getBodyContent(route) {
 
   if (route.path === '/quiz') {
     return `<main><h1>Quiz</h1><p>${escapeHtml(route.description)}</p></main>`;
+  }
+
+  if (route.path === '/learn') {
+    const sorted = [...guides].sort((a, b) => new Date(b.date) - new Date(a.date));
+    return `<main><h1>Learn</h1><p>${escapeHtml(route.description)}</p>${
+      sorted.map((guide) =>
+        `<article><h2><a href="/learn/${guide.slug}">${escapeHtml(guide.title)}</a></h2>` +
+        `<time datetime="${guide.date}">${guide.date}</time>` +
+        `<p>${escapeHtml(guide.excerpt)}</p></article>`
+      ).join('\n')
+    }</main>`;
+  }
+
+  const guide = guides.find((g) => `/learn/${g.slug}` === route.path);
+  if (guide) {
+    const markdown = guideMarkdownBySlug.get(guide.slug) || '';
+    return `<main><article><h1>${escapeHtml(guide.title)}</h1>` +
+      `<time datetime="${guide.date}">${guide.date}</time>` +
+      `${mdToHtml(markdown)}</article></main>`;
   }
 
   const post = posts.find(p => `/blog/${p.slug}` === route.path);

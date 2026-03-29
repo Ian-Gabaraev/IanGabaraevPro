@@ -37,6 +37,18 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://iangabaraev.com/learn</loc>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://iangabaraev.com/learn/full-stack-interview-prep</loc>
+    <lastmod>2026-03-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://iangabaraev.com/blog/building-nomadatlas</loc>
     <lastmod>2026-03-20</lastmod>
     <changefreq>monthly</changefreq>
