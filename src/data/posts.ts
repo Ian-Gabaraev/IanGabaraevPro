@@ -36,9 +36,9 @@ With that came the hidden risk. Any reputable dive instructor will tell you — 
 
 ## The Perfect Day That Wasn't
 
-I learned that lesson on what started as a damn good day. The water was calm, crystal clear, blue skies, visibility pushing 30 meters. I separated from my group of five — which, in itself, is a violation of the rules in any form of diving. I locked onto the gentle downward slope, and in about ten to twelve minutes I was at **60 meters — 200 ft**. That marked my deepest dive on regular air.
+I learned that lesson on what started as a damn good day. The water was calm, crystal clear, blue skies, visibility pushing 30 meters. I separated from my group of five — which, in itself, is a violation of the rules in any form of diving. Not to justify my behavior - but back then I liked to see my diving style as more of a rogue pirate, the kinds of the guys that back in the 80s would descend to 200ft on air in search of sunken WW2 German subs. I locked onto the gentle downward slope, and in about ten to twelve minutes I was at **60 meters — 200 ft**. That marked my deepest dive on regular air.
 
-**Nitrogen narcosis** is a very real thing. It is commonly compared to alcohol intoxication, but I do not think that is accurate. You do lose chunks of memory — but you also get blurred, tunnel vision, numbness in your face, and the rhythmic drumming of your heartbeat in your ears. Symptoms usually manifest past 30 meters. At 60 meters, you are guaranteed to be nark'd, and it is not mild.
+**Nitrogen narcosis** is a very real thing. It is commonly compared to alcohol intoxication, but I do not think that is accurate. You do lose chunks of memory — but you also get blurred, tunnel vision, numbness in your face, and the rhythmic drumming of your heartbeat in your ears. Symptoms usually manifest past 30 meters. At 60 meters, you are guaranteed to be narked, and it is not mild.
 
 I remember not being able to make out the readings on my Shearwater dive computer. I instinctively wanted to rub my eyes — but I was not impaired enough to attempt something as pointless as rubbing your eyes at 200 ft in salt water.
 
