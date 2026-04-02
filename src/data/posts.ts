@@ -13,7 +13,7 @@ export const posts: BlogPost[] = [
     favorite: true,
     slug: "first-200ft-dive",
     title: "My First 200ft Dive Was My First Close Call",
-    date: "2026-04-02",
+    date: "2026-04-05",
     excerpt:
       "Side mount diving gave me confidence, redundancy, and perfect trim. It also gave me the audacity to solo-descend to 60 meters — and learn why the ocean does not care about your gear.",
     tags: ["Diving", "Side Mount", "Technical Diving", "Deep Diving"],
