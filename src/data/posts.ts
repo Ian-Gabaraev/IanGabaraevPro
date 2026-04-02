@@ -10,6 +10,7 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    favorite: true,
     slug: "first-200ft-dive",
     title: "My First 200ft Dive Was My First Close Call",
     date: "2026-04-02",
