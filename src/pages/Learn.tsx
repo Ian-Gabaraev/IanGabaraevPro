@@ -1,18 +1,18 @@
-import { Helmet } from 'react-helmet-async';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Star } from 'lucide-react';
-import { getAllGuides } from '../data/guides';
-import './Learn.css';
+import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Star } from "lucide-react";
+import { getAllGuides } from "../data/guides";
+import "./Learn.css";
 
 const Learn = () => {
   const guides = getAllGuides();
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+    return new Date(dateStr).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
@@ -42,26 +42,37 @@ const Learn = () => {
         >
           <h1 className="learn-list-title">Learn</h1>
           <p className="learn-list-subtitle">
-            Structured guides for full stack interview prep and production-ready frontend engineering.
+            Structured guides for full stack interview prep and production-ready
+            frontend engineering.
           </p>
 
           <div className="learn-guides-list">
             {guides.map((guide, index) => (
               <motion.article
                 key={guide.slug}
-                className={`learn-guide-card${guide.featured ? ' learn-guide-card-featured' : ''}`}
+                className={`learn-guide-card${guide.featured ? " learn-guide-card-featured" : ""}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
               >
-                {guide.featured && <Star className="learn-favorite-star" size={18} fill="currentColor" />}
+                {guide.featured && (
+                  <Star
+                    className="learn-favorite-star"
+                    size={18}
+                    fill="currentColor"
+                  />
+                )}
                 <Link to={`/learn/${guide.slug}`} className="learn-guide-link">
-                  <time className="learn-guide-date">{formatDate(guide.date)}</time>
+                  <time className="learn-guide-date">
+                    {formatDate(guide.date)}
+                  </time>
                   <h2 className="learn-guide-title">{guide.title}</h2>
                   <p className="learn-guide-excerpt">{guide.excerpt}</p>
                   <div className="learn-guide-tags">
                     {guide.tags.map((tag) => (
-                      <span key={tag} className="learn-guide-tag">{tag}</span>
+                      <span key={tag} className="learn-guide-tag">
+                        {tag}
+                      </span>
                     ))}
                   </div>
                 </Link>
@@ -75,4 +86,3 @@ const Learn = () => {
 };
 
 export default Learn;
-

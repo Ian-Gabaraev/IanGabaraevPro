@@ -31,7 +31,7 @@
 .post-header .post-meta {
   font-size: 0.875rem;
   color: var(--text-secondary);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   display: block;
   margin-bottom: 1rem;
 }
@@ -52,7 +52,7 @@
 
 .post-header .post-tag {
   font-size: 0.75rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   color: var(--text-secondary);
   background: var(--bg-secondary);
   padding: 0.25rem 0.5rem;
@@ -113,7 +113,7 @@
 }
 
 .post-content code {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   font-size: 0.875em;
   background: var(--bg-secondary);
   padding: 0.2em 0.4em;

@@ -1,14 +1,26 @@
-import { motion } from 'framer-motion';
-import { ExternalLink, Waves, Mountain, Landmark, Camera } from 'lucide-react';
-import './About.css';
-import { SiPexels } from 'react-icons/si';
-import { FaQuora } from 'react-icons/fa6';
-import { SiUnsplash } from 'react-icons/si';
+import { motion } from "framer-motion";
+import { ExternalLink, Waves, Mountain, Landmark, Camera } from "lucide-react";
+import "./About.css";
+import { SiPexels } from "react-icons/si";
+import { FaQuora } from "react-icons/fa6";
+import { SiUnsplash } from "react-icons/si";
 
 const About = () => {
   const skills = [
-    'Python', 'TypeScript', 'React', 'Django', 'FastAPI', 'AWS', 'Azure',
-    'PostgreSQL', 'Docker', 'GraphQL', 'Redis', 'Kafka', 'PyTorch', 'DSP'
+    "Python",
+    "TypeScript",
+    "React",
+    "Django",
+    "FastAPI",
+    "AWS",
+    "Azure",
+    "PostgreSQL",
+    "Docker",
+    "GraphQL",
+    "Redis",
+    "Kafka",
+    "PyTorch",
+    "DSP",
   ];
 
   return (
@@ -21,37 +33,49 @@ const About = () => {
           transition={{ duration: 0.5 }}
         >
           <p className="section-title">About</p>
-          
+
           <div className="about-grid">
             <div className="about-text">
               <p>
-                Full stack engineer building end-to-end solutions — from React frontends 
-                to Python backends to cloud infrastructure on AWS and Azure. For the past 
-                decade, I've shipped production systems across healthcare, biotech, and education.
+                Full stack engineer building end-to-end solutions — from React
+                frontends to Python backends to cloud infrastructure on AWS and
+                Azure. For the past decade, I've shipped production systems
+                across healthcare, biotech, and education.
               </p>
               <p>
-                I architect cloud migrations, design APIs, build real-time UIs, and optimize 
-                distributed systems for scale. At Akvelon, I lead development of an enterprise 
-                telehealth platform serving interpreters across 65 languages worldwide.
+                I architect cloud migrations, design APIs, build real-time UIs,
+                and optimize distributed systems for scale. At Akvelon, I lead
+                development of an enterprise telehealth platform serving
+                interpreters across 65 languages worldwide.
               </p>
               <p>
-                Outside enterprise work, I build personal projects: <a href='https://nomadatlas.dev' className='project-link'>NomadAtlas</a> — a React 19 
-                finance dashboard for digital nomads — and <a href='https://github.com/Ian-Gabaraev/Bat-Sonar-Listener' className='project-link'>Bat Sonar</a>, the ultrasonic bat detection systems 
-                combining DSP with machine learning.
+                Outside enterprise work, I build personal projects:{" "}
+                <a href="https://nomadatlas.dev" className="project-link">
+                  NomadAtlas
+                </a>{" "}
+                — a React 19 finance dashboard for digital nomads — and{" "}
+                <a
+                  href="https://github.com/Ian-Gabaraev/Bat-Sonar-Listener"
+                  className="project-link"
+                >
+                  Bat Sonar
+                </a>
+                , the ultrasonic bat detection systems combining DSP with
+                machine learning.
               </p>
             </div>
-            
+
             <div className="about-info">
               <div className="info-block">
                 <h3>Education</h3>
                 <p>Moscow State Institute of International Relations</p>
                 <span>Bachelor's in International Relations</span>
               </div>
-              
+
               <div className="info-block">
                 <h3>Certification</h3>
                 <p>Machine Learning Specialization</p>
-                <a 
+                <a
                   href="https://www.coursera.org/account/accomplishments/specialization/7DDIBT28LOZT"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -60,14 +84,22 @@ const About = () => {
                   Stanford University <ExternalLink size={12} />
                 </a>
               </div>
-              
+
               <div className="info-block beyond-code">
                 <h3>Beyond Code</h3>
                 <div className="beyond-items">
-                  <span className="beyond-item"><Waves size={15} /> Technical Diving</span>
-                  <span className="beyond-item"><Mountain size={15} /> Himalayan Trekking</span>
-                  <span className="beyond-item"><Landmark size={15} /> Archeology</span>
-                  <span className="beyond-item"><Camera size={15} /> Photography</span>
+                  <span className="beyond-item">
+                    <Waves size={15} /> Technical Diving
+                  </span>
+                  <span className="beyond-item">
+                    <Mountain size={15} /> Himalayan Trekking
+                  </span>
+                  <span className="beyond-item">
+                    <Landmark size={15} /> Archeology
+                  </span>
+                  <span className="beyond-item">
+                    <Camera size={15} /> Photography
+                  </span>
                 </div>
                 <div className="beyond-links">
                   <a
@@ -101,7 +133,9 @@ const About = () => {
 
           <div className="skills-list">
             {skills.map((skill) => (
-              <span key={skill} className="skill-tag">{skill}</span>
+              <span key={skill} className="skill-tag">
+                {skill}
+              </span>
             ))}
           </div>
         </motion.div>

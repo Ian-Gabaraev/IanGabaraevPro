@@ -55,7 +55,7 @@
 .learn-guide-date {
   font-size: 0.875rem;
   color: var(--text-secondary);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
 }
 
 .learn-guide-title {
@@ -81,7 +81,7 @@
 
 .learn-guide-tag {
   font-size: 0.75rem;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   color: var(--text-secondary);
   background: var(--bg-primary);
   padding: 0.25rem 0.5rem;
@@ -94,4 +94,3 @@
     font-size: 2rem;
   }
 }
-

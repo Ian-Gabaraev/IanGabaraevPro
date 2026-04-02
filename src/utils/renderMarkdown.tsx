@@ -1,4 +1,4 @@
-import { type ReactElement, type ReactNode } from 'react';
+import { type ReactElement, type ReactNode } from "react";
 
 type ParsedTable = {
   header: string[];
@@ -9,17 +9,17 @@ const slugify = (text: string): string =>
   text
     .toLowerCase()
     .trim()
-    .replace(/<[^>]+>/g, '')
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-');
+    .replace(/<[^>]+>/g, "")
+    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-");
 
 const normalizeHref = (href: string): string => {
-  if (href === 'quiz.html' || href.endsWith('/quiz.html')) {
-    return '/quiz';
+  if (href === "quiz.html" || href.endsWith("/quiz.html")) {
+    return "/quiz";
   }
 
-  if (href.startsWith('./')) {
+  if (href.startsWith("./")) {
     return href.slice(1);
   }
 
@@ -28,7 +28,8 @@ const normalizeHref = (href: string): string => {
 
 const renderInlineMarkdown = (text: string, keyPrefix: string): ReactNode[] => {
   const elements: ReactNode[] = [];
-  const pattern = /`([^`]+)`|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\(([^)]+)\)/g;
+  const pattern =
+    /`([^`]+)`|\*\*([^*]+)\*\*|\*([^*]+)\*|\[([^\]]+)\]\(([^)]+)\)/g;
   let lastIndex = 0;
   let match: RegExpExecArray | null;
 
@@ -38,9 +39,13 @@ const renderInlineMarkdown = (text: string, keyPrefix: string): ReactNode[] => {
     }
 
     if (match[1] !== undefined) {
-      elements.push(<code key={`${keyPrefix}-${match.index}`}>{match[1]}</code>);
+      elements.push(
+        <code key={`${keyPrefix}-${match.index}`}>{match[1]}</code>,
+      );
     } else if (match[2] !== undefined) {
-      elements.push(<strong key={`${keyPrefix}-${match.index}`}>{match[2]}</strong>);
+      elements.push(
+        <strong key={`${keyPrefix}-${match.index}`}>{match[2]}</strong>,
+      );
     } else if (match[3] !== undefined) {
       elements.push(<em key={`${keyPrefix}-${match.index}`}>{match[3]}</em>);
     } else if (match[4] !== undefined && match[5] !== undefined) {
@@ -50,11 +55,11 @@ const renderInlineMarkdown = (text: string, keyPrefix: string): ReactNode[] => {
         <a
           key={`${keyPrefix}-${match.index}`}
           href={href}
-          target={isExternal ? '_blank' : undefined}
-          rel={isExternal ? 'noopener noreferrer' : undefined}
+          target={isExternal ? "_blank" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
         >
           {match[4]}
-        </a>
+        </a>,
       );
     }
 
@@ -69,11 +74,12 @@ const renderInlineMarkdown = (text: string, keyPrefix: string): ReactNode[] => {
 };
 
 const parseTableRow = (line: string): string[] => {
-  const trimmed = line.trim().replace(/^\|/, '').replace(/\|$/, '');
-  return trimmed.split('|').map((cell) => cell.trim());
+  const trimmed = line.trim().replace(/^\|/, "").replace(/\|$/, "");
+  return trimmed.split("|").map((cell) => cell.trim());
 };
 
-const isTableDivider = (line: string): boolean => /^\s*\|?[\s:-]+\|[\s|:-]*$/.test(line);
+const isTableDivider = (line: string): boolean =>
+  /^\s*\|?[\s:-]+\|[\s|:-]*$/.test(line);
 
 const isUnorderedListLine = (line: string): boolean => /^\s*-\s+/.test(line);
 const isOrderedListLine = (line: string): boolean => /^\s*\d+\.\s+/.test(line);
@@ -81,13 +87,13 @@ const isHeadingLine = (line: string): boolean => /^#{1,6}\s+/.test(line);
 const isHorizontalRule = (line: string): boolean => /^\s*---+\s*$/.test(line);
 
 export const renderMarkdownContent = (content: string): ReactElement[] => {
-  const lines = content.replace(/\r\n/g, '\n').split('\n');
+  const lines = content.replace(/\r\n/g, "\n").split("\n");
   const elements: ReactElement[] = [];
   const headingCounts = new Map<string, number>();
   let index = 0;
 
   const createHeadingId = (rawText: string) => {
-    const base = slugify(rawText) || 'section';
+    const base = slugify(rawText) || "section";
     const existing = headingCounts.get(base) ?? 0;
     headingCounts.set(base, existing + 1);
     return existing === 0 ? base : `${base}-${existing}`;
@@ -97,17 +103,17 @@ export const renderMarkdownContent = (content: string): ReactElement[] => {
     const line = lines[index];
     const trimmed = line.trim();
 
-    if (trimmed === '') {
+    if (trimmed === "") {
       index += 1;
       continue;
     }
 
-    if (line.startsWith('```')) {
+    if (line.startsWith("```")) {
       const language = line.slice(3).trim();
       const codeLines: string[] = [];
       index += 1;
 
-      while (index < lines.length && !lines[index].startsWith('```')) {
+      while (index < lines.length && !lines[index].startsWith("```")) {
         codeLines.push(lines[index]);
         index += 1;
       }
@@ -118,8 +124,8 @@ export const renderMarkdownContent = (content: string): ReactElement[] => {
 
       elements.push(
         <pre key={`code-${index}`} className="learn-code-block">
-          <code className={language}>{codeLines.join('\n')}</code>
-        </pre>
+          <code className={language}>{codeLines.join("\n")}</code>
+        </pre>,
       );
       continue;
     }
@@ -136,20 +142,47 @@ export const renderMarkdownContent = (content: string): ReactElement[] => {
         const level = match[1].length;
         const headingText = match[2].trim();
         const id = createHeadingId(headingText);
-        const headingChildren = renderInlineMarkdown(headingText, `heading-${index}`);
+        const headingChildren = renderInlineMarkdown(
+          headingText,
+          `heading-${index}`,
+        );
 
         if (level === 1) {
-          elements.push(<h1 key={`h1-${index}`} id={id}>{headingChildren}</h1>);
+          elements.push(
+            <h1 key={`h1-${index}`} id={id}>
+              {headingChildren}
+            </h1>,
+          );
         } else if (level === 2) {
-          elements.push(<h2 key={`h2-${index}`} id={id}>{headingChildren}</h2>);
+          elements.push(
+            <h2 key={`h2-${index}`} id={id}>
+              {headingChildren}
+            </h2>,
+          );
         } else if (level === 3) {
-          elements.push(<h3 key={`h3-${index}`} id={id}>{headingChildren}</h3>);
+          elements.push(
+            <h3 key={`h3-${index}`} id={id}>
+              {headingChildren}
+            </h3>,
+          );
         } else if (level === 4) {
-          elements.push(<h4 key={`h4-${index}`} id={id}>{headingChildren}</h4>);
+          elements.push(
+            <h4 key={`h4-${index}`} id={id}>
+              {headingChildren}
+            </h4>,
+          );
         } else if (level === 5) {
-          elements.push(<h5 key={`h5-${index}`} id={id}>{headingChildren}</h5>);
+          elements.push(
+            <h5 key={`h5-${index}`} id={id}>
+              {headingChildren}
+            </h5>,
+          );
         } else {
-          elements.push(<h6 key={`h6-${index}`} id={id}>{headingChildren}</h6>);
+          elements.push(
+            <h6 key={`h6-${index}`} id={id}>
+              {headingChildren}
+            </h6>,
+          );
         }
       }
 
@@ -157,14 +190,22 @@ export const renderMarkdownContent = (content: string): ReactElement[] => {
       continue;
     }
 
-    if (line.includes('|') && index + 1 < lines.length && isTableDivider(lines[index + 1])) {
+    if (
+      line.includes("|") &&
+      index + 1 < lines.length &&
+      isTableDivider(lines[index + 1])
+    ) {
       const table: ParsedTable = {
         header: parseTableRow(line),
         rows: [],
       };
       index += 2;
 
-      while (index < lines.length && lines[index].includes('|') && lines[index].trim() !== '') {
+      while (
+        index < lines.length &&
+        lines[index].includes("|") &&
+        lines[index].trim() !== ""
+      ) {
         table.rows.push(parseTableRow(lines[index]));
         index += 1;
       }
@@ -175,7 +216,9 @@ export const renderMarkdownContent = (content: string): ReactElement[] => {
             <thead>
               <tr>
                 {table.header.map((cell, cellIndex) => (
-                  <th key={`th-${index}-${cellIndex}`}>{renderInlineMarkdown(cell, `th-${index}-${cellIndex}`)}</th>
+                  <th key={`th-${index}-${cellIndex}`}>
+                    {renderInlineMarkdown(cell, `th-${index}-${cellIndex}`)}
+                  </th>
                 ))}
               </tr>
             </thead>
@@ -184,14 +227,17 @@ export const renderMarkdownContent = (content: string): ReactElement[] => {
                 <tr key={`tr-${index}-${rowIndex}`}>
                   {row.map((cell, cellIndex) => (
                     <td key={`td-${index}-${rowIndex}-${cellIndex}`}>
-                      {renderInlineMarkdown(cell, `td-${index}-${rowIndex}-${cellIndex}`)}
+                      {renderInlineMarkdown(
+                        cell,
+                        `td-${index}-${rowIndex}-${cellIndex}`,
+                      )}
                     </td>
                   ))}
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
+        </div>,
       );
       continue;
     }
@@ -200,7 +246,7 @@ export const renderMarkdownContent = (content: string): ReactElement[] => {
       const items: string[] = [];
 
       while (index < lines.length && isUnorderedListLine(lines[index])) {
-        items.push(lines[index].replace(/^\s*-\s+/, ''));
+        items.push(lines[index].replace(/^\s*-\s+/, ""));
         index += 1;
       }
 
@@ -211,7 +257,7 @@ export const renderMarkdownContent = (content: string): ReactElement[] => {
               {renderInlineMarkdown(item, `ul-${index}-${itemIndex}`)}
             </li>
           ))}
-        </ul>
+        </ul>,
       );
       continue;
     }
@@ -220,7 +266,7 @@ export const renderMarkdownContent = (content: string): ReactElement[] => {
       const items: string[] = [];
 
       while (index < lines.length && isOrderedListLine(lines[index])) {
-        items.push(lines[index].replace(/^\s*\d+\.\s+/, ''));
+        items.push(lines[index].replace(/^\s*\d+\.\s+/, ""));
         index += 1;
       }
 
@@ -231,36 +277,39 @@ export const renderMarkdownContent = (content: string): ReactElement[] => {
               {renderInlineMarkdown(item, `ol-${index}-${itemIndex}`)}
             </li>
           ))}
-        </ol>
+        </ol>,
       );
       continue;
     }
 
-    if (trimmed.startsWith('>')) {
+    if (trimmed.startsWith(">")) {
       const quoteLines: string[] = [];
 
-      while (index < lines.length && lines[index].trim().startsWith('>')) {
-        quoteLines.push(lines[index].trim().replace(/^>\s?/, ''));
+      while (index < lines.length && lines[index].trim().startsWith(">")) {
+        quoteLines.push(lines[index].trim().replace(/^>\s?/, ""));
         index += 1;
       }
 
       elements.push(
         <blockquote key={`quote-${index}`}>
-          <p>{renderInlineMarkdown(quoteLines.join(' '), `quote-${index}`)}</p>
-        </blockquote>
+          <p>{renderInlineMarkdown(quoteLines.join(" "), `quote-${index}`)}</p>
+        </blockquote>,
       );
       continue;
     }
 
-    if (trimmed.startsWith('<')) {
+    if (trimmed.startsWith("<")) {
       const htmlLines: string[] = [];
-      while (index < lines.length && lines[index].trim() !== '') {
+      while (index < lines.length && lines[index].trim() !== "") {
         htmlLines.push(lines[index]);
         index += 1;
       }
 
       elements.push(
-        <div key={`html-${index}`} dangerouslySetInnerHTML={{ __html: htmlLines.join('\n') }} />
+        <div
+          key={`html-${index}`}
+          dangerouslySetInnerHTML={{ __html: htmlLines.join("\n") }}
+        />,
       );
       continue;
     }
@@ -270,27 +319,26 @@ export const renderMarkdownContent = (content: string): ReactElement[] => {
 
     while (
       index < lines.length &&
-      lines[index].trim() !== '' &&
-      !lines[index].startsWith('```') &&
+      lines[index].trim() !== "" &&
+      !lines[index].startsWith("```") &&
       !isHorizontalRule(lines[index]) &&
       !isHeadingLine(lines[index]) &&
       !isUnorderedListLine(lines[index]) &&
       !isOrderedListLine(lines[index]) &&
-      !lines[index].trim().startsWith('>') &&
-      !lines[index].trim().startsWith('<')
+      !lines[index].trim().startsWith(">") &&
+      !lines[index].trim().startsWith("<")
     ) {
       paragraphLines.push(lines[index]);
       index += 1;
     }
 
-    const paragraphText = paragraphLines.join(' ');
+    const paragraphText = paragraphLines.join(" ");
     elements.push(
       <p key={`p-${index}`}>
         {renderInlineMarkdown(paragraphText, `p-${index}`)}
-      </p>
+      </p>,
     );
   }
 
   return elements;
 };
-

@@ -34,7 +34,7 @@
   border: 2px solid var(--text-primary);
   font-size: 0.875rem;
   font-weight: 700;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
   letter-spacing: -0.02em;
   transition: all 0.2s ease;
 }
@@ -65,7 +65,7 @@
 }
 
 .nav-link-dot::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -2px;
   right: -8px;

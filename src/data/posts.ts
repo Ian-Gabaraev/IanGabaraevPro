@@ -10,12 +10,89 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "bat-sonar-p2",
+    title: "The Bat Sonar Project: Hearing What We Cannot",
+    date: "2026-04-02",
+    excerpt:
+      "Introducing an open-source ultrasonic bat detection system — where math, physics, programming, and machine learning collide.",
+    tags: ["Python", "DSP", "Machine Learning", "Wildlife", "Series"],
+    content: `
+# The Bat Sonar Project: Hearing What We Cannot
+
+<img src="/images/bats-echolocation.jpg" alt="Bats in flight using echolocation (Pexels, by Ian Gabaraev)" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Bat foraging over water in Da Nang, Vietnam (Photo by Ian Gabaraev @ Pexels)</p>
+
+
+I've always had a complicated relationship with sound. As a light sleeper, I sometimes wished I had a knob to narrow my frequency range — blocking out loud music, car horns, fireworks, and all the nighttime noise that intrudes past bedtime.
+
+Yet, at the same time, scuba diving and astrophotography introduced me to the beauty of unraveling the hidden, the invisible, the inaudible. When I got my hands on hardware that could record signals beyond our — let's face it, quite modest — human hearing range, I was hooked.
+
+It didn't take long for another project to emerge. This one was truly challenging, sitting at the intersection of **math**, **physics**, **programming**, and **machine learning**.
+
+**The Bat Sonar.**
+
+---
+
+## Why Bats?
+
+<img src="/images/bats-cave.jpg" alt="Cave habitat for bats" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Bats in a cave (Photo by Vladimir Konoplev @ Pexels)</p>
+
+
+Bats are fascinating creatures. Despite being so different from cetaceans like orcas, dolphins, and whales in every conceivable way, these two groups share one extraordinary skill at the very core of their survival: **echolocation**.
+
+The evolutionary paths that led bats and cetaceans to develop this sophisticated ability are beyond the scope of my project. However, one factor stands out — both hunt in darkness.
+
+Bats typically emerge at twilight and feed throughout the night. Whales like the mighty sperm whale dive over a thousand meters into the ocean's depths in search of their ultimate prey: the giant squid.
+
+## The Darkness Problem
+
+As a scuba diver, I know firsthand that light barely penetrates water. At about 50 meters, it's already dim. Past 300 meters, it's universally considered a no-light zone.
+
+Sperm whales hunt far beyond that, in complete darkness, relying on echolocation to navigate and capture their prey.
+
+## Why Not Whales?
+
+The answer lies in accessibility and the ability to collect and analyze my own data.
+
+Capturing whale songs is a monumental task, requiring specialized equipment, vessels, and large-scale operations. With bats, all I need is:
+
+- An **ultrasonic microphone**
+- A **cave**
+
+Fortunately, caves are abundant in Southeast Asia, and ultrasonic microphones are relatively affordable — costing only a few hundred dollars.
+
+---
+
+## What's Coming
+
+This will be a series of posts. I'll be describing the development of the project in detail, including:
+
+- How and where I'm getting my data
+- The DSP pipeline for processing ultrasonic audio
+- Species classification using neural networks
+- Real-time monitoring on a Raspberry Pi
+
+Gathering bat noise is definitely one of the best parts of this.
+
+*Next up: Sound fundamentals — wavelength, sampling rate, Nyquist, and FFT.*
+    `.trim(),
+  },
+  {
     favorite: true,
-    slug: 'nepal-pros',
-    title: 'The Himalayas Called — And I Answered with a Laptop',
-    date: '2026-03-27',
-    excerpt: 'Remote work in Nepal sounds insane — until you try it. Affordable, connected, serene, and utterly unlike any digital nomad destination you have been to.',
-    tags: ['Digital Nomad', 'Nomad Atlas', 'React', 'TypeScript', 'Remote Work', 'Nepal'],
+    slug: "nepal-pros",
+    title: "The Himalayas Called — And I Answered with a Laptop",
+    date: "2026-03-27",
+    excerpt:
+      "Remote work in Nepal sounds insane — until you try it. Affordable, connected, serene, and utterly unlike any digital nomad destination you have been to.",
+    tags: [
+      "Digital Nomad",
+      "Nomad Atlas",
+      "React",
+      "TypeScript",
+      "Remote Work",
+      "Nepal",
+    ],
     content: `
 # The Himalayas Called — And I Answered with a Laptop
 
@@ -79,11 +156,12 @@ If you do decide to go, [Nomad Atlas](https://nomadatlas.dev) will do its best t
     `.trim(),
   },
   {
-    slug: 'why-bats',
-    title: 'Why Bats? A Scuba Diver\'s Path to Bioacoustics',
-    date: '2026-03-25',
-    excerpt: 'From hunting in darkness underwater to building ultrasonic bat detectors in Vietnamese caves — the science of echolocation.',
-    tags: ['Python', 'DSP', 'Bioacoustics', 'Wildlife', 'Science'],
+    slug: "why-bats",
+    title: "Why Bats? A Scuba Diver's Path to Bioacoustics",
+    date: "2026-03-25",
+    excerpt:
+      "From hunting in darkness underwater to building ultrasonic bat detectors in Vietnamese caves — the science of echolocation.",
+    tags: ["Python", "DSP", "Bioacoustics", "Wildlife", "Science"],
     content: `
 # Why Bats? A Scuba Diver's Path to Bioacoustics
 
@@ -255,11 +333,12 @@ Coming up: FFT implementation details, spectrogram generation, and the neural ne
     `.trim(),
   },
   {
-    slug: 'building-nomadatlas',
-    title: 'Building NomadAtlas: A Finance Dashboard for Digital Nomads',
-    date: '2026-03-20',
-    excerpt: 'How I built a personal finance and lifestyle dashboard using React 19, Vite, and real-time APIs.',
-    tags: ['React', 'TypeScript', 'Nomad Atlas', 'Digital Nomad'],
+    slug: "building-nomadatlas",
+    title: "Building NomadAtlas: A Finance Dashboard for Digital Nomads",
+    date: "2026-03-20",
+    excerpt:
+      "How I built a personal finance and lifestyle dashboard using React 19, Vite, and real-time APIs.",
+    tags: ["React", "TypeScript", "Nomad Atlas", "Digital Nomad"],
     content: `
 # Building NomadAtlas: A Finance Dashboard for Digital Nomads
 
@@ -294,11 +373,12 @@ Check it out at [nomadatlas.dev](https://nomadatlas.dev).
     `.trim(),
   },
   {
-    slug: 'ultrasonic-bat-detection',
-    title: 'Building a Real-Time Ultrasonic Bat Detector with Python',
-    date: '2026-03-15',
-    excerpt: 'Capturing bat calls at 192kHz and using DSP techniques for species identification.',
-    tags: ['Python', 'DSP', 'Audio', 'Wildlife'],
+    slug: "ultrasonic-bat-detection",
+    title: "Building a Real-Time Ultrasonic Bat Detector with Python",
+    date: "2026-03-15",
+    excerpt:
+      "Capturing bat calls at 192kHz and using DSP techniques for species identification.",
+    tags: ["Python", "DSP", "Audio", "Wildlife"],
     content: `
 # Building a Real-Time Ultrasonic Bat Detector with Python
 
@@ -350,11 +430,20 @@ I'm building a neural network classifier using spectrograms to automate species 
   },
   {
     favorite: true,
-    slug: 'nepal-cons',
-    title: 'Beautiful, Brutal, Honest — The Other Side of Nepal',
-    date: '2026-03-31',
-    excerpt: 'Nepal is stunning. It is also dangerous, polluted, heartbreaking, and boring after dark. Five reasons remote work in Nepal will never go mainstream.',
-    tags: ['Digital Nomad', 'Nomad Atlas', 'React', 'TypeScript', 'Series', 'Remote Work', 'Nepal'],
+    slug: "nepal-cons",
+    title: "Beautiful, Brutal, Honest — The Other Side of Nepal",
+    date: "2026-03-31",
+    excerpt:
+      "Nepal is stunning. It is also dangerous, polluted, heartbreaking, and boring after dark. Five reasons remote work in Nepal will never go mainstream.",
+    tags: [
+      "Digital Nomad",
+      "Nomad Atlas",
+      "React",
+      "TypeScript",
+      "Series",
+      "Remote Work",
+      "Nepal",
+    ],
     content: `
 # Beautiful, Brutal, Honest — The Other Side of Nepal
 
@@ -439,7 +528,7 @@ Read the first part of this series: [The Himalayas Called — And I Answered wit
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  return posts.find(post => post.slug === slug);
+  return posts.find((post) => post.slug === slug);
 }
 
 export function getAllPosts(): BlogPost[] {

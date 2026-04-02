@@ -1,20 +1,21 @@
-# $$Bat Sonar Project$$ 
-## $$inspired-by-nature$$ 
+# $$Bat Sonar Project$$
+
+## $$inspired-by-nature$$
 
 #### This is an ambitious project, that I decided to embark on as a learning opportunity before my main "passivesonar" effort. In this document, I will outline the goals and approaches to the task at hand, along with a degree of mathematics behind them.
 
-
-
 ## Why bats?
+
 Bats are fascinating creatures. As much as they are different in all possible way or form from cetaceans like orcas, dolphins and whales, these two major groups of species share one fundamental skill that is the very core of their survival. And that skill is echolocation.
 
-The evolutionary mechanisms of how bats and cetaceans developed this sophisticated ability are beyond the scope of this project, although one factor is obvious - both hunt in darkness. Bats usually come out at twilight and go on with their feeding for the rest of the evening, while large whales like the sperm whale dive down to over a thousand meters looking for the ultimate treat - the giant squid. 
+The evolutionary mechanisms of how bats and cetaceans developed this sophisticated ability are beyond the scope of this project, although one factor is obvious - both hunt in darkness. Bats usually come out at twilight and go on with their feeding for the rest of the evening, while large whales like the sperm whale dive down to over a thousand meters looking for the ultimate treat - the giant squid.
 
 As a scuba diver, one thing I know for a fact is that light does not penetrate water too deep. Most times it gets pretty dark when you hit 50 meters, and past 300 meters it is universally known to be a no-light zone. The hunting grounds of sperm whales are way beyond that limit, so pitch darkness is why and where they need echolocation.
 
 Again - why bats and not whales? For a few reasons, number one being accessibility and opportunity to gather and analyze my own data. See, capturing whale songs is one hell of an endevour, dependent on so many things it is only possible for large-scale operations with specialized vessels. With bats, all I need is a ultrasonic microphone and a cave. Luckily, caves in South East Asia are not uncommon, and ultrasonic mics can be purchased for a few hundred dollars a piece.
 
 ## What am I trying to do?
+
 The goal of this project is to have an open-source platform that will offer several key features:
 
 - Real-time monitoring of bat vocalizations
@@ -23,7 +24,9 @@ The goal of this project is to have an open-source platform that will offer seve
 - Species identification
 
 ## Platform
+
 The code of the backend will be in Python. However, it is going to require a number of dependencies
+
 - `Librosa`: for analyzing the recordings
 - `Numpy`: for mathematical operations
 - `Pandas`: for working with datasets
@@ -34,6 +37,7 @@ The code of the backend will be in Python. However, it is going to require a num
 Ideally, this should be able to run on anything as small as the Raspberry Pi 4 with 4gb of RAM.
 
 ---
+
 #### Now that the objectives and motivations are established, I am moving on to the science behind this. I partly do it for my own benefit to have a reference, because preparing for this has already required hundreds of hours of reading books, researching, writing code, binge-watching Coursera, you name it. It's been fun, though, I've absolutely loved it.
 
 ## Sound signal primer
@@ -46,13 +50,13 @@ $$ P = A^2 $$
 
 The `frequency` $F$ refers to the rate of oscillation of the sound wave per second. For example, a 20hz signal oscillates (completes a cycle) 20 times per second.
 
-Human hearing frequency range is modest, ranging from 20hz to 20kHz. Although most people will hear sounds up to 16-17kHz max. 
+Human hearing frequency range is modest, ranging from 20hz to 20kHz. Although most people will hear sounds up to 16-17kHz max.
 
 The `sampling rate` $S_r$ refers to the number of samples taken on a signal per second. A signal with $S_r$=50 will be evenly sampled 50 times per 1-second worth of signal. Generally, the higher the $S_r$, the better the quality of the signal, and the more information is preserved. However, $S_r$ is based on another rule called the `Nyquist`. Think of sampling a soundwave as slicing pizza. With a high $S_r$ you will end up with many thin slices. Now, doing that barely makes any sense in a case of a pizza, but when it comes to sound, more 'slices' mean more accurate representation of a signal, since each such 'slice' is a specific point on the wave.
 
 The `Nyquist frequency` $F_n$ is a term from the Nyquist theorem that states, that in order to accurately sample a signal, its sampling rate $S_r$ has to be at least 2x higher than the highest frequency present in the signal.
 
-$$ S_r = max(F) * 2 $$
+$$ S_r = max(F) \* 2 $$
 $$ F_n = \frac{S_r}{2} $$
 
 In practice, we should always allow for more space, so a realistic sampling rate should be:
@@ -61,17 +65,15 @@ $$S_r = F_n * 2.5$$
 For instance, if we are recording bat calls that have $F$ ~ 80kHz, our sampling rate needs to be at least 200kHz:
 $$F * 2.5 = 80 * 2.5 = 200 $$
 
-
 The `Bit Depth` $Q$ refers to the range of values each point of a signal can take. If you imagine a sound signal as a continuous wave, when you sample that wave, you are essentially trying to trace the movement of that signal by marking it with dots. Each such 'dot' has a numerical value. The higher your $Q$, the more bandwith you allocate for each point of the signal. The most common $Q$ are 16-bit or 32-bit, although oftentines 16 is more than enough. Higher $Q$ also results in larger file size.
 
 $$ size(bytes) = \frac{(S_rQCT)}{8}$$
 
 Where $S_r$ is the sampling rate, $Q$ is bit depth, $C$ is number of channels and $T$ is duration in seconds.
 
-
 The `Sine Wave` is a fundamental idea of digital audio. Any real-life audio recording is a product of many sine waves combined together. The formula for a basic sine wave is as follows:
 
-$$ A*sin(2\pi ft + \phi) $$
+$$ A\*sin(2\pi ft + \phi) $$
 
 Where $A$ is `amplitude`, $f$ is `frequency`, $\pi$ is the Pi number ~ `3.14`, $t$ is the `time vector` and $\phi$ is the `phase`.
 
@@ -81,11 +83,11 @@ The `Frame` is simply a collection of samples. Frames allow processing samples i
 
 The `Doppler Shift` describes an effect where a continous, constant-rate signal may appear faster or slower depending on the speed of movement of the listener and the source of sound. Essentially, as we get closer to the source of the sound, signals arrive faster, although their frequency does not change. This change of frequency can be formulated as follows:
 
-$$ \Delta f = (\frac{(c + v)}{c})*c $$
+$$ \Delta f = (\frac{(c + v)}{c})\*c $$
 
 Where $c$ is the speed of sound in air m/s, $v$ is the speed of the source of sound (bat) m/s, and $f$ is the emitted frequency.
 
-| There is a variety of ways to represent a digital signal, namely `oscillograms`, `power spectra` and   `sonograms` aka `spectrograms`. 
+| There is a variety of ways to represent a digital signal, namely `oscillograms`, `power spectra` and `sonograms` aka `spectrograms`.
 
 `Oscillograms` show time against amplitude, `power spectra` show frequency again time, and `sonograms/spectrograms` display time against frequency with amplitude being represented by colour intensity.
 
@@ -93,32 +95,32 @@ Where $c$ is the speed of sound in air m/s, $v$ is the speed of the source of so
 
 FFT is an algorithm that allows us to move a signal from **time domain** to **frequency domain**. If you think about it, any audio signal can be illustrated on a cartesian plane, where the x-axis is time, and the y-axis is amplitude. That is **signal in a time domain**. Although useful, it does not tell us what frequencies are contained in the signal, which is critical information in we are analyzing bat vocalizations.
 
-That is where `FFT` comes into play. Fourier-transform essentially decomposes the original signal into its frequencies, which allows us to plot them on a cartesian plane, where x-axis has the frequencies, and y-axis shows their relative amplitude. This provides a clear picture of how much of a specific frequency is contained in the signal. 
+That is where `FFT` comes into play. Fourier-transform essentially decomposes the original signal into its frequencies, which allows us to plot them on a cartesian plane, where x-axis has the frequencies, and y-axis shows their relative amplitude. This provides a clear picture of how much of a specific frequency is contained in the signal.
 
 That is the basic idea. Keep reading to learn about the math behind the Fourier Transform or skip to the next chapter.
 
 ## Bat science
 
-Much of what I've learned about these animals is from a fantastic book by Jon Russ `British Bat Calls`. In this paragraph I will be quoting him extensively. Although the title specifically refers to bats found in  Britain, the fundamentals of bat communication are the same across the world. 
+Much of what I've learned about these animals is from a fantastic book by Jon Russ `British Bat Calls`. In this paragraph I will be quoting him extensively. Although the title specifically refers to bats found in Britain, the fundamentals of bat communication are the same across the world.
 
 This project has originated during my time in South-East Asia - specifically, central Vietnam, in city of Da Nang along the coast of the South China Sea. The species that live here are not present in Britain and vice-versa, however the basic rules still apply.
 
 ### How bats produce sound
 
-*Bats echolocate by producing and projecting ultrasonic sounds from their mouths or noses and
+_Bats echolocate by producing and projecting ultrasonic sounds from their mouths or noses and
 then detecting the echoes that return from any solid object within range. Bats produce these
 pulses in rapid succession in order to receive a regularly updated picture of their environment.
 Thus a single call provides the bat with a single snapshot of its environment whereas a series
 of calls provides a series of snapshots, in much the same way as a strobe light provides us
-with a series of staggered images.*
+with a series of staggered images._
 
-*A bat’s echolocation system is highly sophisticated. By emitting short high-frequency pulses
+_A bat’s echolocation system is highly sophisticated. By emitting short high-frequency pulses
 of sound from their mouths or noses, bats are able to use the information contained within the
 echoes returned from a solid object to construct a ‘sound picture’ of their environment. Not
 only are they able to identify the size, position and speed of objects within three-dimensional
 space, they are also able to differentiate forms and surface textures. However, as there is no
 single signal form that is optimal for all purposes, bats have evolved a large number of signal
-types.*
+types._
 
 ### Types of bat sounds
 
@@ -127,15 +129,15 @@ types.*
 `qCF signals`: combines the benefits of narrow-band (CF) and broad-band (FM). Generally bat species foraging primarily in a cluttered environment usually put more emphasis on the FM components of their calls while those that forage primarily in an open environment tend to put more emphasis on the qCF
 components of their calls. CF calls provide long-range detection.
 
-*`Social calls` produced by bats are often more structurally complex than `echolocation calls`
+_`Social calls` produced by bats are often more structurally complex than `echolocation calls`
 used for orientation. Social calls are used to communicate with other bats, and for many
 species they consist of a wide variety of trills and harmonics, comparable in many respects to
-bird song.*
+bird song._
 
-*Some are used to defend patches of insects against other
+_Some are used to defend patches of insects against other
 bats or to sustain territorial boundaries. Others function in attracting a mate or, in the case of
 `distress calls`, to initiate a mobbing response. Perhaps the most astounding are the `isolation
-calls` emitted by young bats, which allow their mothers to identify them.*
+calls` emitted by young bats, which allow their mothers to identify them._
 
 Bats that use FM or FM/qCF calls determine the distance of prey by the time it takes for the
 echo to return, while the direction is determined from analysis of the time difference between
@@ -178,22 +180,22 @@ slower.
 
 The disadvantage of TE is that during the period when the detector plays back the time-expanded sound, it is not capturing any new sounds.
 
-
 - In general, a bat call will be longer than 2.5 ms and shorter than 70 ms.
 - Measuring parameters from the series of three to five selected calls is good practice and
-ensures any variation between calls is taken into account; if there are alternating call types,
-parameters from both are measured.
+  ensures any variation between calls is taken into account; if there are alternating call types,
+  parameters from both are measured.
 - Peak frequency (also referred to as the frequency containing maximum energy (FmaxE)) is
-often the key parameter used to identify species, in conjunction with call shape.
+  often the key parameter used to identify species, in conjunction with call shape.
 - Start or maximum frequency can be very difficult to measure, depending on the level
-of background noise and the quality of the recordings
+  of background noise and the quality of the recordings
 - The time parameters duration and inter-pulse interval are
-rarely diagnostic but often measured to help confirm likely species identification.
+  rarely diagnostic but often measured to help confirm likely species identification.
 - Occasionally, calls may be recorded which appear to have repeated or ‘double’ calls. In most cases this appears on a sonogram as distorted sound. These echoes are due to the emitted sound from the bat being picked up directly by the detector but also bouncing off an object such as a wall and the resulting echo also being picked up by the detector.
 
-**The author presents certain call parameters for a number of species <sup>5.1</sup>.  We are only interested in a few, as those are the species that inhabit Vietnam**
+**The author presents certain call parameters for a number of species <sup>5.1</sup>. We are only interested in a few, as those are the species that inhabit Vietnam**
 
 #### Greater Horse-Shoe bat
+
 - Inter-pulse interval (ms)90.2 (24.9–186.6)
 - Call duration (ms)50.5 (16.3–73.8)
 - Frequency of maximum energy (peak) (kHz)81.3 (77.8–83.8)
@@ -204,6 +206,7 @@ rarely diagnostic but often measured to help confirm likely species identificati
 - Social calls of the greater horseshoe bat are generally not produced in flight.
 
 #### Lesser Horse-Shoe bat
+
 - Inter-pulse interval (ms)70.4 (14.1–113.7)
 - Call duration (ms)43.6 (11.9–61.4)
 - Frequency of maximum energy (peak) (kHz)111.1 (107.3–114.0)
@@ -214,6 +217,7 @@ rarely diagnostic but often measured to help confirm likely species identificati
 - Social calls of the lesser horseshoe bat are generally not produced in flight.
 
 #### Daubenton's bat (for training only)
+
 - Inter-pulse interval (ms)75.5 (27.5–186.0)
 - Call duration (ms)3.2 (1.4–5.8)
 - Frequency of maximum energy (peak) (kHz)47.0 (41.8–56.5)
@@ -221,9 +225,10 @@ rarely diagnostic but often measured to help confirm likely species identificati
 - End frequency (kHz)29.4 (22.4–38.6)
 - Generally forages higher above the water.
 - Social calls, though rarely heard, sound like a loud extra call slipped into the
-echolocation call sequence.
+  echolocation call sequence.
 
 #### Common Pipistrelle (for training only)
+
 - Inter-pulse interval (ms)102.5 (59.9–211.0)
 - Call duration (ms)5.9 (3.2–8.6)
 - Frequency of maximum energy (peak) (kHz)46.6 (43.3–49.9)
@@ -231,6 +236,7 @@ echolocation call sequence.
 - End frequency (kHz)45.9 (41.2–50.6)
 
 #### Whiskered bat
+
 - Inter-pulse interval (ms)113.0 (66.7–251.5)
 - Call duration (ms)4.2 (3.1–6.4)
 - Frequency of maximum energy (peak) (kHz)47.5 (39.2–68.5)
@@ -239,16 +245,17 @@ echolocation call sequence.
 - Woodland, parks, meadows, flowing water, and gardens.
 
 #### Noctule
+
 - Inter-pulse interval (ms)216.9 (120.3–413.1)372.2 (120.2–807.2)
 - Call duration (ms)14.7 (8.8–23.4)22.1 (13.2–29.9)
 - Frequency of maximum energy (peak) (kHz)24.5 (22.4–33.6)19.3 (17.5–23.6)
 - Start frequency (kHz)37.9 (23.8–52.2)23.2 (18.2–30.4)
 - End frequency (kHz)23.7 (21.4–32.2)18.3 (17.1–23.0)
 - Found in a wide range of open habitats. Common over deciduous woodland, parkland, pasture,
-marshland and rivers. Not very common in larger cities.
-
+  marshland and rivers. Not very common in larger cities.
 
 #### General tips
+
 - Timing: Bats are most active after sunset.
 - Location: Look for entrances to caves or areas where bats emerge.
 - Keep away from human noise or overlapping natural sounds (e.g., running water).

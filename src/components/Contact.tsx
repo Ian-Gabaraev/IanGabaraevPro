@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
-import { Mail, MapPin } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from './Icons';
-import './Contact.css';
+import { motion } from "framer-motion";
+import { Mail, MapPin } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "./Icons";
+import "./Contact.css";
 
 const Contact = () => {
   return (
@@ -15,7 +15,7 @@ const Contact = () => {
           className="contact-content"
         >
           <p className="section-title">Contact</p>
-          
+
           <div className="contact-info">
             <div className="contact-item">
               <Mail size={18} />
@@ -26,13 +26,21 @@ const Contact = () => {
               <span>Remote — Open to relocation</span>
             </div>
           </div>
-          
+
           <div className="contact-social">
-            <a href="https://github.com/Ian-Gabaraev" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://github.com/Ian-Gabaraev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <GithubIcon size={20} />
               <span>GitHub</span>
             </a>
-            <a href="https://linkedin.com/in/iangabaraev" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://linkedin.com/in/iangabaraev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <LinkedinIcon size={20} />
               <span>LinkedIn</span>
             </a>

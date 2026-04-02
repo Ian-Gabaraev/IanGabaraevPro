@@ -1,7 +1,7 @@
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { GithubIcon, LinkedinIcon } from './Icons';
-import './Hero.css';
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "./Icons";
+import "./Hero.css";
 
 const Hero = () => {
   return (
@@ -31,9 +31,10 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Backend, Cloud, Frontend — I build across the entire stack. 10+ years shipping 
-          production systems in Python, TypeScript, React, AWS, and Azure. Currently at 
-          Akvelon, architecting telehealth infrastructure serving millions.
+          Backend, Cloud, Frontend — I build across the entire stack. 10+ years
+          shipping production systems in Python, TypeScript, React, AWS, and
+          Azure. Currently at Akvelon, architecting telehealth infrastructure
+          serving millions.
         </motion.p>
 
         <motion.div
@@ -46,10 +47,20 @@ const Hero = () => {
             Get in touch
             <ArrowRight size={16} />
           </a>
-          <a href="https://github.com/ian-gabaraev" target="_blank" rel="noopener noreferrer" className="hero-social">
+          <a
+            href="https://github.com/ian-gabaraev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-social"
+          >
             <GithubIcon size={20} />
           </a>
-          <a href="https://www.linkedin.com/in/ian-gabaraev/" target="_blank" rel="noopener noreferrer" className="hero-social">
+          <a
+            href="https://www.linkedin.com/in/ian-gabaraev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-social"
+          >
             <LinkedinIcon size={20} />
           </a>
         </motion.div>

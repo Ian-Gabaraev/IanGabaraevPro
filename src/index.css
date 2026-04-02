@@ -1,8 +1,8 @@
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/inter/700.css';
-@import '@fontsource/jetbrains-mono/400.css';
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
 
 :root {
   --bg-primary: #fafafa;
@@ -43,7 +43,12 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    system-ui,
+    sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
@@ -52,8 +57,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code, .mono {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+code,
+.mono {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
 }
 
 ::selection {

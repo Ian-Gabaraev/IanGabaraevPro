@@ -1,17 +1,17 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
-import { Link, Navigate, useParams } from 'react-router-dom';
-import { getGuideBySlug } from '../data/guides';
-import { renderMarkdownContent } from '../utils/renderMarkdown';
-import './LearnGuide.css';
+import { useEffect, useMemo, useState } from "react";
+import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
+import { Link, Navigate, useParams } from "react-router-dom";
+import { getGuideBySlug } from "../data/guides";
+import { renderMarkdownContent } from "../utils/renderMarkdown";
+import "./LearnGuide.css";
 
 const LearnGuide = () => {
   const { slug } = useParams<{ slug: string }>();
   const guide = slug ? getGuideBySlug(slug) : undefined;
 
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,7 +26,7 @@ const LearnGuide = () => {
       try {
         const response = await fetch(guide.markdownPath);
         if (!response.ok) {
-          throw new Error('Failed to load guide content.');
+          throw new Error("Failed to load guide content.");
         }
 
         const markdown = await response.text();
@@ -35,7 +35,9 @@ const LearnGuide = () => {
         }
       } catch {
         if (isMounted) {
-          setError('Could not load this guide right now. Please try again in a moment.');
+          setError(
+            "Could not load this guide right now. Please try again in a moment.",
+          );
         }
       } finally {
         if (isMounted) {
@@ -68,10 +70,16 @@ const LearnGuide = () => {
       <Helmet>
         <title>{guide.title} | Ian Gabaraev</title>
         <meta name="description" content={guide.excerpt} />
-        <link rel="canonical" href={`https://iangabaraev.com/learn/${guide.slug}`} />
+        <link
+          rel="canonical"
+          href={`https://iangabaraev.com/learn/${guide.slug}`}
+        />
         <meta property="og:title" content={`${guide.title} | Ian Gabaraev`} />
         <meta property="og:description" content={guide.excerpt} />
-        <meta property="og:url" content={`https://iangabaraev.com/learn/${guide.slug}`} />
+        <meta
+          property="og:url"
+          content={`https://iangabaraev.com/learn/${guide.slug}`}
+        />
         <meta property="og:type" content="article" />
         <meta property="article:published_time" content={guide.date} />
       </Helmet>
@@ -89,16 +97,18 @@ const LearnGuide = () => {
 
           <header className="learn-guide-header">
             <time className="learn-guide-meta">
-              {new Date(guide.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
+              {new Date(guide.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
               })}
             </time>
             <h1>{guide.title}</h1>
             <div className="learn-guide-tags">
               {guide.tags.map((tag) => (
-                <span key={tag} className="learn-guide-tag">{tag}</span>
+                <span key={tag} className="learn-guide-tag">
+                  {tag}
+                </span>
               ))}
             </div>
           </header>
@@ -115,4 +125,3 @@ const LearnGuide = () => {
 };
 
 export default LearnGuide;
-
