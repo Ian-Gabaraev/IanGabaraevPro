@@ -584,7 +584,7 @@ If astrophotography is your thing, I may have just sold you on the idea of going
 
 Nepal is not a digital nomad destination — not in the way Bali, Lisbon, or Bangkok are. It has no digital nomad visa program, limited coworking infrastructure, unreliable roads, and a cost of living that is low for a reason. But it has something those places will never have: an unfiltered, unkempt, unapologetic honesty. Nepal does not try to sell itself to you. It just exists — and if you can handle what it is, working remotely from the Himalayas will give you something no coworking space ever will.
 
-Read the first part of this series: [The Himalayas Called — And I Answered with a Laptop](/blog/nepal-the-digital-nomad-destination-nobody-talks-about).
+Read the first part of this series: [The Himalayas Called — And I Answered with a Laptop](/blog/nepal-pros).
     `.trim(),
   },
 ];
