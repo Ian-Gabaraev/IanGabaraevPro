@@ -25,7 +25,7 @@ export const posts: BlogPost[] = [
 
 At this point, I am not entirely sure why I got into side mount diving. I do know I invested a lot of money into the gear and the training. It paid off — side mount is, arguably, the superior way of diving. It is fussier, more complex, but it offers two things that recreational back mount diving cannot beat: **redundancy** and **effortless buoyancy**.
 
-My diving style changed drastically after the first time I tried the gear in open water. I became far more aggressive, far more confident, and paradoxically calmer. I now had double the air of anyone else in the group, and I was gliding through water in perfect trim so gracefully even the fish would approve.
+My diving style changed drastically after the first time I tried the gear in open water. I became far more aggressive, far more confident, and paradoxically calmer. I now had double the air of anyone else in the group, and I was gliding through water in perfect trim, gracefully.
 
 <video src="https://media.iangabaraev.com/media/sidemount.mp4" autoplay loop muted playsinline style="width:100%;border-radius:8px;margin:1.5rem 0;"></video>
 <p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Gliding at 40 meters (~130 ft)</p>
@@ -68,7 +68,7 @@ Needless to say, the dive shop was upset. I was asked to never repeat the stunt,
 - **Gas planning is everything.** Redundancy means nothing if you burn through both tanks chasing depth.
 - **The ocean does not negotiate.** Confidence without discipline is just a more elaborate way of getting yourself killed.
 
-Side mount diving remains one of the best decisions I have made. But the gear did not save me that day — my instincts did. And instincts are only worth something if you train them with humility, not hubris.
+Side mount diving remains one of the best decisions I have made. But the gear did not save me that day — my instincts did. And instincts are only worth something if you train them with humility. The moment you have a brilliant idea of rubbing your eyes at 200 ft - you know instincts are no longer behind the wheel.
     `.trim(),
   },
   {
