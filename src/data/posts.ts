@@ -10,6 +10,68 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    favorite: true,
+    slug: "first-200ft-dive",
+    title: "My First 200ft Dive Was My First Close Call",
+    date: "2026-04-05",
+    excerpt:
+      "Side mount diving gave me confidence, redundancy, and perfect trim. It also gave me the audacity to solo-descend to 60 meters — and learn why the ocean does not care about your gear.",
+    tags: ["Diving", "Side Mount", "Technical Diving", "Deep Diving"],
+    content: `
+# My First 200ft Dive Was My First Close Call
+
+<img src="https://media.iangabaraev.com/media/sidemount.JPG" alt="Ian Gabaraev in side mount diving configuration during training in Phuket, Thailand" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">My 4th or so side mount dive — courtesy of my instructor Jon (Phuket, Thailand)</p>
+
+At this point, I am not entirely sure why I got into side mount diving. I do know I invested a lot of money into the gear and the training. It paid off — side mount is, arguably, the superior way of diving. It is fussier, more complex, but it offers two things that recreational back mount diving cannot beat: **redundancy** and **effortless buoyancy**.
+
+My diving style changed drastically after the first time I tried the gear in open water. I became far more aggressive, far more confident, and paradoxically calmer. I now had double the air of anyone else in the group, and I was gliding through water in perfect trim, gracefully.
+
+<video src="https://media.iangabaraev.com/media/sidemount.mp4" autoplay loop muted playsinline style="width:100%;border-radius:8px;margin:1.5rem 0;"></video>
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Gliding at 40 meters (~130 ft)</p>
+
+With that came the hidden risk. Any reputable dive instructor will tell you — the moment you lose respect for the sea is the moment you need to step back. Ultimately, the water does not care what setup you have. All it takes is one bad case of narcosis, one freakout at depth, one panic attack, or one vicious current that exhausts you before you make it back up safely.
+
+---
+
+## The Perfect Day That Wasn't
+
+I learned that lesson on what started as a damn good day. The water was calm, crystal clear, blue skies, visibility pushing 30 meters. I separated from my group of five — which, in itself, is a violation of the rules in any form of diving. Not to justify my behavior - but back then I liked to see my diving style as more of a rogue pirate, the kinds of the guys that back in the 80s would descend to 200ft on air in search of sunken WW2 German subs. I locked onto the gentle downward slope, and in about ten to twelve minutes I was at **60 meters — 200 ft**. That marked my deepest dive on regular air.
+
+**Nitrogen narcosis** is a very real thing. It is commonly compared to alcohol intoxication, but I do not think that is accurate. You do lose chunks of memory — but you also get blurred, tunnel vision, numbness in your face, and the rhythmic drumming of your heartbeat in your ears. Symptoms usually manifest past 30 meters. At 60 meters, you are guaranteed to be narked, and it is not mild.
+
+I remember not being able to make out the readings on my Shearwater dive computer. I instinctively wanted to rub my eyes — but I was not impaired enough to attempt something as pointless as rubbing your eyes at 200 ft in salt water.
+
+<video src="https://media.iangabaraev.com/media/deepdive.mp4" autoplay loop muted playsinline style="width:100%;border-radius:8px;margin:1.5rem 0;"></video>
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The last thing I recorded — the computer reads 50 meters, ~160 ft</p>
+
+## The Ascent
+
+So the instincts kicked in and I turned back. I was already in deco by that point, with four mandatory stops of increasing duration — the longest being at 3 meters (10 ft) for 20 minutes. For context, a typical recreational dive takes under an hour. I had already been down for 40 minutes and was staring at roughly 40 more minutes of decompression. I knew that by the time I surfaced, the boat would be either searching for me or gone.
+
+I did my first three stops diligently. But ten minutes into the final 3-meter stop, I ran out of gas.
+
+Now — mandatory decompression is called *mandatory* for a reason. Skipping it is gambling with your health, and in more serious cases, with your life. I figured I was close enough to safe — my computer was running extra-conservative settings — so I surfaced. I kicked back to the pristine little beach on the island. Ten minutes later, the boat showed up. They had been looking for me.
+
+## The Aftermath
+
+The crew was not happy. I asked to hold the discussion until I had my 100% oxygen. I breathed on that mask for half an hour and felt fine.
+
+Needless to say, the dive shop was upset. I was asked to never repeat the stunt, and I did not. Instead, I paired up with another tech diver from the Netherlands — and together we did a solid 20 dives with proper gas planning, proper buddy checks, and proper respect for the water.
+
+---
+
+## Lessons
+
+- **Never separate from your group.** Solo diving at depth without explicit planning is reckless — no matter how good your gear is.
+- **Narcosis is not optional.** At 60 meters on air, you will be impaired. Period.
+- **Gas planning is everything.** Redundancy means nothing if you burn through both tanks chasing depth.
+- **The ocean does not negotiate.** Confidence without discipline is just a more elaborate way of getting yourself killed.
+
+Side mount diving remains one of the best decisions I have made. But the gear did not save me that day — my instincts did. And instincts are only worth something if you train them with humility. The moment you have a brilliant idea of rubbing your eyes at 200 ft - you know instincts are no longer behind the wheel.
+    `.trim(),
+  },
+  {
     slug: "bat-sonar-p2",
     title: "The Bat Sonar Project: Hearing What We Cannot",
     date: "2026-04-02",
@@ -114,7 +176,7 @@ Today, though, I want to talk about another place. A place many people visit, bu
 
 ## Buying Columbia Gear in Kuala Lumpur
 
-In October 2024, my girlfriend and I went to a mall in Kuala Lumpur looking for Columbia gear. We found the store on the ground floor and left an hour later with large shopping bags. We each bought a new pair of hiking boots and a puffer jacket. The rest of the gear, we decided, could wait until arrival.
+In October 2024, my girlfriend and I went to a mall in Kuala Lumpur looking for Columbia gear. We found the store on the first floor and left an hour later with large shopping bags. We each bought a new pair of hiking boots and a puffer jacket. The rest of the gear, we decided, could wait until arrival.
 
 November came fast. There were reports of devastating floods in our destination, and we hesitated. Neither of us had ever been there before. But the flights were already booked, so after a sleepless night, we drove to KLIA, passport in hand and walkie-talkie on the belt.
 
@@ -522,7 +584,7 @@ If astrophotography is your thing, I may have just sold you on the idea of going
 
 Nepal is not a digital nomad destination — not in the way Bali, Lisbon, or Bangkok are. It has no digital nomad visa program, limited coworking infrastructure, unreliable roads, and a cost of living that is low for a reason. But it has something those places will never have: an unfiltered, unkempt, unapologetic honesty. Nepal does not try to sell itself to you. It just exists — and if you can handle what it is, working remotely from the Himalayas will give you something no coworking space ever will.
 
-Read the first part of this series: [The Himalayas Called — And I Answered with a Laptop](/blog/nepal-the-digital-nomad-destination-nobody-talks-about).
+Read the first part of this series: [The Himalayas Called — And I Answered with a Laptop](/blog/nepal-pros).
     `.trim(),
   },
 ];
