@@ -76,36 +76,12 @@ const routes = [
     og: { type: "website" },
   },
   ...guideRoutes,
-  {
-    path: "/blog/nepal-the-digital-nomad-destination-nobody-talks-about",
-    title: "The Himalayas Called — And I Answered with a Laptop | Ian Gabaraev",
-    description:
-      "Nepal is gorgeous, affordable, connected, and serene. Why almost nobody considers it a remote work destination — and why they should.",
+  ...posts.map((post) => ({
+    path: `/blog/${post.slug}`,
+    title: `${post.title} | Ian Gabaraev`,
+    description: post.excerpt,
     og: { type: "article" },
-  },
-  {
-    path: "/blog/building-nomadatlas",
-    title:
-      "Building NomadAtlas: A Finance Dashboard for Digital Nomads | Ian Gabaraev",
-    description:
-      "How I built a personal finance and lifestyle dashboard using React 19, Vite, and real-time APIs.",
-    og: { type: "article" },
-  },
-  {
-    path: "/blog/why-bats-a-scuba-divers-path-to-bioacoustics",
-    title: "Why Bats? A Scuba Diver's Path to Bioacoustics | Ian Gabaraev",
-    description:
-      "From hunting in darkness underwater to building ultrasonic bat detectors in Vietnamese caves — the science of echolocation.",
-    og: { type: "article" },
-  },
-  {
-    path: "/blog/ultrasonic-bat-detection",
-    title:
-      "Building a Real-Time Ultrasonic Bat Detector with Python | Ian Gabaraev",
-    description:
-      "Capturing bat calls at 192kHz and using DSP techniques for species identification.",
-    og: { type: "article" },
-  },
+  })),
 ];
 
 // --- Minimal markdown → HTML for crawler-visible content ---
