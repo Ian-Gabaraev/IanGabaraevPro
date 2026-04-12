@@ -3461,6 +3461,712 @@ export const awsCategories: QuizCategory[] = [
   { id: "beanstalk", label: "Elastic Beanstalk", questions: awsBeanstalk },
 ];
 
+// Git Quiz Questions
+
+const gitBasics: Question[] = [
+  {
+    question: "What does `git init` do?",
+    options: [
+      "Clones a remote repository",
+      "Creates a new empty Git repository in the current directory",
+      "Initializes a remote server",
+      "Installs Git on the system",
+    ],
+    correct: 1,
+    explanation:
+      "git init creates a new .git directory in the current folder, turning it into a Git repository. It doesn't create any commits or connect to a remote.",
+  },
+  {
+    question: "What are the three main areas in Git?",
+    options: [
+      "Local, Remote, Cloud",
+      "Working directory, Staging area (index), Repository (.git)",
+      "Branch, Tag, Commit",
+      "HEAD, Main, Origin",
+    ],
+    correct: 1,
+    explanation:
+      "Git has three areas: Working directory (your files), Staging area/index (what will go into the next commit), and the Repository (.git directory where commits live).",
+  },
+  {
+    question: "What does `git add .` do?",
+    options: [
+      "Commits all files",
+      "Stages all changed and new files in the current directory",
+      "Pushes all changes to remote",
+      "Creates a new branch",
+    ],
+    correct: 1,
+    explanation:
+      "git add . stages all modified and untracked files in the current directory and subdirectories. The files are added to the staging area, ready for commit.",
+  },
+  {
+    question: "What is HEAD in Git?",
+    options: [
+      "The first commit ever made",
+      "A pointer to the currently checked out commit/branch",
+      "The remote repository",
+      "The main branch",
+    ],
+    correct: 1,
+    explanation:
+      "HEAD is a pointer to the current commit you're working on. Usually it points to a branch name, which in turn points to a commit. Detached HEAD means it points directly to a commit.",
+  },
+  {
+    question: "What does `git clone` do compared to `git init`?",
+    options: [
+      "They do the same thing",
+      "clone copies an existing repo including all history; init creates a new empty repo",
+      "init copies a repo; clone creates a new one",
+      "clone only copies the latest commit",
+    ],
+    correct: 1,
+    explanation:
+      "git clone downloads an entire repository including all branches and history from a remote. git init creates a brand new empty repository locally.",
+  },
+  {
+    question: "What does `git status` show?",
+    options: [
+      "Commit history",
+      "Current branch, staged changes, unstaged changes, and untracked files",
+      "Remote repository info",
+      "Diff of all files",
+    ],
+    correct: 1,
+    explanation:
+      "git status gives an overview of the working directory: which branch you're on, what's staged, what's modified but not staged, and what files are untracked.",
+  },
+  {
+    question: "What's the difference between `git rm` and just deleting a file?",
+    options: [
+      "No difference",
+      "git rm stages the deletion; manually deleting leaves it unstaged",
+      "git rm deletes from remote only",
+      "git rm is irreversible",
+    ],
+    correct: 1,
+    explanation:
+      "git rm removes the file AND stages the removal in one step. If you just delete a file with rm, you still need to git add the deletion to stage it.",
+  },
+  {
+    question: "What does a commit hash represent?",
+    options: [
+      "A random ID",
+      "A SHA-1 hash of the commit content, parent, author, and message",
+      "The line count of changes",
+      "The branch name encoded as a number",
+    ],
+    correct: 1,
+    explanation:
+      "A commit hash is a SHA-1 (or SHA-256) hash computed from the tree (snapshot), parent commit(s), author info, timestamp, and commit message. It uniquely identifies a commit.",
+  },
+  {
+    question: "What does `git diff` show by default?",
+    options: [
+      "Staged changes",
+      "Unstaged changes in the working directory",
+      "Differences between branches",
+      "All changes since the last push",
+    ],
+    correct: 1,
+    explanation:
+      "Plain git diff shows changes in the working directory that are NOT yet staged. Use git diff --staged (or --cached) to see what's staged for commit.",
+  },
+  {
+    question: "What does the `.gitignore` file do?",
+    options: [
+      "Deletes ignored files",
+      "Tells Git which files/patterns to exclude from tracking",
+      "Hides files from the filesystem",
+      "Prevents files from being modified",
+    ],
+    correct: 1,
+    explanation:
+      ".gitignore lists file patterns that Git should not track. Common entries include node_modules/, .env, build/, and *.log. Already tracked files must be untracked separately.",
+  },
+];
+
+const gitBranching: Question[] = [
+  {
+    question: "What is a branch in Git, internally?",
+    options: [
+      "A copy of the entire repository",
+      "A lightweight movable pointer to a commit",
+      "A separate folder on disk",
+      "A remote-only concept",
+    ],
+    correct: 1,
+    explanation:
+      "A branch is just a pointer (40-byte reference) to a commit. Creating a branch is nearly instantaneous because Git only creates a new pointer, not a copy of files.",
+  },
+  {
+    question: "What does `git checkout -b feature` do?",
+    options: [
+      "Deletes the feature branch",
+      "Creates a new branch called 'feature' and switches to it",
+      "Merges feature into the current branch",
+      "Fetches the feature branch from remote",
+    ],
+    correct: 1,
+    explanation:
+      "git checkout -b is shorthand for git branch feature + git checkout feature. The modern equivalent is git switch -c feature.",
+  },
+  {
+    question: "What is a fast-forward merge?",
+    options: [
+      "A merge that always creates a merge commit",
+      "A merge where the target branch pointer simply moves forward (no divergence)",
+      "A merge that skips conflict resolution",
+      "A merge that deletes the source branch",
+    ],
+    correct: 1,
+    explanation:
+      "A fast-forward merge happens when the target branch has no new commits since the source branched off. Git just moves the pointer forward — no merge commit needed.",
+  },
+  {
+    question: "What happens during a three-way merge?",
+    options: [
+      "Git copies files three times",
+      "Git compares the common ancestor, source tip, and target tip to create a merge commit",
+      "Three developers must approve the merge",
+      "Git merges three branches at once",
+    ],
+    correct: 1,
+    explanation:
+      "When branches have diverged, Git finds the common ancestor, then compares both branch tips against it to determine what changed on each side. The result is a merge commit with two parents.",
+  },
+  {
+    question: "What does `git branch -d feature` do?",
+    options: [
+      "Force-deletes the branch even if unmerged",
+      "Deletes the branch only if it has been fully merged",
+      "Deletes the branch from remote",
+      "Renames the branch",
+    ],
+    correct: 1,
+    explanation:
+      "-d (lowercase) is the safe delete — it refuses if the branch has unmerged changes. Use -D (uppercase) to force delete an unmerged branch.",
+  },
+  {
+    question: "What does `git merge --no-ff feature` do?",
+    options: [
+      "Merges without creating any commits",
+      "Always creates a merge commit even if fast-forward is possible",
+      "Merges and deletes the feature branch",
+      "Prevents the merge from happening",
+    ],
+    correct: 1,
+    explanation:
+      "--no-ff forces a merge commit even when fast-forward is possible. This preserves branch history and makes it clear where a feature branch was merged.",
+  },
+  {
+    question: "How do you list all branches including remote-tracking branches?",
+    options: [
+      "git branch",
+      "git branch -a",
+      "git branch --remote-only",
+      "git log --branches",
+    ],
+    correct: 1,
+    explanation:
+      "git branch -a lists all local and remote-tracking branches. git branch alone shows only local branches. git branch -r shows only remote-tracking ones.",
+  },
+  {
+    question: "What is a merge conflict?",
+    options: [
+      "When Git can't connect to the remote",
+      "When two branches modify the same lines and Git can't auto-resolve",
+      "When a branch is deleted during merge",
+      "When you merge into the wrong branch",
+    ],
+    correct: 1,
+    explanation:
+      "A merge conflict occurs when both branches changed the same lines in the same file. Git marks the conflict in the file and pauses the merge for you to resolve manually.",
+  },
+];
+
+const gitStashAndUndo: Question[] = [
+  {
+    question: "What does `git stash` do?",
+    options: [
+      "Deletes all uncommitted changes",
+      "Saves uncommitted changes to a stack and cleans the working directory",
+      "Creates a new branch with the changes",
+      "Pushes changes to remote",
+    ],
+    correct: 1,
+    explanation:
+      "git stash saves your staged and unstaged changes onto a stack, then reverts the working directory to the last commit. Use git stash pop to re-apply them.",
+  },
+  {
+    question: "What's the difference between `git stash pop` and `git stash apply`?",
+    options: [
+      "No difference",
+      "pop applies and removes the stash; apply keeps it on the stack",
+      "apply is faster",
+      "pop only works on the oldest stash",
+    ],
+    correct: 1,
+    explanation:
+      "git stash pop applies the most recent stash and removes it from the stack. git stash apply re-applies it but keeps it stored, so you can apply it again elsewhere.",
+  },
+  {
+    question: "What does `git stash --include-untracked` do?",
+    options: [
+      "Stashes only untracked files",
+      "Stashes tracked changes AND new untracked files",
+      "Deletes untracked files",
+      "Ignores untracked files",
+    ],
+    correct: 1,
+    explanation:
+      "By default, git stash only saves tracked changes. --include-untracked (or -u) also stashes new files that haven't been added to Git yet.",
+  },
+  {
+    question: "What does `git reset --soft HEAD~1` do?",
+    options: [
+      "Deletes the last commit and all changes permanently",
+      "Undoes the last commit but keeps changes staged",
+      "Undoes the last commit and unstages changes",
+      "Moves to the previous branch",
+    ],
+    correct: 1,
+    explanation:
+      "--soft moves HEAD back one commit but keeps all changes in the staging area. It's like un-committing: your files are exactly as they were, just staged again.",
+  },
+  {
+    question: "What does `git reset --hard HEAD~1` do?",
+    options: [
+      "Undoes the last commit but keeps files",
+      "Undoes the last commit, unstages, AND discards all changes",
+      "Only resets the staging area",
+      "Deletes the branch",
+    ],
+    correct: 1,
+    explanation:
+      "--hard is destructive: it moves HEAD back, resets the staging area, AND reverts the working directory. All changes from that commit are gone (unless reflog saves you).",
+  },
+  {
+    question: "What does `git revert` do compared to `git reset`?",
+    options: [
+      "They do the same thing",
+      "revert creates a NEW commit that undoes changes; reset moves the branch pointer backward",
+      "revert is faster",
+      "reset is safer for shared branches",
+    ],
+    correct: 1,
+    explanation:
+      "git revert creates a new commit that undoes a previous commit's changes — it's safe for shared branches. git reset rewrites history by moving the branch pointer, which can break others' work.",
+  },
+  {
+    question: "What is the reflog used for?",
+    options: [
+      "Logging errors in Git",
+      "Recording all HEAD movements — a safety net to recover lost commits",
+      "Tracking remote changes",
+      "Logging merge conflicts",
+    ],
+    correct: 1,
+    explanation:
+      "The reflog records every time HEAD moves (commits, resets, rebases, checkouts). Even after a hard reset, you can find the lost commit hash in the reflog to recover it.",
+  },
+  {
+    question: "What does `git checkout -- file.txt` do?",
+    options: [
+      "Switches to a branch called file.txt",
+      "Discards unstaged changes in file.txt (restores from last commit/index)",
+      "Stages file.txt",
+      "Deletes file.txt",
+    ],
+    correct: 1,
+    explanation:
+      "git checkout -- <file> discards working directory changes for that file, restoring it from the index (or HEAD). The modern equivalent is git restore file.txt.",
+  },
+  {
+    question: "What does `git clean -fd` do?",
+    options: [
+      "Removes staged files",
+      "Removes untracked files and directories",
+      "Cleans the commit history",
+      "Removes remote branches",
+    ],
+    correct: 1,
+    explanation:
+      "git clean -fd force-removes untracked files (-f) and directories (-d). It's useful for cleaning build artifacts, but destructive — those files are not recoverable by Git.",
+  },
+  {
+    question: "How do you unstage a file without losing changes?",
+    options: [
+      "git rm file.txt",
+      "git reset HEAD file.txt (or git restore --staged file.txt)",
+      "git checkout file.txt",
+      "git stash file.txt",
+    ],
+    correct: 1,
+    explanation:
+      "git reset HEAD <file> moves a file from staged back to unstaged without changing the file contents. The modern equivalent is git restore --staged <file>.",
+  },
+];
+
+const gitRebase: Question[] = [
+  {
+    question: "What does `git rebase main` do when on a feature branch?",
+    options: [
+      "Merges main into feature",
+      "Replays feature branch commits on top of the latest main",
+      "Deletes the feature branch",
+      "Pushes feature to main",
+    ],
+    correct: 1,
+    explanation:
+      "Rebase takes your feature branch commits, temporarily removes them, updates your branch to the tip of main, then re-applies your commits one by one on top. Results in a linear history.",
+  },
+  {
+    question: "When should you NOT rebase?",
+    options: [
+      "On local feature branches",
+      "On public/shared branches that others are working on",
+      "Before opening a pull request",
+      "When you want clean history",
+    ],
+    correct: 1,
+    explanation:
+      "Never rebase commits that have been pushed and are used by others. Rebase rewrites commit hashes, which causes conflicts for anyone who based work on the original commits.",
+  },
+  {
+    question: "What does `git rebase -i HEAD~3` do?",
+    options: [
+      "Deletes the last 3 commits",
+      "Opens an interactive editor to reorder, edit, squash, or drop the last 3 commits",
+      "Creates 3 new branches",
+      "Merges the last 3 commits into one automatically",
+    ],
+    correct: 1,
+    explanation:
+      "Interactive rebase lets you manipulate recent commits: pick (keep), reword (change message), squash (combine), edit (amend), or drop (remove). Powerful for cleaning up history.",
+  },
+  {
+    question: "What does squashing commits mean?",
+    options: [
+      "Deleting commits",
+      "Combining multiple commits into a single commit",
+      "Splitting one commit into many",
+      "Reverting commits",
+    ],
+    correct: 1,
+    explanation:
+      "Squashing combines multiple commits into one. Commonly done via interactive rebase (squash or fixup) to clean up a feature branch before merging into main.",
+  },
+  {
+    question: "What's the difference between merge and rebase?",
+    options: [
+      "No difference in result",
+      "Merge preserves branch history with a merge commit; rebase creates linear history by replaying commits",
+      "Rebase is always safer",
+      "Merge rewrites commit hashes",
+    ],
+    correct: 1,
+    explanation:
+      "Merge joins branches with a merge commit (preserves parallel history). Rebase replays commits to create a linear history (cleaner log, but rewrites hashes). Both integrate changes.",
+  },
+  {
+    question: "What does `git cherry-pick <hash>` do?",
+    options: [
+      "Deletes a specific commit",
+      "Applies a specific commit from another branch onto the current branch",
+      "Reverts a commit",
+      "Moves a commit between repos",
+    ],
+    correct: 1,
+    explanation:
+      "Cherry-pick copies a single commit and applies it to your current branch as a new commit. Useful for grabbing a specific bug fix without merging an entire branch.",
+  },
+];
+
+const gitRemote: Question[] = [
+  {
+    question: "What does `git fetch` do?",
+    options: [
+      "Downloads remote changes and merges them",
+      "Downloads remote changes without merging into local branches",
+      "Pushes local changes to remote",
+      "Deletes remote branches",
+    ],
+    correct: 1,
+    explanation:
+      "git fetch downloads new data from the remote (commits, branches, tags) but does NOT modify your working directory or merge anything. It updates remote-tracking branches (origin/main, etc.).",
+  },
+  {
+    question: "What's the difference between `git fetch` and `git pull`?",
+    options: [
+      "No difference",
+      "pull = fetch + merge (or rebase); fetch only downloads",
+      "fetch is faster",
+      "pull only works with GitHub",
+    ],
+    correct: 1,
+    explanation:
+      "git pull is a shortcut for git fetch followed by git merge (or git rebase with --rebase). git fetch is safer because it lets you review changes before integrating.",
+  },
+  {
+    question: "What does `git push --force-with-lease` do?",
+    options: [
+      "Same as git push --force",
+      "Force-pushes only if no one else has pushed since your last fetch",
+      "Pushes without authentication",
+      "Creates a lease on the remote",
+    ],
+    correct: 1,
+    explanation:
+      "--force-with-lease is a safer alternative to --force. It rejects the push if the remote branch has new commits you haven't fetched. Prevents accidentally overwriting someone else's work.",
+  },
+  {
+    question: "What is `origin` in Git?",
+    options: [
+      "The main branch",
+      "The default name for the remote repository you cloned from",
+      "The first commit",
+      "A Git command",
+    ],
+    correct: 1,
+    explanation:
+      "'origin' is just the conventional default name for the remote repository when you git clone. You can rename it or add multiple remotes (e.g., upstream for forks).",
+  },
+  {
+    question: "What does `git remote -v` show?",
+    options: [
+      "Remote branch list",
+      "Remote names and their fetch/push URLs",
+      "Commit log from remote",
+      "Remote server status",
+    ],
+    correct: 1,
+    explanation:
+      "git remote -v lists all configured remotes with their URLs for both fetch and push. Useful for verifying your remote configuration and debugging push/pull issues.",
+  },
+  {
+    question: "How do you delete a remote branch?",
+    options: [
+      "git branch -d origin/feature",
+      "git push origin --delete feature",
+      "git remote remove feature",
+      "git fetch --prune",
+    ],
+    correct: 1,
+    explanation:
+      "git push origin --delete feature removes the branch from the remote. git fetch --prune removes stale remote-tracking references but doesn't delete the actual remote branch.",
+  },
+  {
+    question: "What does `git pull --rebase` do?",
+    options: [
+      "Pulls and creates a merge commit",
+      "Fetches remote changes and replays your local commits on top",
+      "Deletes local commits",
+      "Only works with GitHub",
+    ],
+    correct: 1,
+    explanation:
+      "git pull --rebase fetches remote changes and rebases your local commits on top instead of creating a merge commit. Results in cleaner linear history.",
+  },
+  {
+    question: "What is an upstream branch?",
+    options: [
+      "The main branch of the repo",
+      "The remote branch that a local branch is configured to track",
+      "A branch created by the repo owner",
+      "A branch that's ahead of others",
+    ],
+    correct: 1,
+    explanation:
+      "An upstream (tracking) branch is the remote branch associated with your local branch. Set with git push -u origin feature. Enables git pull/push without specifying the remote and branch.",
+  },
+];
+
+const gitInternals: Question[] = [
+  {
+    question: "How does Git store data internally?",
+    options: [
+      "As diffs/patches between versions",
+      "As snapshots of the entire project at each commit",
+      "As a list of changed files",
+      "As a database table",
+    ],
+    correct: 1,
+    explanation:
+      "Git stores full snapshots (trees of blobs), not diffs. If a file hasn't changed, Git stores a pointer to the previous identical blob. Packfiles later compress with deltas for efficiency.",
+  },
+  {
+    question: "What are the four types of Git objects?",
+    options: [
+      "File, Folder, Branch, Tag",
+      "Blob, Tree, Commit, Tag",
+      "Add, Commit, Push, Pull",
+      "HEAD, Index, Working, Remote",
+    ],
+    correct: 1,
+    explanation:
+      "Blob (file content), Tree (directory listing), Commit (snapshot + metadata + parent), and Tag (annotated pointer to a commit). Everything in .git/objects is one of these.",
+  },
+  {
+    question: "What is stored in a commit object?",
+    options: [
+      "Only the changed files",
+      "Tree hash, parent hash(es), author, committer, timestamp, and message",
+      "Just the commit message",
+      "A diff of all changes",
+    ],
+    correct: 1,
+    explanation:
+      "A commit stores: a pointer to a tree (snapshot), parent commit(s), author info, committer info, timestamps, and the commit message. This is what gets SHA-1 hashed.",
+  },
+  {
+    question: "Where does Git store branches?",
+    options: [
+      "In the staging area",
+      "As simple files in .git/refs/heads/ containing a commit hash",
+      "In a database",
+      "In the working directory",
+    ],
+    correct: 1,
+    explanation:
+      "A branch is just a 41-byte file in .git/refs/heads/ containing the commit hash it points to. That's why creating branches is instant — Git only writes one tiny file.",
+  },
+  {
+    question: "What does `git gc` do?",
+    options: [
+      "Deletes all branches",
+      "Compresses objects into packfiles and cleans up unreachable objects",
+      "Clears the staging area",
+      "Resets the repository",
+    ],
+    correct: 1,
+    explanation:
+      "git gc (garbage collect) compresses loose objects into packfiles, removes unreachable objects, and optimizes the repository. Git runs it automatically, but you can trigger it manually.",
+  },
+  {
+    question: "What is the index (staging area) technically?",
+    options: [
+      "A copy of the working directory",
+      "A binary file (.git/index) listing tracked files with their hashes and metadata",
+      "A branch pointer",
+      "A commit object",
+    ],
+    correct: 1,
+    explanation:
+      "The index is a binary file at .git/index. It stores file paths, modes, and blob hashes for everything that will go into the next commit. git add updates this file.",
+  },
+];
+
+const gitWorkflow: Question[] = [
+  {
+    question: "What is the purpose of a pull request (PR)?",
+    options: [
+      "To pull code from remote",
+      "A code review mechanism to propose merging one branch into another",
+      "To request access to a repo",
+      "To sync forks",
+    ],
+    correct: 1,
+    explanation:
+      "A pull request is a collaboration feature (GitHub/GitLab/etc.) that lets you propose changes, get code review, run CI checks, and discuss before merging into the target branch.",
+  },
+  {
+    question: "What does `git bisect` do?",
+    options: [
+      "Splits a branch in two",
+      "Uses binary search through commit history to find the commit that introduced a bug",
+      "Merges two branches",
+      "Creates a backup",
+    ],
+    correct: 1,
+    explanation:
+      "git bisect performs a binary search through commits. You mark commits as good/bad and Git narrows down the exact commit that introduced the bug. Very efficient for large histories.",
+  },
+  {
+    question: "What does `git tag v1.0.0` create?",
+    options: [
+      "A new branch named v1.0.0",
+      "A lightweight tag pointing to the current commit",
+      "A commit with message v1.0.0",
+      "A remote release",
+    ],
+    correct: 1,
+    explanation:
+      "A lightweight tag is a simple pointer to a commit (like a branch that doesn't move). Use git tag -a v1.0.0 -m 'msg' for an annotated tag with metadata.",
+  },
+  {
+    question: "What does `git log --oneline --graph` show?",
+    options: [
+      "Full commit details",
+      "A compact, visual representation of the commit history with branch structure",
+      "Only merge commits",
+      "Remote commit history",
+    ],
+    correct: 1,
+    explanation:
+      "--oneline shows each commit on one line (short hash + message). --graph draws ASCII art showing branch and merge structure. Great for understanding project history.",
+  },
+  {
+    question: "What is a Git hook?",
+    options: [
+      "A way to connect to remote servers",
+      "A script that runs automatically at certain Git events (commit, push, etc.)",
+      "A merging strategy",
+      "A type of branch",
+    ],
+    correct: 1,
+    explanation:
+      "Git hooks are scripts in .git/hooks/ that fire at events like pre-commit, pre-push, post-merge, etc. Commonly used for linting, testing, and enforcing commit message formats.",
+  },
+  {
+    question: "What does `git blame file.txt` show?",
+    options: [
+      "Errors in the file",
+      "Who last modified each line, when, and in which commit",
+      "A list of commits that deleted lines",
+      "File permissions",
+    ],
+    correct: 1,
+    explanation:
+      "git blame shows line-by-line annotation: the commit hash, author, and date of the last modification for each line. Useful for understanding why code was changed and by whom.",
+  },
+  {
+    question: "What is a `.gitkeep` file?",
+    options: [
+      "A Git configuration file",
+      "A convention to track empty directories (Git doesn't track empty dirs)",
+      "A lock file for branches",
+      "A backup file",
+    ],
+    correct: 1,
+    explanation:
+      "Git doesn't track empty directories. .gitkeep is a convention — an empty placeholder file you add so the directory is included in the repository. It's not a Git feature, just a convention.",
+  },
+  {
+    question: "What does `git worktree add ../feature feature-branch` do?",
+    options: [
+      "Creates a new repository",
+      "Creates a separate working directory linked to the same repo for a different branch",
+      "Copies the branch",
+      "Moves the feature branch",
+    ],
+    correct: 1,
+    explanation:
+      "git worktree lets you check out multiple branches simultaneously in separate directories, all linked to the same repository. Great for working on a fix while keeping your feature branch untouched.",
+  },
+];
+
+export const gitCategories: QuizCategory[] = [
+  { id: "all", label: "All Topics", questions: [] },
+  { id: "basics", label: "Git Basics", questions: gitBasics },
+  { id: "branching", label: "Branching & Merging", questions: gitBranching },
+  { id: "stash-undo", label: "Stash & Undo", questions: gitStashAndUndo },
+  { id: "rebase", label: "Rebase & Cherry-pick", questions: gitRebase },
+  { id: "remote", label: "Remotes & Collaboration", questions: gitRemote },
+  { id: "internals", label: "Git Internals", questions: gitInternals },
+  { id: "workflow", label: "Workflow & Tools", questions: gitWorkflow },
+];
+
 export const quizzes: QuizDefinition[] = [
   {
     id: "frontend",
@@ -3473,6 +4179,12 @@ export const quizzes: QuizDefinition[] = [
     title: "AWS DVA-C02",
     description: "AWS Developer Associate Certification",
     categories: awsCategories,
+  },
+  {
+    id: "git",
+    title: "Git",
+    description: "Git fundamentals, branching, rebasing & internals",
+    categories: gitCategories,
   },
 ];
 
