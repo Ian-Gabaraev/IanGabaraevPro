@@ -187,6 +187,32 @@ const jsGotchas: Question[] = [
     explanation:
       "delete removes object properties and returns true. After deletion, accessing obj.a returns undefined.",
   },
+  {
+    question: "What does this code output?",
+    code: `const array = [5, 1, 8, 2, 0, 10]\nconst sorted = array.slice().sort((a, b) => a - b)\nconsole.log(sorted)\nconsole.log(array)`,
+    options: [
+      "[0,1,2,5,8,10] and [0,1,2,5,8,10]",
+      "[0,1,2,5,8,10] and [5,1,8,2,0,10]",
+      "[5,1,8,2,0,10] and [0,1,2,5,8,10]",
+      "Error — slice is not a function",
+    ],
+    correct: 1,
+    explanation:
+      ".slice() with no arguments creates a shallow copy of the array. sort() then mutates the copy, not the original. This is a common pattern to sort without modifying the source array. Modern alternative: array.toSorted((a, b) => a - b).",
+  },
+  {
+    question: "What does this code output?",
+    code: `const scores = [10, 5, 20, 1]\nconst top = scores.sort((a, b) => b - a)[0]\nconsole.log(top)\nconsole.log(scores)`,
+    options: [
+      "20 and [10, 5, 20, 1]",
+      "20 and [20, 10, 5, 1]",
+      "10 and [10, 5, 20, 1]",
+      "1 and [1, 5, 10, 20]",
+    ],
+    correct: 1,
+    explanation:
+      "sort() mutates the original array in place and returns it. Grabbing [0] gets the max, but scores is now permanently sorted descending. This is a sneaky side effect — use Math.max(...scores) or scores.toSorted() to avoid it.",
+  },
 ];
 
 const jsConcepts: Question[] = [
