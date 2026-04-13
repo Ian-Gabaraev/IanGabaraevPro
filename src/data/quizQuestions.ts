@@ -187,32 +187,6 @@ const jsGotchas: Question[] = [
     explanation:
       "delete removes object properties and returns true. After deletion, accessing obj.a returns undefined.",
   },
-  {
-    question: "What does this code output?",
-    code: `const array = [5, 1, 8, 2, 0, 10]\nconst sorted = array.slice().sort((a, b) => a - b)\nconsole.log(sorted)\nconsole.log(array)`,
-    options: [
-      "[0,1,2,5,8,10] and [0,1,2,5,8,10]",
-      "[0,1,2,5,8,10] and [5,1,8,2,0,10]",
-      "[5,1,8,2,0,10] and [0,1,2,5,8,10]",
-      "Error — slice is not a function",
-    ],
-    correct: 1,
-    explanation:
-      ".slice() with no arguments creates a shallow copy of the array. sort() then mutates the copy, not the original. This is a common pattern to sort without modifying the source array. Modern alternative: array.toSorted((a, b) => a - b).",
-  },
-  {
-    question: "What does this code output?",
-    code: `const scores = [10, 5, 20, 1]\nconst top = scores.sort((a, b) => b - a)[0]\nconsole.log(top)\nconsole.log(scores)`,
-    options: [
-      "20 and [10, 5, 20, 1]",
-      "20 and [20, 10, 5, 1]",
-      "10 and [10, 5, 20, 1]",
-      "1 and [1, 5, 10, 20]",
-    ],
-    correct: 1,
-    explanation:
-      "sort() mutates the original array in place and returns it. Grabbing [0] gets the max, but scores is now permanently sorted descending. This is a sneaky side effect — use Math.max(...scores) or scores.toSorted() to avoid it.",
-  },
 ];
 
 const jsConcepts: Question[] = [
@@ -2483,6 +2457,1074 @@ export const categories: QuizCategory[] = [
   { id: "node", label: "Node.js", questions: node },
 ];
 
+// Backend Quiz Questions
+
+const python: Question[] = [
+  {
+    question: "What is the difference between a list and a tuple in Python?",
+    options: [
+      "No difference",
+      "Lists are mutable; tuples are immutable",
+      "Tuples are faster to iterate",
+      "Lists can only hold numbers",
+    ],
+    correct: 1,
+    explanation:
+      "Lists ([]) are mutable — you can add, remove, and change elements. Tuples (()) are immutable — once created they cannot be changed. Tuples are hashable and can be used as dict keys.",
+  },
+  {
+    question: "What does this output?",
+    code: `a = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)`,
+    options: ["[1, 2, 3]", "[1, 2, 3, 4]", "Error", "None"],
+    correct: 1,
+    explanation:
+      "In Python, assignment copies the reference, not the object. b and a point to the same list. Use b = a.copy() or b = a[:] to make a shallow copy.",
+  },
+  {
+    question: "What is a Python decorator?",
+    options: [
+      "A way to style Python code",
+      "A function that wraps another function to extend its behavior",
+      "A class attribute",
+      "A type hint",
+    ],
+    correct: 1,
+    explanation:
+      "A decorator is a function that takes a function as input, wraps it with extra logic, and returns the wrapped function. Used with @syntax. Common examples: @staticmethod, @property, @login_required.",
+  },
+  {
+    question: "What does this output?",
+    code: `def f(x, items=[]):\n    items.append(x)\n    return items\n\nprint(f(1))\nprint(f(2))`,
+    options: ["[1] and [2]", "[1] and [1, 2]", "Error", "[] and []"],
+    correct: 1,
+    explanation:
+      "Mutable default arguments are created ONCE when the function is defined, not on each call. items=[] is shared across all calls. Use items=None and assign inside the function instead.",
+  },
+  {
+    question: "What is the difference between *args and **kwargs?",
+    options: [
+      "No difference",
+      "*args collects positional arguments as a tuple; **kwargs collects keyword arguments as a dict",
+      "**kwargs is faster",
+      "*args only works with numbers",
+    ],
+    correct: 1,
+    explanation:
+      "*args captures extra positional arguments as a tuple. **kwargs captures extra keyword arguments as a dictionary. Both names are convention — the * and ** are what matter.",
+  },
+  {
+    question: "What does the GIL (Global Interpreter Lock) do in CPython?",
+    options: [
+      "Speeds up multi-threaded code",
+      "Ensures only one thread executes Python bytecode at a time",
+      "Locks files during I/O",
+      "Prevents memory leaks",
+    ],
+    correct: 1,
+    explanation:
+      "The GIL prevents true multi-threaded CPU parallelism in CPython. For CPU-bound tasks, use multiprocessing. For I/O-bound tasks, threading (or asyncio) still works well because threads release the GIL during I/O.",
+  },
+  {
+    question: "What is a generator in Python?",
+    options: [
+      "A function that returns a list",
+      "A function that yields values lazily one at a time",
+      "A class that creates objects",
+      "A random number tool",
+    ],
+    correct: 1,
+    explanation:
+      "A generator uses yield instead of return. It produces values lazily — one at a time — without building the full sequence in memory. Great for large datasets or infinite sequences.",
+  },
+  {
+    question: "What is the difference between deepcopy and shallow copy?",
+    options: [
+      "No difference",
+      "Shallow copy duplicates the top-level object only; deepcopy recursively duplicates all nested objects",
+      "deepcopy is faster",
+      "Shallow copy only works on lists",
+    ],
+    correct: 1,
+    explanation:
+      "copy.copy() creates a new container but nested objects are still shared references. copy.deepcopy() recursively copies everything — no shared references at any level.",
+  },
+  {
+    question: "What does __init__ do in a Python class?",
+    options: [
+      "Creates the class",
+      "Initializes a new instance with attributes",
+      "Destroys the object",
+      "Imports the module",
+    ],
+    correct: 1,
+    explanation:
+      "__init__ is the constructor — called automatically when you instantiate a class. It sets up instance attributes. Note: __new__ actually creates the object; __init__ just initializes it.",
+  },
+  {
+    question: "What is the difference between @classmethod and @staticmethod?",
+    options: [
+      "No difference",
+      "@classmethod receives the class (cls) as first arg; @staticmethod receives nothing automatically",
+      "@staticmethod is faster",
+      "@classmethod can only be called on instances",
+    ],
+    correct: 1,
+    explanation:
+      "@classmethod gets cls (the class itself) as first argument — useful for factory methods. @staticmethod gets no implicit argument — it's just a regular function namespaced in the class.",
+  },
+  {
+    question: "What does this output?",
+    code: `x = [i**2 for i in range(5) if i % 2 == 0]\nprint(x)`,
+    options: ["[0, 4, 16]", "[1, 9, 25]", "[0, 1, 4, 9, 16]", "Error"],
+    correct: 0,
+    explanation:
+      "This is a list comprehension with a filter. range(5) = [0,1,2,3,4]. Only even numbers pass (0,2,4). Their squares are [0, 4, 16].",
+  },
+  {
+    question: "What is the purpose of `if __name__ == '__main__':`?",
+    options: [
+      "Runs code only when imported",
+      "Runs code only when the file is executed directly, not when imported",
+      "Defines the main class",
+      "Creates a main thread",
+    ],
+    correct: 1,
+    explanation:
+      "__name__ equals '__main__' only when the script is run directly. When the file is imported as a module, __name__ equals the module name. This prevents setup/startup code from running on import.",
+  },
+  {
+    question: "What is the difference between `is` and `==` in Python?",
+    options: [
+      "No difference",
+      "`is` compares identity (same object in memory); `==` compares value",
+      "`==` is faster",
+      "`is` only works with strings",
+    ],
+    correct: 1,
+    explanation:
+      "`is` checks if two variables point to the exact same object in memory. `==` checks if their values are equal. Never use `is` to compare values — use it only to check against None (x is None).",
+  },
+  {
+    question: "What does `enumerate()` do?",
+    code: `for i, v in enumerate(['a', 'b', 'c']):\n    print(i, v)`,
+    options: [
+      "Prints the length",
+      "Iterates with (index, value) pairs",
+      "Sorts the list",
+      "Converts to a dict",
+    ],
+    correct: 1,
+    explanation:
+      "enumerate() wraps an iterable and yields (index, value) tuples. Avoids manually tracking a counter variable. Output: 0 a, 1 b, 2 c.",
+  },
+  {
+    question: "What is a context manager and what does `with` do?",
+    options: [
+      "A way to import modules",
+      "An object that handles setup and teardown via __enter__ and __exit__",
+      "A loop construct",
+      "A class decorator",
+    ],
+    correct: 1,
+    explanation:
+      "Context managers implement __enter__ and __exit__. The `with` statement calls __enter__ on entry and guarantees __exit__ runs on exit — even if an exception occurs. Classic use: `with open('file') as f:`.",
+  },
+  {
+    question: "What is the difference between `__str__` and `__repr__`?",
+    options: [
+      "They are identical",
+      "__str__ is for readable output (end users); __repr__ is for unambiguous output (developers/debugging)",
+      "__repr__ is called by print()",
+      "__str__ is only for numbers",
+    ],
+    correct: 1,
+    explanation:
+      "__str__ is the human-readable string (used by print/str()). __repr__ should ideally return a string that could recreate the object (used in REPL, logs, repr()). If __str__ is missing, Python falls back to __repr__.",
+  },
+  {
+    question: "What is a metaclass in Python?",
+    options: [
+      "A base class for all classes",
+      "A class whose instances are classes — controls how classes are created",
+      "An abstract class",
+      "A decorator for classes",
+    ],
+    correct: 1,
+    explanation:
+      "In Python, everything is an object — including classes. A metaclass is the 'class of a class'. type is the default metaclass. Custom metaclasses can intercept class creation to add validation, auto-register subclasses, etc. Used by Django ORM and SQLAlchemy.",
+  },
+  {
+    question: "What does `__slots__` do?",
+    options: [
+      "Limits method count",
+      "Replaces the instance __dict__ with a fixed set of attributes, saving memory and speeding up attribute access",
+      "Creates read-only attributes",
+      "Prevents subclassing",
+    ],
+    correct: 1,
+    explanation:
+      "By default, Python objects store attributes in a __dict__. __slots__ replaces this with a fixed-size array — no per-instance dict. This reduces memory significantly and speeds up attribute access, at the cost of flexibility.",
+  },
+  {
+    question: "What is the difference between `threading` and `multiprocessing` in Python?",
+    options: [
+      "No difference",
+      "threading shares memory within one process (limited by GIL for CPU tasks); multiprocessing spawns separate processes with separate memory (true parallelism)",
+      "multiprocessing uses less memory",
+      "threading is faster for CPU-bound tasks",
+    ],
+    correct: 1,
+    explanation:
+      "Threads share memory but the GIL blocks true CPU parallelism in CPython. multiprocessing spawns separate OS processes — each with its own GIL — enabling real CPU parallelism. Use threading for I/O-bound, multiprocessing for CPU-bound tasks.",
+  },
+  {
+    question: "What is `asyncio` and when should you use it?",
+    options: [
+      "A multithreading library",
+      "An event loop for concurrent I/O-bound tasks using async/await without threads",
+      "A multiprocessing framework",
+      "A testing library",
+    ],
+    correct: 1,
+    explanation:
+      "asyncio provides a single-threaded event loop. async functions are coroutines — they yield control to the event loop when awaiting I/O (network, disk), letting other coroutines run. Perfect for high-concurrency I/O (APIs, WebSockets). Not useful for CPU-bound work.",
+  },
+  {
+    question: "What does `functools.lru_cache` do?",
+    options: [
+      "Limits function call frequency",
+      "Memoizes function results keyed by arguments, returning cached results on repeated calls",
+      "Runs a function in a separate process",
+      "Logs function calls",
+    ],
+    correct: 1,
+    explanation:
+      "@lru_cache (Least Recently Used) caches up to maxsize results. If the same arguments are passed again, it returns the cached result instantly. Useful for expensive pure functions. @cache (Python 3.9+) is the unbounded version.",
+  },
+  {
+    question: "What is the difference between `@property` and a regular attribute?",
+    options: [
+      "No difference",
+      "@property turns a method into a computed attribute — accessed like an attribute but executes code",
+      "@property makes an attribute immutable",
+      "@property is faster than attributes",
+    ],
+    correct: 1,
+    explanation:
+      "@property lets you define getter (and optionally setter/deleter) logic behind attribute-style access. Useful for validation, lazy computation, or computed fields without breaking the public interface.",
+  },
+  {
+    question: "What is the descriptor protocol in Python?",
+    options: [
+      "A way to document classes",
+      "Objects that define __get__, __set__, or __delete__ to control attribute access on a class",
+      "A type annotation system",
+      "A serialization protocol",
+    ],
+    correct: 1,
+    explanation:
+      "Descriptors implement __get__, __set__, __delete__. When you access obj.attr, Python checks if the class has a descriptor for 'attr' and calls its __get__. This is how @property, classmethod, staticmethod, and Django model fields work internally.",
+  },
+  {
+    question: "What does this output and why?",
+    code: `class Counter:\n    count = 0\n    def increment(self):\n        self.count += 1\n\na = Counter()\nb = Counter()\na.increment()\nprint(a.count, b.count, Counter.count)`,
+    options: [
+      "1 1 1",
+      "1 0 0",
+      "0 0 1",
+      "1 1 0",
+    ],
+    correct: 1,
+    explanation:
+      "count is a class attribute shared by all instances. But self.count += 1 reads the class attribute then creates an INSTANCE attribute on 'a' (shadowing the class attribute). So a.count=1 (instance), b.count=0 (class), Counter.count=0 (class unchanged).",
+  },
+  {
+    question: "What is the MRO (Method Resolution Order) and how does Python resolve it?",
+    options: [
+      "The order in which methods are defined",
+      "The order Python searches classes for a method in multiple inheritance, computed via the C3 linearization algorithm",
+      "The order of decorators applied to a method",
+      "The priority of built-in methods",
+    ],
+    correct: 1,
+    explanation:
+      "In multiple inheritance, MRO determines which class's method is called. Python uses C3 linearization — roughly: left-to-right depth-first, then base classes. Inspect with ClassName.__mro__. super() respects the MRO.",
+  },
+  {
+    question: "What is the difference between `raise` and `raise e` in an except block?",
+    options: [
+      "No difference",
+      "`raise` re-raises preserving the original traceback; `raise e` resets the traceback to the current line",
+      "`raise e` preserves the original traceback",
+      "`raise` only works with built-in exceptions",
+    ],
+    correct: 1,
+    explanation:
+      "Using `raise` alone re-raises the current exception with the original traceback intact. `raise e` creates a new raise context — the traceback points to that line, losing the original location of the exception. Prefer bare `raise` when re-raising.",
+  },
+  {
+    question: "What is the difference between `iter()` and `next()` in Python?",
+    options: [
+      "They do the same thing",
+      "iter() returns an iterator object from an iterable; next() retrieves the next value from an iterator",
+      "next() creates an iterable",
+      "iter() only works with lists",
+    ],
+    correct: 1,
+    explanation:
+      "iter(obj) calls obj.__iter__() returning an iterator. next(it) calls it.__next__() returning the next value or raising StopIteration. The for loop is syntactic sugar: it calls iter() once, then next() in a loop until StopIteration.",
+  },
+  {
+    question: "What is `__call__` used for?",
+    options: [
+      "Calling parent class methods",
+      "Makes an instance callable like a function",
+      "Calls all methods at startup",
+      "Creates a copy of the object",
+    ],
+    correct: 1,
+    explanation:
+      "Defining __call__ on a class makes its instances callable: obj() will invoke obj.__call__(). Commonly used for function-like objects, stateful callables, and implementing decorators as classes.",
+  },
+];
+
+const django: Question[] = [
+  {
+    question: "What is Django's MTV pattern?",
+    options: [
+      "Model-Template-View — similar to MVC but View maps to Controller logic",
+      "Module-Type-Validation",
+      "Multi-Table-View",
+      "Method-Transaction-View",
+    ],
+    correct: 0,
+    explanation:
+      "Django uses MTV: Model (data layer / ORM), Template (HTML presentation), View (business logic / request handler). Django's View is roughly equivalent to a Controller in MVC.",
+  },
+  {
+    question: "What does Django's ORM do?",
+    options: [
+      "Handles HTTP routing",
+      "Maps Python classes to database tables and lets you query the DB in Python",
+      "Renders HTML templates",
+      "Manages static files",
+    ],
+    correct: 1,
+    explanation:
+      "The ORM (Object-Relational Mapper) lets you define models as Python classes and perform CRUD operations with Python syntax — no raw SQL needed. Django translates these to SQL queries.",
+  },
+  {
+    question: "What is a Django migration?",
+    options: [
+      "Moving the project to a new server",
+      "A file that describes changes to the database schema, applied via `migrate`",
+      "A way to swap databases",
+      "A deployment script",
+    ],
+    correct: 1,
+    explanation:
+      "Migrations track model changes over time. `makemigrations` generates migration files from your models. `migrate` applies them to the database. They act like version control for your schema.",
+  },
+  {
+    question: "What is the difference between `select_related` and `prefetch_related`?",
+    options: [
+      "No difference",
+      "select_related uses SQL JOIN for ForeignKey/OneToOne; prefetch_related makes a separate query for ManyToMany/reverse FK",
+      "prefetch_related is only for caching",
+      "select_related works with ManyToMany",
+    ],
+    correct: 1,
+    explanation:
+      "select_related performs a SQL JOIN in one query — best for ForeignKey and OneToOne relationships. prefetch_related does a separate query and joins in Python — required for ManyToMany and reverse FK. Both prevent the N+1 query problem.",
+  },
+  {
+    question: "What is the N+1 query problem?",
+    options: [
+      "Running a query N times for no reason",
+      "Fetching a list of N objects then firing one extra query per object to get related data",
+      "A query that returns N+1 rows",
+      "A bug in the Django ORM",
+    ],
+    correct: 1,
+    explanation:
+      "If you fetch 100 posts and then access each post's author in a loop, you make 1 query for posts + 100 queries for authors = 101 queries. Fix with select_related or prefetch_related.",
+  },
+  {
+    question: "What does Django middleware do?",
+    options: [
+      "Connects to external APIs",
+      "Processes requests/responses globally before they reach views or after views respond",
+      "Manages database connections",
+      "Handles template rendering",
+    ],
+    correct: 1,
+    explanation:
+      "Middleware is a hook into Django's request/response cycle. Each middleware component can process the request before the view runs and/or the response before it's sent. Used for auth, CSRF, sessions, logging, etc.",
+  },
+  {
+    question: "What is Django REST Framework (DRF) used for?",
+    options: [
+      "Frontend rendering",
+      "Building RESTful APIs on top of Django with serializers, viewsets, and authentication",
+      "Database migrations",
+      "Static file serving",
+    ],
+    correct: 1,
+    explanation:
+      "DRF provides serializers (model ↔ JSON), class-based views/viewsets, routers, authentication backends, and permissions — making it straightforward to build REST APIs with Django.",
+  },
+  {
+    question: "What is a Django serializer?",
+    options: [
+      "A JSON compression tool",
+      "Converts complex types (querysets, model instances) to/from Python dicts and JSON",
+      "A database indexing tool",
+      "A template engine",
+    ],
+    correct: 1,
+    explanation:
+      "Serializers in DRF handle (de)serialization: converting model instances to JSON for API responses, and validating + parsing incoming JSON back to Python objects for saving.",
+  },
+  {
+    question: "What does `@login_required` do in Django?",
+    options: [
+      "Creates a login page",
+      "Decorator that redirects unauthenticated users to the login page",
+      "Hashes passwords",
+      "Validates form input",
+    ],
+    correct: 1,
+    explanation:
+      "@login_required checks if the request.user is authenticated. If not, it redirects to settings.LOGIN_URL. In DRF, the equivalent is permission_classes = [IsAuthenticated].",
+  },
+  {
+    question: "What is the difference between `null=True` and `blank=True` in a Django model field?",
+    options: [
+      "They are identical",
+      "`null=True` allows NULL in the database; `blank=True` allows empty values in form/serializer validation",
+      "`blank=True` allows NULL in the database",
+      "`null=True` is only for CharField",
+    ],
+    correct: 1,
+    explanation:
+      "null=True is a database-level setting (stores NULL). blank=True is a validation-level setting (allows empty string in forms/serializers). For strings, prefer blank=True without null=True — use empty string as 'empty'.",
+  },
+  {
+    question: "What does `Q()` object do in Django ORM?",
+    options: [
+      "Queues database operations",
+      "Enables complex lookups with OR conditions and negation",
+      "Caches queries",
+      "Creates subqueries",
+    ],
+    correct: 1,
+    explanation:
+      "Q objects allow complex WHERE clauses. Model.objects.filter(Q(name='Ian') | Q(name='John')) produces OR logic. You can also negate with ~Q(...) and combine with &.",
+  },
+  {
+    question: "What is Django's `signals` framework used for?",
+    options: [
+      "WebSocket communication",
+      "Decoupled event-driven hooks — e.g. running code automatically when a model is saved or deleted",
+      "Sending emails",
+      "Scheduling tasks",
+    ],
+    correct: 1,
+    explanation:
+      "Signals allow decoupled applications to react to events. post_save fires after a model instance is saved, pre_delete before deletion, etc. Useful but can make code hard to trace — use sparingly.",
+  },
+  {
+    question: "What is the difference between `APIView`, `GenericAPIView`, and `ViewSet` in DRF?",
+    options: [
+      "They are identical",
+      "APIView is the base; GenericAPIView adds queryset/serializer wiring; ViewSet groups list/detail actions and maps to a router",
+      "ViewSet is the base class",
+      "GenericAPIView only works with ModelSerializer",
+    ],
+    correct: 1,
+    explanation:
+      "APIView: raw class-based view, full control. GenericAPIView: adds get_queryset(), get_serializer(). Mixins add list/create/retrieve/update/destroy. ModelViewSet combines all of these. ViewSets pair with Router to auto-generate URL patterns.",
+  },
+  {
+    question: "How does Django's caching framework work and what backends are available?",
+    options: [
+      "Django only caches templates",
+      "A pluggable cache API supporting per-view, per-template-fragment, or low-level caching with backends like Redis, Memcached, database, or in-memory",
+      "Caching is only available in production",
+      "Django uses the browser cache exclusively",
+    ],
+    correct: 1,
+    explanation:
+      "Django's cache framework provides cache.set/get/delete, @cache_page, {% cache %} template tag, and more. Backends: Memcached, Redis (django-redis), database, filesystem, in-memory (dev). Redis is the production standard for distributed caching.",
+  },
+  {
+    question: "What is `ContentType` framework used for in Django?",
+    options: [
+      "Handling HTTP content types",
+      "A generic foreign key system that lets a model relate to any other model dynamically",
+      "Validating file uploads",
+      "Managing media types",
+    ],
+    correct: 1,
+    explanation:
+      "The contenttypes framework provides GenericForeignKey — a FK that can point to any model. Used for tagging, comments, activity streams, or audit logs that need to attach to multiple model types. Internally used by Django's permissions system.",
+  },
+  {
+    question: "What is the difference between `annotate()` and `aggregate()` in Django ORM?",
+    options: [
+      "No difference",
+      "annotate() adds a computed value per object in the queryset; aggregate() computes a single value over the entire queryset",
+      "aggregate() adds per-object values",
+      "annotate() only works with COUNT",
+    ],
+    correct: 1,
+    explanation:
+      "annotate() extends each returned object with a computed field (e.g. Post.objects.annotate(comment_count=Count('comments'))). aggregate() returns a dict with one total value (e.g. Post.objects.aggregate(total=Count('id'))).",
+  },
+  {
+    question: "How does Django handle database transactions, and what does `atomic()` do?",
+    options: [
+      "Django auto-commits every query",
+      "`atomic()` wraps a block in a database transaction — either all operations succeed or all are rolled back",
+      "Transactions must be managed manually in raw SQL",
+      "Django doesn't support transactions",
+    ],
+    correct: 1,
+    explanation:
+      "@transaction.atomic or with transaction.atomic(): wraps operations in a database transaction. On exception, it rolls back. Transactions can be nested using savepoints. ATOMIC_REQUESTS=True wraps every HTTP request in a transaction.",
+  },
+  {
+    question: "What is `defer()` vs `only()` in Django ORM?",
+    options: [
+      "They do the same thing",
+      "only() fetches only specified columns; defer() fetches all columns except specified ones",
+      "defer() delays query execution",
+      "only() is for foreign keys",
+    ],
+    correct: 1,
+    explanation:
+      "Both optimize queries by limiting fetched columns. only('name', 'email') fetches only those fields. defer('large_text_field') fetches everything else. Deferred fields are lazy-loaded on access (triggering an extra query).",
+  },
+  {
+    question: "What is the purpose of `get_or_create()` and what does it return?",
+    options: [
+      "Gets an object or raises an error",
+      "Returns a (instance, created) tuple — looks up by given kwargs; creates the object if it doesn't exist",
+      "Creates an object and always returns it",
+      "Gets the first object matching the filter",
+    ],
+    correct: 1,
+    explanation:
+      "get_or_create(defaults={...}, **lookup_kwargs) returns (obj, created_bool). It avoids race conditions better than manually doing get then create — though for high-concurrency you may still need unique constraints + retry logic.",
+  },
+  {
+    question: "What is the difference between `ForeignKey`, `OneToOneField`, and `ManyToManyField`?",
+    options: [
+      "They are used for the same relationships",
+      "ForeignKey is many-to-one; OneToOneField is exactly one-to-one; ManyToManyField creates a junction table for many-to-many",
+      "OneToOneField allows multiple instances",
+      "ManyToManyField stores data inline",
+    ],
+    correct: 1,
+    explanation:
+      "ForeignKey: many instances can point to one related object (e.g. many Posts → one Author). OneToOneField: each instance maps to exactly one related instance (e.g. User ↔ Profile). ManyToManyField: Django creates a junction table automatically.",
+  },
+  {
+    question: "How does Django's permission system work?",
+    options: [
+      "Only superusers can access anything",
+      "Permissions (add/change/delete/view) are auto-created per model, assignable to users or groups; checked via has_perm()",
+      "Permissions are defined in settings.py",
+      "All logged-in users have full access",
+    ],
+    correct: 1,
+    explanation:
+      "Django auto-creates 4 permissions per model (add, change, delete, view). Assign to users/groups via admin or code. Check with user.has_perm('app.change_post'). DRF has its own permission classes (IsAuthenticated, IsAdminUser, custom ones).",
+  },
+];
+
+const sql: Question[] = [
+  {
+    question: "What is the difference between INNER JOIN and LEFT JOIN?",
+    options: [
+      "No difference",
+      "INNER JOIN returns only matching rows; LEFT JOIN returns all rows from the left table plus matches from the right",
+      "LEFT JOIN is faster",
+      "INNER JOIN returns all rows from both tables",
+    ],
+    correct: 1,
+    explanation:
+      "INNER JOIN returns rows where there's a match in both tables. LEFT JOIN returns ALL rows from the left table — unmatched right columns are NULL. RIGHT JOIN is the mirror.",
+  },
+  {
+    question: "What does an index do?",
+    options: [
+      "Numbers every row",
+      "Creates a data structure that speeds up read queries at the cost of slower writes and storage",
+      "Encrypts the column",
+      "Prevents duplicate values",
+    ],
+    correct: 1,
+    explanation:
+      "An index (typically a B-tree) lets the database find rows without a full table scan. Drastically speeds up SELECT/WHERE/JOIN on indexed columns. Trade-off: INSERT/UPDATE/DELETE become slightly slower.",
+  },
+  {
+    question: "What is the difference between WHERE and HAVING?",
+    options: [
+      "No difference",
+      "WHERE filters rows before grouping; HAVING filters groups after GROUP BY",
+      "HAVING is faster",
+      "WHERE works only with numbers",
+    ],
+    correct: 1,
+    explanation:
+      "WHERE filters individual rows before aggregation. HAVING filters the result of GROUP BY (e.g. HAVING COUNT(*) > 5). You can't use aggregate functions in WHERE.",
+  },
+  {
+    question: "What is a primary key?",
+    options: [
+      "The most important column",
+      "A column (or set of columns) that uniquely identifies each row — NOT NULL and UNIQUE",
+      "The first column in a table",
+      "An automatically incrementing number",
+    ],
+    correct: 1,
+    explanation:
+      "A primary key uniquely identifies every row, must be NOT NULL, and is automatically indexed. It can be a natural key or a surrogate key (like an auto-increment ID or UUID).",
+  },
+  {
+    question: "What does a foreign key do?",
+    options: [
+      "Encrypts a column",
+      "Enforces referential integrity — a value must exist as a primary key in the referenced table",
+      "Creates an index",
+      "Links two databases",
+    ],
+    correct: 1,
+    explanation:
+      "A foreign key constraint ensures the value in a column matches a primary key in another table. Prevents orphaned records (e.g. an order with a non-existent customer_id).",
+  },
+  {
+    question: "What is the difference between DELETE, TRUNCATE, and DROP?",
+    options: [
+      "They all do the same thing",
+      "DELETE removes rows (filterable, logged); TRUNCATE removes all rows fast; DROP removes the entire table",
+      "TRUNCATE is reversible, DELETE is not",
+      "DROP only works on indexed tables",
+    ],
+    correct: 1,
+    explanation:
+      "DELETE removes specific rows and is transaction-safe. TRUNCATE removes all rows quickly (less logging) but can't be filtered. DROP removes the table structure entirely.",
+  },
+  {
+    question: "What is a transaction and what does ACID stand for?",
+    options: [
+      "A single SQL statement",
+      "A unit of work that is Atomic, Consistent, Isolated, and Durable",
+      "A backup operation",
+      "A stored procedure",
+    ],
+    correct: 1,
+    explanation:
+      "ACID: Atomicity (all or nothing), Consistency (data remains valid), Isolation (concurrent transactions don't interfere), Durability (committed data survives crashes). Transactions guarantee these properties.",
+  },
+  {
+    question: "What does GROUP BY do?",
+    options: [
+      "Sorts the result set",
+      "Groups rows with the same value in a column so aggregate functions run per group",
+      "Filters rows",
+      "Joins tables",
+    ],
+    correct: 1,
+    explanation:
+      "GROUP BY collapses rows sharing a value into one group. Then aggregate functions like COUNT(), SUM(), AVG(), MAX() operate on each group independently.",
+  },
+  {
+    question: "What is a window function?",
+    options: [
+      "A function that opens a UI window",
+      "An aggregate function that operates over a partition of rows without collapsing them into one row",
+      "A function that splits a string",
+      "A subquery",
+    ],
+    correct: 1,
+    explanation:
+      "Window functions (ROW_NUMBER, RANK, LAG, SUM OVER, etc.) compute values across a set of rows related to the current row — without GROUP BY collapsing the result. Use OVER(PARTITION BY ... ORDER BY ...).",
+  },
+  {
+    question: "What is the difference between UNION and UNION ALL?",
+    options: [
+      "No difference",
+      "UNION removes duplicates; UNION ALL includes all rows including duplicates",
+      "UNION ALL removes duplicates",
+      "UNION only works with two tables",
+    ],
+    correct: 1,
+    explanation:
+      "UNION combines result sets and removes duplicate rows (like DISTINCT). UNION ALL includes every row including duplicates and is faster because it skips the deduplication step.",
+  },
+  {
+    question: "What is a subquery?",
+    options: [
+      "A stored procedure",
+      "A SELECT statement nested inside another query",
+      "A temporary table",
+      "A JOIN alias",
+    ],
+    correct: 1,
+    explanation:
+      "A subquery is a query embedded in another query (in WHERE, FROM, or SELECT). Can be correlated (references the outer query) or non-correlated. Often replaceable with a JOIN for readability and performance.",
+  },
+  {
+    question: "What does `EXPLAIN` do in SQL?",
+    options: [
+      "Documents the table schema",
+      "Shows the query execution plan — how the database intends to execute the query",
+      "Validates SQL syntax",
+      "Shows column data types",
+    ],
+    correct: 1,
+    explanation:
+      "EXPLAIN (or EXPLAIN ANALYZE in PostgreSQL) shows the execution plan: which indexes are used, join strategies, estimated vs actual row counts. Essential for diagnosing slow queries.",
+  },
+  {
+    question: "What is database normalization?",
+    options: [
+      "Backing up a database",
+      "Organizing tables to reduce data redundancy and improve integrity",
+      "Sorting data alphabetically",
+      "Compressing tables",
+    ],
+    correct: 1,
+    explanation:
+      "Normalization (1NF, 2NF, 3NF) structures tables to eliminate redundancy and update anomalies. Denormalization is the intentional reversal for read performance. Most OLTP schemas aim for 3NF.",
+  },
+  {
+    question: "What is the difference between optimistic and pessimistic locking?",
+    options: [
+      "No difference",
+      "Optimistic: assumes no conflict, checks on write; Pessimistic: locks the row immediately on read",
+      "Pessimistic locking is faster",
+      "Optimistic locking is used only in NoSQL",
+    ],
+    correct: 1,
+    explanation:
+      "Pessimistic locking (SELECT FOR UPDATE) locks rows immediately, preventing concurrent writes. Optimistic locking adds a version/timestamp column — on update it checks the version hasn't changed and fails if it has. Best for low-contention scenarios.",
+  },
+  {
+    question: "What is a CTE (Common Table Expression) and when would you use it?",
+    options: [
+      "A type of index",
+      "A named temporary result set defined with WITH, usable within a single query for readability or recursion",
+      "A stored procedure",
+      "A view that persists to disk",
+    ],
+    correct: 1,
+    explanation:
+      "CTEs (WITH name AS (SELECT ...)) define inline named subqueries. They improve readability, allow recursive queries (e.g. tree traversals), and can be referenced multiple times. Recursive CTEs use WITH RECURSIVE and a base case + recursive case.",
+  },
+  {
+    question: "What is the difference between a clustered and non-clustered index?",
+    options: [
+      "No difference",
+      "A clustered index determines the physical row order (one per table); non-clustered indexes are separate structures with pointers to rows",
+      "Non-clustered indexes are faster for writes",
+      "Clustered indexes are only for primary keys",
+    ],
+    correct: 1,
+    explanation:
+      "A table can have only ONE clustered index because rows can only be physically sorted one way (usually the PK). Non-clustered indexes are separate B-tree structures containing the indexed columns + a pointer back to the row. MySQL InnoDB always clusters on the PK.",
+  },
+  {
+    question: "What is query plan caching and when can it hurt you?",
+    options: [
+      "Databases never cache query plans",
+      "Databases cache compiled query plans for reuse; stale plans can cause 'parameter sniffing' issues where a plan optimized for one value performs badly for another",
+      "Query plan caching only applies to stored procedures",
+      "Plan caching is only a concern in MySQL",
+    ],
+    correct: 1,
+    explanation:
+      "Databases compile and cache query execution plans. Parameter sniffing: a plan compiled for value X (returning 5 rows) may be reused for value Y (returning 5M rows) with the wrong strategy. Fix with OPTION(RECOMPILE), sp_recompile, or statistics updates.",
+  },
+  {
+    question: "What are database isolation levels and what anomalies do they prevent?",
+    options: [
+      "There is only one isolation level",
+      "READ UNCOMMITTED, READ COMMITTED, REPEATABLE READ, SERIALIZABLE — each preventing more anomalies (dirty reads, non-repeatable reads, phantom reads) at increasing performance cost",
+      "Isolation levels only apply to NoSQL databases",
+      "All databases default to SERIALIZABLE",
+    ],
+    correct: 1,
+    explanation:
+      "READ UNCOMMITTED: allows dirty reads. READ COMMITTED: prevents dirty reads (default in PostgreSQL). REPEATABLE READ: prevents non-repeatable reads (default in MySQL InnoDB). SERIALIZABLE: prevents phantom reads — fully isolated but slowest. Higher isolation = more locking.",
+  },
+  {
+    question: "What is a materialized view?",
+    options: [
+      "A view that filters null values",
+      "A view whose result set is physically stored and periodically refreshed — trades freshness for query speed",
+      "A view with an index on it",
+      "A read-only table",
+    ],
+    correct: 1,
+    explanation:
+      "Unlike a regular view (re-executed on every query), a materialized view stores the query result on disk. Queries against it are fast (no recomputation). Must be refreshed (REFRESH MATERIALIZED VIEW) to reflect underlying data changes. Great for expensive aggregations.",
+  },
+  {
+    question: "What is the difference between `RANK()`, `DENSE_RANK()`, and `ROW_NUMBER()`?",
+    options: [
+      "They all produce the same result",
+      "ROW_NUMBER: unique sequential; RANK: gaps after ties; DENSE_RANK: no gaps after ties",
+      "DENSE_RANK skips tied rows",
+      "ROW_NUMBER handles ties with duplicates",
+    ],
+    correct: 1,
+    explanation:
+      "For values (100, 100, 90): ROW_NUMBER → 1,2,3 (arbitrary order for ties). RANK → 1,1,3 (gap after tie). DENSE_RANK → 1,1,2 (no gap). Choose based on whether gaps matter for your use case.",
+  },
+  {
+    question: "What is an upsert and how is it typically implemented in SQL?",
+    options: [
+      "A combination of UPDATE and SELECT",
+      "An operation that inserts a row if it doesn't exist or updates it if it does — typically via INSERT ... ON CONFLICT or MERGE",
+      "A bulk delete operation",
+      "An atomic SELECT FOR UPDATE",
+    ],
+    correct: 1,
+    explanation:
+      "PostgreSQL: INSERT INTO t VALUES(...) ON CONFLICT (id) DO UPDATE SET col = EXCLUDED.col. MySQL: INSERT ... ON DUPLICATE KEY UPDATE. SQL Server/Oracle: MERGE statement. Avoids race conditions of separate SELECT + INSERT/UPDATE.",
+  },
+  {
+    question: "What is connection pooling and why does it matter?",
+    options: [
+      "Caching query results",
+      "Maintaining a pool of pre-established database connections to avoid the overhead of opening a new connection per request",
+      "Distributing queries across multiple databases",
+      "A backup connection for failover",
+    ],
+    correct: 1,
+    explanation:
+      "Opening a DB connection is expensive (TCP + auth handshake). A connection pool reuses existing connections. In Python: SQLAlchemy pool, Django's CONN_MAX_AGE, pgBouncer. Without pooling, a high-traffic app will exhaust the database's connection limit.",
+  },
+  {
+    question: "What is the difference between horizontal and vertical database scaling?",
+    options: [
+      "They mean the same thing",
+      "Vertical: bigger hardware on one machine; Horizontal: distributing data/load across multiple machines (sharding, replication)",
+      "Horizontal scaling is only for NoSQL",
+      "Vertical scaling adds more tables",
+    ],
+    correct: 1,
+    explanation:
+      "Vertical scaling (scale up): faster CPU, more RAM, faster disk — hits hardware limits. Horizontal scaling (scale out): read replicas for read distribution, sharding for write distribution, partitioning. SQL databases scale vertically more naturally; horizontal requires careful design.",
+  },
+  {
+    question: "What is a database shard and what are the challenges of sharding?",
+    options: [
+      "A type of index",
+      "A horizontal partition of data across multiple database instances; challenges include cross-shard queries, rebalancing, and distributed transactions",
+      "A backup of the database",
+      "A read replica",
+    ],
+    correct: 1,
+    explanation:
+      "Sharding splits data across multiple DB instances by a shard key (e.g. user_id % N). Challenges: cross-shard JOINs become application-level, rebalancing when adding shards, no distributed transactions, hotspot risk if shard key is poorly chosen.",
+  },
+];
+
+const networks: Question[] = [
+  {
+    question: "What are the 7 layers of the OSI model (top to bottom)?",
+    options: [
+      "Application, Presentation, Session, Transport, Network, Data Link, Physical",
+      "Physical, Data Link, Network, Transport, Session, Presentation, Application",
+      "HTTP, TCP, IP, Ethernet, Signal, Frame, Bit",
+      "Application, Transport, Internet, Link",
+    ],
+    correct: 0,
+    explanation:
+      "OSI (top to bottom): Application (HTTP, DNS), Presentation (TLS, encoding), Session (connection management), Transport (TCP/UDP), Network (IP, routing), Data Link (MAC, Ethernet), Physical (cables, signals). TCP/IP collapses these into 4 layers.",
+  },
+  {
+    question: "What is the difference between TCP and UDP?",
+    options: [
+      "No difference",
+      "TCP is connection-oriented, reliable, ordered; UDP is connectionless, faster, no delivery guarantee",
+      "UDP is more secure",
+      "TCP is for video streaming only",
+    ],
+    correct: 1,
+    explanation:
+      "TCP guarantees delivery, ordering, and error-checking via handshake + acknowledgments. UDP sends packets with no handshake or guarantee — lower latency, used for DNS, video streaming, games, VoIP.",
+  },
+  {
+    question: "What happens during the TCP 3-way handshake?",
+    options: [
+      "Client sends data, server acknowledges",
+      "SYN → SYN-ACK → ACK — establishes a connection before any data is sent",
+      "Server initiates the connection",
+      "TLS certificates are exchanged",
+    ],
+    correct: 1,
+    explanation:
+      "1. Client sends SYN (I want to connect). 2. Server responds SYN-ACK (OK, and I also want to connect). 3. Client sends ACK (acknowledged). Connection is established. TCP teardown uses a 4-step FIN process.",
+  },
+  {
+    question: "What is the difference between HTTP/1.1 and HTTP/2?",
+    options: [
+      "No difference",
+      "HTTP/2 adds multiplexing, header compression, and server push over a single TCP connection",
+      "HTTP/2 is less secure",
+      "HTTP/1.1 supports binary framing",
+    ],
+    correct: 1,
+    explanation:
+      "HTTP/1.1 is text-based and opens one request per connection (or pipelining, rarely used). HTTP/2 is binary, multiplexes multiple streams over one TCP connection, compresses headers (HPACK), and supports server push — drastically reducing latency.",
+  },
+  {
+    question: "What is TLS and what problem does it solve?",
+    options: [
+      "A routing protocol",
+      "A cryptographic protocol that provides encryption, authentication, and integrity for data in transit",
+      "A DNS resolver",
+      "A load balancing algorithm",
+    ],
+    correct: 1,
+    explanation:
+      "TLS (Transport Layer Security) sits between TCP and HTTP (making HTTPS). It solves: confidentiality (encryption), authentication (server cert proves identity), and integrity (MACs prevent tampering). TLS 1.3 is the current standard.",
+  },
+  {
+    question: "What happens during the TLS handshake?",
+    options: [
+      "Passwords are exchanged",
+      "Client and server negotiate a cipher suite, exchange certificates, and establish a shared session key",
+      "Only the client sends a certificate",
+      "TCP is re-established",
+    ],
+    correct: 1,
+    explanation:
+      "TLS 1.3 handshake: client sends supported ciphers + key share → server responds with chosen cipher, certificate, and its key share → both derive the same session key (via ECDHE). Then symmetric encryption begins.",
+  },
+  {
+    question: "What is DNS and how does it work?",
+    options: [
+      "A database for storing web pages",
+      "A system that translates domain names to IP addresses via a hierarchy of resolvers",
+      "A routing protocol",
+      "A protocol for sending emails",
+    ],
+    correct: 1,
+    explanation:
+      "DNS resolves names to IPs. Browser checks local cache → OS cache → recursive resolver (ISP) → root nameserver → TLD nameserver → authoritative nameserver returns the IP. Results are cached per TTL.",
+  },
+  {
+    question: "What is the difference between HTTP and HTTPS?",
+    options: [
+      "HTTPS is faster",
+      "HTTPS is HTTP over TLS — all traffic is encrypted; HTTP sends everything in plaintext",
+      "HTTPS uses a different port than 443",
+      "HTTP uses TCP; HTTPS uses UDP",
+    ],
+    correct: 1,
+    explanation:
+      "HTTP (port 80) sends everything in plaintext — anyone on the network can read it. HTTPS (port 443) wraps HTTP inside TLS, encrypting all headers and body content.",
+  },
+  {
+    question: "What is an IP address and what is the difference between IPv4 and IPv6?",
+    options: [
+      "IPs are the same in both versions",
+      "IPv4 is 32-bit (~4 billion addresses); IPv6 is 128-bit — created because IPv4 addresses ran out",
+      "IPv6 is slower",
+      "IPv4 supports encryption; IPv6 does not",
+    ],
+    correct: 1,
+    explanation:
+      "IPv4 is a 32-bit number (e.g. 192.168.1.1) — ~4.3 billion addresses. IPv6 is 128-bit (e.g. 2001:db8::1) — 340 undecillion addresses. IPv4 exhaustion drove IPv6 adoption, though NAT extended IPv4's life.",
+  },
+  {
+    question: "What is a REST API and what are its key constraints?",
+    options: [
+      "Any API that uses JSON",
+      "An architectural style using stateless HTTP, uniform interface, client-server separation, and cacheability",
+      "An API that uses XML",
+      "A database query language",
+    ],
+    correct: 1,
+    explanation:
+      "REST constraints: Stateless (no session on server), Client-Server (separated concerns), Uniform Interface (standard HTTP verbs/URIs), Cacheable (responses declare cacheability), Layered System. Not a protocol — just an architectural style.",
+  },
+  {
+    question: "What does a status code 503 mean vs 504?",
+    options: [
+      "Both mean client error",
+      "503 = service unavailable (server overloaded/down); 504 = gateway timeout (upstream server didn't respond in time)",
+      "504 means not found",
+      "503 is a redirect",
+    ],
+    correct: 1,
+    explanation:
+      "503 Service Unavailable: the server is temporarily unable to handle requests (overloaded or down for maintenance). 504 Gateway Timeout: a proxy/gateway didn't get a timely response from an upstream server.",
+  },
+  {
+    question: "What is the difference between a cookie and a session?",
+    options: [
+      "They are the same",
+      "A cookie is stored client-side; a session stores state server-side (cookie holds only the session ID)",
+      "Sessions are more insecure",
+      "Cookies can only store numbers",
+    ],
+    correct: 1,
+    explanation:
+      "Cookies live in the browser. Sessions live on the server. Typically, a session ID is stored in a cookie — the browser sends it with every request and the server looks up the session data. JWT is an alternative that stores state client-side.",
+  },
+  {
+    question: "What is a CDN and why is it used?",
+    options: [
+      "A type of database",
+      "A network of geographically distributed servers that cache and serve content from locations close to users",
+      "A DNS replacement",
+      "A load balancer",
+    ],
+    correct: 1,
+    explanation:
+      "A CDN (Content Delivery Network) caches static assets (JS, CSS, images) at edge servers worldwide. Users download from the nearest edge server — lower latency, reduced origin load. Examples: Cloudflare, CloudFront, Fastly.",
+  },
+  {
+    question: "What is the difference between long polling, SSE, and WebSockets?",
+    options: [
+      "They all work the same way",
+      "Long polling re-requests on response; SSE is one-way server push over HTTP; WebSockets are full-duplex bidirectional",
+      "WebSockets use UDP",
+      "SSE requires HTTP/2",
+    ],
+    correct: 1,
+    explanation:
+      "Long polling: client requests, server holds until data available, client immediately re-requests. SSE (EventSource): persistent HTTP connection for server → client push only. WebSockets: full-duplex TCP channel, both sides can send at any time — best for chat, games, live data.",
+  },
+  {
+    question: "What does CORS do and why does it exist?",
+    options: [
+      "Encrypts API responses",
+      "A browser security policy that restricts cross-origin HTTP requests unless the server explicitly allows them",
+      "Prevents SQL injection",
+      "A CDN caching policy",
+    ],
+    correct: 1,
+    explanation:
+      "CORS (Cross-Origin Resource Sharing) is enforced by browsers. A script on origin-a.com cannot fetch from origin-b.com unless origin-b.com includes the correct Access-Control-Allow-Origin header. Preflight OPTIONS requests check permissions for non-simple requests.",
+  },
+];
+
+export const backendCategories: QuizCategory[] = [
+  { id: "all", label: "All Topics", questions: [] },
+  { id: "python", label: "Python", questions: python },
+  { id: "django", label: "Django", questions: django },
+  { id: "sql", label: "SQL", questions: sql },
+  { id: "networks", label: "Networking", questions: networks },
+];
+
 // AWS DVA-C02 Quiz Questions
 const awsInfrastructure: Question[] = [
   {
@@ -4199,6 +5241,12 @@ export const quizzes: QuizDefinition[] = [
     title: "Frontend Interview",
     description: "JavaScript, TypeScript, React & Node.js",
     categories: categories,
+  },
+  {
+    id: "backend",
+    title: "Backend Interview",
+    description: "Python, Django, SQL & Networking",
+    categories: backendCategories,
   },
   {
     id: "aws-dva",
