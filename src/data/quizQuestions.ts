@@ -610,6 +610,90 @@ const react: Question[] = [
       "In a controlled component, React state is the 'single source of truth' for form inputs. The input value is controlled by state and updated via onChange.",
   },
   {
+    question: "What's wrong with this controlled input?",
+    code: `const [name, setName] = useState("")\nreturn <input value={name} />`,
+    options: [
+      "Nothing is wrong",
+      "Input is effectively read-only because value is set but onChange is missing",
+      "useState cannot store strings",
+      "value should be replaced with defaultValue",
+    ],
+    correct: 1,
+    explanation:
+      "In React, if you pass value, you must also handle onChange to update state. Otherwise the input cannot change from user typing and React may warn in development.",
+  },
+  {
+    question: "What causes the warning 'A component is changing an uncontrolled input to be controlled'?",
+    code: `const [email, setEmail] = useState(undefined)\nreturn <input value={email} onChange={(e) => setEmail(e.target.value)} />`,
+    options: [
+      "Using useState in a form",
+      "Starting with undefined/null and later setting a string value",
+      "Using onChange instead of onInput",
+      "Using a function inside setState",
+    ],
+    correct: 1,
+    explanation:
+      "If value starts as undefined/null, the input is uncontrolled. Later setting it to a string makes it controlled, triggering the warning. Initialize text inputs with empty string ('').",
+  },
+  {
+    question: "For a controlled checkbox, which prop should hold state?",
+    options: ["value", "checked", "selected", "defaultChecked"],
+    correct: 1,
+    explanation:
+      "Checkboxes and radio inputs are controlled via checked, not value. onChange should read e.target.checked and update a boolean state.",
+  },
+  {
+    question: "What does this log?",
+    code: `const [age, setAge] = useState(0)\nconst onChange = (e) => setAge(e.target.value)\n// User types 42\nconsole.log(typeof age)`,
+    options: ["number", "string", "boolean", "undefined"],
+    correct: 1,
+    explanation:
+      "All input values come from the DOM as strings (even type='number'). Parse explicitly when you need numeric state, e.g. Number(e.target.value).",
+  },
+  {
+    question: "Which input type is inherently uncontrolled in React?",
+    options: ["text", "checkbox", "file", "textarea"],
+    correct: 2,
+    explanation:
+      "File inputs cannot be meaningfully controlled with a value prop. Read selected files from e.target.files in onChange.",
+  },
+  {
+    question: "When is uncontrolled input usually a reasonable choice?",
+    options: [
+      "Complex multi-step forms with live validation",
+      "Simple forms where value is only needed on submit",
+      "When using checkboxes",
+      "When using TypeScript",
+    ],
+    correct: 1,
+    explanation:
+      "Uncontrolled inputs can reduce boilerplate for simple forms where you only read values at submit-time. For complex product forms, controlled inputs are usually better.",
+  },
+  {
+    question: "Why are controlled components usually preferred in larger React apps?",
+    options: [
+      "They always render faster",
+      "They keep form state in React, making validation, conditional UI, and testing predictable",
+      "They remove the need for onChange handlers",
+      "They avoid all re-renders",
+    ],
+    correct: 1,
+    explanation:
+      "Controlled forms centralize state in React. This enables deterministic UI logic (errors, disable states, derived values), easier testing, and safer refactoring.",
+  },
+  {
+    question: "You need to reset a form after successful submit. Which approach is most straightforward?",
+    options: [
+      "Uncontrolled inputs with refs only",
+      "Controlled inputs: set state back to initial values",
+      "Reload the page",
+      "Use setTimeout to clear fields",
+    ],
+    correct: 1,
+    explanation:
+      "In controlled forms, reset is deterministic: just set state back to initial values. This is one of the practical benefits of keeping React as the source of truth.",
+  },
+  {
     question: "What does this code output?",
     code: `const [count, setCount] = useState(0)\n\nfunction handleClick() {\n  setCount(count + 1)\n  setCount(count + 1)\n  setCount(count + 1)\n}\n// After clicking once, count is:`,
     options: ["3", "1", "0", "undefined"],
