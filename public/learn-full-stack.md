@@ -98,6 +98,7 @@ Test your knowledge with the interactive quiz! Multiple choice questions coverin
   - [Environment Variables](#environment-variables)
 - [React](#react)
   - [The React Mental Model](#the-react-mental-model)
+  - [React Mental Model Concepts](#react-mental-model-concepts)
   - [State In-Depth](#state-in-depth)
   - [Props In-Depth](#props-in-depth)
   - [Re-rendering In-Depth](#re-rendering-in-depth)
@@ -2531,6 +2532,21 @@ console.log(process.env.PORT); // "3000"
 ### The React Mental Model
 
 Understanding React's core philosophy is crucial for interviews.
+
+#### React Mental Model Concepts
+
+- State is not a variable; it is a snapshot for that render.
+- Setting state requests a new render; it does not mutate the current one.
+- Effects synchronize with external systems, not with your own state logic.
+- Render should stay pure: same inputs, same output.
+- Event handlers run because users interact; renders run because state or props changed.
+- Props are read-only inputs from parents.
+- A re-render is not a DOM repaint; React first computes what changed.
+- Keys define identity in lists, not visual order.
+- Refs hold mutable values without triggering re-renders.
+- Derive values during render when possible; avoid duplicated derived state.
+- React preserves state by position in the tree, not by component name.
+- Think in data flow: props down, events up.
 
 #### Declarative vs Imperative
 
