@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" font-family="system-ui,-apple-system,sans-serif">
+<rect width="720" height="420" fill="#fafafa" rx="12"/>
+<text x="360" y="36" text-anchor="middle" font-size="16" font-weight="700" fill="#171717">Cascading Health-Probe Failure</text>
+<defs><marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#a3a3a3"/></marker></defs>
+<rect x="248" y="68" width="224" height="44" rx="8" fill="#dc2626" fill-opacity="0.1" stroke="#dc2626" stroke-width="1.5"/>
+<text x="360" y="96" text-anchor="middle" font-size="13" fill="#dc2626" font-weight="600">1. Health probes kill ~50 containers</text>
+<rect x="490" y="140" width="210" height="44" rx="8" fill="#ea580c" fill-opacity="0.1" stroke="#ea580c" stroke-width="1.5"/>
+<text x="595" y="168" text-anchor="middle" font-size="13" fill="#ea580c" font-weight="600">2. Load shifts to survivors</text>
+<rect x="490" y="244" width="210" height="52" rx="8" fill="#d97706" fill-opacity="0.1" stroke="#d97706" stroke-width="1.5"/>
+<text x="595" y="266" text-anchor="middle" font-size="12" fill="#d97706" font-weight="600">3. Frontends reconnect</text>
+<text x="595" y="284" text-anchor="middle" font-size="12" fill="#d97706" font-weight="600">WebSockets all at once</text>
+<rect x="248" y="326" width="224" height="44" rx="8" fill="#dc2626" fill-opacity="0.1" stroke="#dc2626" stroke-width="1.5"/>
+<text x="360" y="354" text-anchor="middle" font-size="13" fill="#dc2626" font-weight="600">4. Survivors slow, fail checks</text>
+<rect x="20" y="244" width="210" height="52" rx="8" fill="#7c3aed" fill-opacity="0.1" stroke="#7c3aed" stroke-width="1.5"/>
+<text x="125" y="266" text-anchor="middle" font-size="13" fill="#7c3aed" font-weight="600">5. Massive traffic spike</text>
+<text x="125" y="284" text-anchor="middle" font-size="13" fill="#7c3aed" font-weight="600">on fewer containers</text>
+<rect x="20" y="140" width="210" height="44" rx="8" fill="#be185d" fill-opacity="0.1" stroke="#be185d" stroke-width="1.5"/>
+<text x="125" y="168" text-anchor="middle" font-size="13" fill="#be185d" font-weight="600">6. Probes kill more containers</text>
+<path d="M472,100 Q510,120 500,140" fill="none" stroke="#a3a3a3" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M595,184 L595,244" fill="none" stroke="#a3a3a3" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M490,280 Q460,320 472,326" fill="none" stroke="#a3a3a3" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M248,348 Q200,330 230,296" fill="none" stroke="#a3a3a3" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M125,244 L125,184" fill="none" stroke="#a3a3a3" stroke-width="1.5" marker-end="url(#ah)"/>
+<path d="M230,152 Q250,120 248,108" fill="none" stroke="#a3a3a3" stroke-width="1.5" marker-end="url(#ah)"/>
+<text x="360" y="232" text-anchor="middle" font-size="28" fill="#dc2626" font-weight="700" opacity="0.15">REPEAT</text>
+<text x="360" y="404" text-anchor="middle" font-size="11" fill="#a3a3a3">3-hour production outage resolved by rollback to ws4redis</text>
+</svg>
