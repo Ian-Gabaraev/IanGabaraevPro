@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
@@ -9,6 +9,13 @@ import "./Blog.css";
 const Blog = () => {
   const posts = getAllPosts();
   const [activeTags, setActiveTags] = useState<string[]>([]);
+
+  useEffect(() => {
+    document.title = "Blog | Ian Gabaraev — Software Engineering, DSP & Machine Learning";
+    return () => {
+      document.title = "Ian Gabaraev | Lead Software Engineer | Python, React, Cloud Expert";
+    };
+  }, []);
 
   // Extract all unique tags from posts
   const allTags = useMemo(() => {
@@ -44,9 +51,6 @@ const Blog = () => {
   return (
     <section className="blog-page">
       <Helmet>
-        <title>
-          Blog | Ian Gabaraev — Software Engineering, DSP & Machine Learning
-        </title>
         <meta
           name="description"
           content="Articles by Ian Gabaraev on software engineering, full stack development, bioacoustics, DSP, machine learning, React, Python, and cloud architecture."
@@ -59,6 +63,7 @@ const Blog = () => {
         />
         <meta property="og:url" content="https://iangabaraev.com/blog" />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://iangabaraev.com/og-image.png" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",

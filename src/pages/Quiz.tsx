@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -13,6 +13,13 @@ import "./Quiz.css";
 type QuizState = "select-quiz" | "configure" | "quiz" | "results";
 
 const Quiz = () => {
+  useEffect(() => {
+    document.title = "Quiz | Test Your Frontend & AWS Skills | Ian Gabaraev";
+    return () => {
+      document.title = "Ian Gabaraev | Lead Software Engineer | Python, React, Cloud Expert";
+    };
+  }, []);
+
   const [state, setState] = useState<QuizState>("select-quiz");
   const [selectedQuiz, setSelectedQuiz] = useState<QuizDefinition | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -116,7 +123,6 @@ const Quiz = () => {
   return (
     <section className="quiz-page">
       <Helmet>
-        <title>Quiz | Test Your Frontend & AWS Skills | Ian Gabaraev</title>
         <meta
           name="description"
           content="Free interactive quizzes on JavaScript, TypeScript, React, Node.js, CSS, and AWS. Test your frontend development and cloud skills with 200+ questions."
@@ -132,6 +138,7 @@ const Quiz = () => {
         />
         <meta property="og:url" content="https://iangabaraev.com/quiz" />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://iangabaraev.com/og-image.png" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
