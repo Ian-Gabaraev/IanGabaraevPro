@@ -10,6 +10,259 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    favorite: true,
+    slug: "upgrading-to-django-6",
+    title: "Upgrading to Django 6: Everything That Went Wrong",
+    date: "2026-04-25",
+    excerpt:
+      "Six months, 500+ containers, one brutal outage, and a WebSocket migration that nearly broke everything. A war story about upgrading a massive telehealth platform from Django 3 to Django 6.",
+    tags: [
+      "Python",
+      "Django",
+      "DevOps",
+      "Azure",
+      "Redis",
+      "WebSockets",
+      "Series",
+    ],
+    content: `
+# Upgrading to Django 6: Everything That Went Wrong
+
+<img src="/images/django6/hero.svg" alt="Dramatic diagram showing Django 6, Redis Pub/Sub, django-channels, and Azure containers connected in a dark infrastructure layout — illustrating the complexity of a major Django upgrade" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+
+---
+
+Moving a large-scale telehealth platform — 500+ containers, 6,000 concurrent users at peak, WebRTC calls across 65 languages — from Django 3 to Django 6 was a six-month odyssey. We went from Python 3.9 / Django 3 to Python 3.12 / Django 6, stopping at Django 5 along the way.
+
+Here is everything that broke, everything we learned, and the one outage that made us rethink our entire deployment strategy.
+
+<img src="/images/django6/stack-before-after.svg" alt="Architecture comparison: Django 3 with uWSGI and ws4redis versus Django 6 with Gunicorn, Uvicorn, and django-channels" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+
+---
+
+## The Obvious Stuff (That Still Hurt)
+
+### Deprecations
+
+Django does not remove things overnight. It deprecates them, warns you for two major versions, and then pulls the rug. By Django 6, that rug covered a lot of ground.
+
+One example: \`index_together\` — gone. Replaced by \`Meta.indexes\`. Straightforward in theory, tedious in practice when you have hundreds of models accumulated over years of development.
+
+### Third-Party Library Compatibility
+
+Some libraries kept up with Django's pace. Many did not. In several cases, we had to fork packages and submit our own patches to make them Django 6–compatible. Each fork added to the maintenance surface. Each patch extended the timeline.
+
+### Database Migrations
+
+Django's ORM changes between major versions meant rewriting migrations. That alone is painful enough — ensuring data preservation across environments, testing rollback paths, verifying every migration on staging before it touches production.
+
+But the real trap was **third-party migrations**.
+
+We upgraded \`django-rest-knox\` from version 3 to 5.0.2. Knox 5 shipped with three new migrations that renamed columns and deleted another. On its own, not a big deal. But this meant that rolling back Django was no longer as simple as toggling a version number. A rollback now required automated SQL scripts to restore renamed columns to their original state. What should have been a five-minute revert became a carefully orchestrated database operation.
+
+### Testing
+
+Every major version upgrade demands a full audit of your test suite. New behaviors, changed defaults, deprecated patterns that silently passed before — all of it surfaces during testing. We rewrote and expanded significant portions of our tests. Necessary work, but it added weeks to the timeline.
+
+---
+
+## The WebSocket Problem
+
+This is where things got interesting.
+
+We were running \`ws4redis\` — a package that, by 2026, had been abandoned for years. The last meaningful updates were from our own team. We would have happily kept using it, if not for a breaking change introduced in Django 4.
+
+### What Broke
+
+Django 4 changed how incoming requests are handled at the WSGI layer. The \`LimitedStream\` class no longer exposes the underlying socket object. In Django 3, \`ws4redis\` could reach into the request, grab the raw socket, and use it for WebSocket communication. In Django 4+, that socket is wrapped in an object with no useful public interface.
+
+Compare the two:
+
+- **Django 3** — [\`LimitedStream\` exposes \`self.stream\`](https://github.com/django/django/blob/2a04e24d2dfc8e60a66e4369d970913cb2112d91/django/core/handlers/wsgi.py#L18)
+- **Django 5+** — [\`LimitedStream\` wraps the stream with no public access](https://github.com/django/django/blob/da8fed601625466889849bd6383a2a78d1c17809/django/core/handlers/wsgi.py#L23)
+
+The socket \`ws4redis\` depended on simply was not there anymore. The package was dead.
+
+### The Patch Attempt
+
+Before giving up on \`ws4redis\`, I [patched the code](https://github.com/jrief/django-websocket-redis/commit/8aa0cbd37f1f19df2748bfc47d1154ad225f8f62) to stop accessing the \`stream\` attribute directly.
+
+Load testing looked fine. Messages arrived. Everything seemed to work.
+
+Then our telemetry lit up with a stream of random, context-less errors. None of them pointed to a clear root cause. We had a package that *mostly* worked but was provably unreliable under real-world conditions. Releasing that to 6,000 users on a healthcare platform was not an option.
+
+So \`django-channels\` it was.
+
+---
+
+## The django-channels Tax
+
+Switching to \`django-channels\` solved the WebSocket compatibility problem. It also introduced three new ones.
+
+### Problem 1: The Sync-Async Bridge
+
+\`django-channels\` is asynchronous by design. It uses ASGI and Python's \`asyncio\` event loop under the hood. Our codebase, like most Django projects, was overwhelmingly synchronous.
+
+Channels provides \`async_to_sync\` and \`sync_to_async\` bridge functions to let the two worlds coexist. In practice, this means that every time a synchronous Django view needs to send a WebSocket message, it has to:
+
+1. Spin up or acquire an event loop
+2. Schedule the coroutine on that loop
+3. Block the current thread until the coroutine completes
+
+Each bridge crossing added roughly **50 milliseconds** of latency on average. Invisible in local development with a single container and a handful of test connections. Very visible in production with hundreds of containers and thousands of users, where that 50ms compounds across every API call that triggers a WebSocket message.
+
+### Problem 2: Redis Under Pressure
+
+The default \`RedisChannelLayer\` in \`django-channels\` performs expensive bookkeeping on every message send. Specifically, it calls \`ZREMRANGEBYSCORE\` on Redis sorted sets to prune stale channels from groups.
+
+\`ZREMRANGEBYSCORE\` is an O(log(N) + M) operation — where N is the total number of elements in the sorted set and M is the number of elements removed. On every single group message. At scale, with thousands of groups and constant messaging, this turned our Redis instance into a bottleneck. Latency spiked. Real users felt it.
+
+The irony: we did not even need this cleanup. Most of our groups contained a single channel, and we already handled disconnects explicitly in our consumers.
+
+The fix was switching to \`RedisPubSubChannelLayer\`, which uses Redis Pub/Sub instead of sorted sets. Lightweight, no expensive bookkeeping, no cache suffocation.
+
+### Problem 3: Heartbeats at Scale
+
+Our platform uses periodic WebSocket heartbeats to track user presence — whether an interpreter is available, whether a client is still on the call. Users receive a heartbeat every few seconds.
+
+**Attempt 1: Broadcast Groups**
+
+The first approach was simple: one group per user for direct messages, plus a few shared groups for broadcasting heartbeats. Locally, this worked perfectly.
+
+In production, with 500+ containers but a single shared Redis cluster, group name collisions became a real concern. I isolated groups by combining the hostname and PID of the worker process. It worked, but the cache keys became absurdly long — group name + username + hostname + PID — and the overhead of tracking all of these across the environment was significant.
+
+**Attempt 2: Direct Per-User Messages**
+
+We scrapped broadcast groups for heartbeats and switched to sending messages directly to each user's connection:
+
+\`\`\`python
+await self.send(text_data="heartbeat")
+\`\`\`
+
+The tradeoff: without broadcast groups, each connected user needs a dedicated \`asyncio\` task running an infinite loop:
+
+\`\`\`python
+async def send_heartbeat(self):
+    try:
+        while True:
+            await asyncio.sleep(settings.CHANNELS_HEARTBEAT_INTERVAL_SEC)
+            await self.send(text_data=settings.CHANNELS_HEARTBEAT)
+    except asyncio.CancelledError:
+        pass
+\`\`\`
+
+That means thousands of concurrent coroutines across the platform. We had long discussions about whether this was sustainable. In the end, we had close to a thousand Python processes spread across 500+ containers — the per-process load was minimal. We bit the bullet. It worked.
+
+---
+
+## The Sync Send Hack
+
+We still had the 50ms bridge tax every time a synchronous API view needed to push a WebSocket message. Three approaches were considered:
+
+<img src="/images/django6/sync-bridge.svg" alt="Diagram comparing async_to_sync bridge adding 50ms latency versus direct Redis publish with near-zero overhead" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+
+**Approach 1: Daemon Thread with Isolated Event Loop**
+
+The idea was to spin up a persistent event loop in a daemon thread and dispatch all WebSocket sends to it, bypassing the \`async_to_sync\` bridge entirely.
+
+On paper, elegant. In practice, dangerous. Daemon threads are fire-and-forget — if they crash, the main process has no way to detect or recover from the failure. In a healthcare platform where WebSocket messages drive real-time call routing, a silently dead daemon thread means frozen call logic with no error and no recovery path short of restarting the entire container.
+
+I rejected this approach.
+
+**Approach 2: Direct Redis Publish**
+
+Instead of going through the \`django-channels\` layer from sync code, we extracted the serialization logic and published messages directly to Redis:
+
+\`\`\`python
+backend = settings.CHANNEL_LAYERS["default"]["BACKEND"]
+if backend == "channels_redis.pubsub.RedisPubSubChannelLayer":
+    serialized = channel_layer._serializer.serialize(message)
+    redis_conn = get_ws_redis_conn()
+
+    if len(group_names) > 1:
+        with redis_conn.pipeline() as pipe:
+            for group_name in group_names:
+                pipe.publish(f"asgi__group__{group_name}", serialized)
+            pipe.execute()
+    else:
+        redis_conn.publish(
+            f"asgi__group__{group_names[0]}", serialized
+        )
+else:
+    for group_name in group_names:
+        async_to_sync(channel_layer.group_send)(group_name, message)
+\`\`\`
+
+Yes, it is a hack. It reaches into the internal channel naming convention of \`django-channels\` and publishes directly. The risk is that a future version of \`channels-redis\` changes its internal format and this breaks silently.
+
+The tradeoff was worth it. The 50ms bridge penalty disappeared. The function is still in production today, and we keep a close eye on it with every \`channels-redis\` upgrade.
+
+---
+
+## The Three-Hour Outage
+
+We rolled out \`django-channels\` to production. It survived for exactly three hours before the entire platform went down.
+
+Surface-level metrics looked acceptable — no application errors, no obvious failures. Just mysterious, seemingly random spikes in Redis stats and container restarts.
+
+After weeks of investigation, we found the root cause: **Azure Container Apps health probes**.
+
+Something in our deployment configuration — the combination of uWSGI, Channels, and the new ASGI stack — made the health probes interpret normal behavior as unhealthy. The probes became aggressive. Containers were being killed and restarted in waves.
+
+Here is the cascade:
+
+<img src="/images/django6/cascade-failure.svg" alt="Circular diagram showing cascading health probe failure: probes kill containers, load shifts, frontends reconnect, survivors fail, repeat" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+
+1. Health probes kill ~50 containers out of 500+
+2. The load from those dead containers shifts to the surviving ones
+3. Frontends detect lost WebSocket connections and immediately attempt reconnection — all at once
+4. Surviving containers absorb a massive traffic spike
+5. The spike slows them down enough to fail health checks
+6. Health probes kill them too
+7. Repeat
+
+A classic cascading failure. We resolved the immediate outage with a rollback — turning off \`django-channels\` entirely and falling back to the patched \`ws4redis\` while we figured out the infrastructure side.
+
+The fix came in a separate release:
+
+- **Replaced uWSGI with Gunicorn + Uvicorn workers** — a far more common and better-supported stack for ASGI applications
+- **Switched from HTTP health probes to TCP probes** — less overhead, less chance of false negatives under load
+- **Tuned probe intervals and failure thresholds** to be less trigger-happy
+
+The result: **zero unscheduled container restarts**. The app was stable.
+
+---
+
+## What We Should Have Done Differently
+
+In hindsight, load testing would have caught most of these issues before they reached production. The reality was that our environment was extraordinarily difficult to replicate.
+
+This was not a content management system. This was a real-time communication platform — WebRTC calls, interpreters joining from every timezone, ten different call establishment flows, thousands of concurrent background tasks ranging from milliseconds to an hour in duration.
+
+You can copy a production database. You cannot copy 6,000 users doing unpredictable things every second. The entropy of a live production environment — the noise, the edge cases, the timing-dependent failures — was nearly impossible to simulate without dedicated load testing infrastructure that we did not yet have.
+
+That is the real lesson: **for systems at this scale and complexity, invest in production-grade load testing infrastructure before you start the upgrade, not after the first outage.**
+
+---
+
+## Summary
+
+| Challenge | Solution |
+|---|---|
+| \`index_together\` removed | Migrated to \`Meta.indexes\` |
+| Third-party libraries incompatible | Forked and patched |
+| Knox migrations blocked rollback | Automated SQL rollback scripts |
+| \`ws4redis\` dead on Django 4+ | Migrated to \`django-channels\` |
+| \`async_to_sync\` bridge latency (~50ms) | Direct Redis publish from sync code |
+| \`RedisChannelLayer\` choking Redis | Switched to \`RedisPubSubChannelLayer\` |
+| Heartbeats at scale | Per-user asyncio tasks |
+| Azure health probes cascading failure | Gunicorn + Uvicorn, TCP probes |
+| Unreproducible prod environment | Lesson learned: invest in load testing early |
+
+Six months. Three major Django versions. One outage that rewired how we think about deployments. The platform is faster, more maintainable, and running on a modern stack. Was it worth it? Ask me again after the next major upgrade.
+    `.trim(),
+  },
+  {
     slug: "unknown-bat",
     title: "The Tale of an Unknown Bat: Field Recording in Vietnamese Caves",
     date: "2026-04-17",
