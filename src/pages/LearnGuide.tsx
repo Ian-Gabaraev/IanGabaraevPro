@@ -78,6 +78,7 @@ const LearnGuide = () => {
     <article className="learn-guide-page">
       <Helmet>
         <meta name="description" content={guide.excerpt} />
+        <meta name="keywords" content={guide.tags.join(", ")} />
         <link
           rel="canonical"
           href={`https://iangabaraev.com/learn/${guide.slug}`}
@@ -90,6 +91,60 @@ const LearnGuide = () => {
         />
         <meta property="og:type" content="article" />
         <meta property="article:published_time" content={guide.date} />
+        <meta property="article:author" content="Ian Gabaraev" />
+        {guide.tags.map((tag) => (
+          <meta key={tag} property="article:tag" content={tag} />
+        ))}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content={`${guide.title} | Ian Gabaraev`}
+        />
+        <meta name="twitter:description" content={guide.excerpt} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "TechArticle",
+            headline: guide.title,
+            description: guide.excerpt,
+            datePublished: guide.date,
+            dateModified: guide.date,
+            keywords: guide.tags.join(", "),
+            author: {
+              "@type": "Person",
+              name: "Ian Gabaraev",
+              url: "https://iangabaraev.com",
+            },
+            publisher: { "@type": "Person", name: "Ian Gabaraev" },
+            mainEntityOfPage: `https://iangabaraev.com/learn/${guide.slug}`,
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "https://iangabaraev.com",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Learn",
+                item: "https://iangabaraev.com/learn",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: guide.title,
+                item: `https://iangabaraev.com/learn/${guide.slug}`,
+              },
+            ],
+          })}
+        </script>
       </Helmet>
 
       <div className="container">
