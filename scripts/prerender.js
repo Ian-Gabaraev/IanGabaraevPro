@@ -276,3 +276,46 @@ for (const route of routes) {
 }
 
 console.log(`\nPrerendered ${routes.length} routes with body content.`);
+
+// --- Generate RSS feed ---
+
+const sortedPosts = [...posts].sort(
+  (a, b) => new Date(b.date) - new Date(a.date),
+);
+
+const rssItems = sortedPosts
+  .map(
+    (post) =>
+      `    <item>
+      <title>${escapeHtml(post.title)}</title>
+      <link>${BASE_URL}/blog/${post.slug}</link>
+      <guid isPermaLink="true">${BASE_URL}/blog/${post.slug}</guid>
+      <description>${escapeHtml(post.excerpt)}</description>
+      <pubDate>${new Date(post.date).toUTCString()}</pubDate>
+      <author>iandevhkt@gmail.com (Ian Gabaraev)</author>
+      ${post.tags.map((t) => `<category>${escapeHtml(t)}</category>`).join("\n      ")}
+    </item>`,
+  )
+  .join("\n");
+
+const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ian Gabaraev — Blog</title>
+    <link>${BASE_URL}/blog</link>
+    <description>Articles by Ian Gabaraev on software engineering, Django, Python, bioacoustics, DSP, machine learning, and technical deep dives.</description>
+    <language>en-us</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <atom:link href="${BASE_URL}/feed.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>${BASE_URL}/favicon-192.png</url>
+      <title>Ian Gabaraev — Blog</title>
+      <link>${BASE_URL}/blog</link>
+    </image>
+${rssItems}
+  </channel>
+</rss>`;
+
+writeFileSync(join(DIST, "feed.xml"), rssFeed);
+console.log("  ✓ /feed.xml (RSS feed)");
+

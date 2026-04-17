@@ -7,6 +7,9 @@ Allow: /
 # Sitemap location
 Sitemap: https://iangabaraev.com/sitemap.xml
 
+# RSS feed
+# https://iangabaraev.com/feed.xml
+
 # Disallow admin/private paths (none currently)
 # Disallow: /admin/
 
