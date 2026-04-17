@@ -11,6 +11,15 @@ const LearnGuide = () => {
   const { slug } = useParams<{ slug: string }>();
   const guide = slug ? getGuideBySlug(slug) : undefined;
 
+  useEffect(() => {
+    if (guide) {
+      document.title = `${guide.title} | Ian Gabaraev`;
+    }
+    return () => {
+      document.title = "Ian Gabaraev | Lead Software Engineer | Python, React, Cloud Expert";
+    };
+  }, [guide]);
+
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -68,7 +77,6 @@ const LearnGuide = () => {
   return (
     <article className="learn-guide-page">
       <Helmet>
-        <title>{guide.title} | Ian Gabaraev</title>
         <meta name="description" content={guide.excerpt} />
         <link
           rel="canonical"
