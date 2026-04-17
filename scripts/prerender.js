@@ -213,7 +213,7 @@ function getBodyContent(route) {
 function generateHTML(route) {
   let html = template;
 
-  html = html.replace(/<title>[^<]*<\/title>/, `<title>${route.title}</title>`);
+  html = html.replace(/<title[^>]*>[^<]*<\/title>/, `<title>${route.title}</title>`);
   html = html.replace(
     /<meta name="title" content="[^"]*"/,
     `<meta name="title" content="${route.title}"`,
