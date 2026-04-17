@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
@@ -11,6 +11,15 @@ import "./BlogPost.css";
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = slug ? getPostBySlug(slug) : undefined;
+
+  useEffect(() => {
+    if (post) {
+      document.title = `${post.title} | Ian Gabaraev`;
+    }
+    return () => {
+      document.title = "Ian Gabaraev | Lead Software Engineer | Python, React, Cloud Expert";
+    };
+  }, [post]);
 
   if (!post) {
     return <Navigate to="/blog" replace />;
@@ -151,7 +160,6 @@ const BlogPost = () => {
   return (
     <article className="blog-post-page">
       <Helmet>
-        <title>{post.title} | Ian Gabaraev</title>
         <meta name="description" content={post.excerpt} />
         <link
           rel="canonical"
