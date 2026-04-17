@@ -172,6 +172,7 @@ const BlogPost = () => {
           content={`https://iangabaraev.com/blog/${post.slug}`}
         />
         <meta property="og:type" content="article" />
+        <meta property="og:image" content="https://iangabaraev.com/og-image.png" />
         <meta property="article:published_time" content={post.date} />
         <meta property="article:author" content="Ian Gabaraev" />
         {post.tags.map((tag) => (
@@ -184,6 +185,7 @@ const BlogPost = () => {
             headline: post.title,
             description: post.excerpt,
             datePublished: post.date,
+            dateModified: post.date,
             author: {
               "@type": "Person",
               name: "Ian Gabaraev",

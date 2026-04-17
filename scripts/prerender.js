@@ -243,16 +243,16 @@ function generateHTML(route) {
     `<meta property="og:type" content="${route.og.type}"`,
   );
   html = html.replace(
-    /<meta property="twitter:title" content="[^"]*"/,
-    `<meta property="twitter:title" content="${route.title}"`,
+    /<meta name="twitter:title" content="[^"]*"/,
+    `<meta name="twitter:title" content="${route.title}"`,
   );
   html = html.replace(
-    /<meta property="twitter:description" content="[^"]*"/,
-    `<meta property="twitter:description" content="${route.description}"`,
+    /<meta name="twitter:description" content="[^"]*"/,
+    `<meta name="twitter:description" content="${route.description}"`,
   );
   html = html.replace(
-    /<meta property="twitter:url" content="[^"]*"/,
-    `<meta property="twitter:url" content="${BASE_URL}${route.path}"`,
+    /<meta name="twitter:url" content="[^"]*"/,
+    `<meta name="twitter:url" content="${BASE_URL}${route.path}"`,
   );
 
   // Inject body content into <div id="root">

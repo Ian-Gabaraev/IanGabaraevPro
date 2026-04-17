@@ -90,6 +90,7 @@ const LearnGuide = () => {
           content={`https://iangabaraev.com/learn/${guide.slug}`}
         />
         <meta property="og:type" content="article" />
+        <meta property="og:image" content="https://iangabaraev.com/og-image.png" />
         <meta property="article:published_time" content={guide.date} />
         <meta property="article:author" content="Ian Gabaraev" />
         {guide.tags.map((tag) => (

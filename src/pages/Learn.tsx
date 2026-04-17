@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -7,6 +8,13 @@ import "./Learn.css";
 
 const Learn = () => {
   const guides = getAllGuides();
+
+  useEffect(() => {
+    document.title = "Learn | Ian Gabaraev";
+    return () => {
+      document.title = "Ian Gabaraev | Lead Software Engineer | Python, React, Cloud Expert";
+    };
+  }, []);
 
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString("en-US", {
@@ -19,7 +27,6 @@ const Learn = () => {
   return (
     <section className="learn-list-page">
       <Helmet>
-        <title>Learn | Ian Gabaraev</title>
         <meta
           name="description"
           content="Learning guides on JavaScript, TypeScript, React, Node.js, and practical full stack engineering topics."
@@ -32,6 +39,7 @@ const Learn = () => {
         />
         <meta property="og:url" content="https://iangabaraev.com/learn" />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://iangabaraev.com/og-image.png" />
       </Helmet>
 
       <div className="container">
