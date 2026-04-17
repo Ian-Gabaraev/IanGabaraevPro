@@ -10,12 +10,85 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
+    slug: "unknown-bat",
+    title: "The Tale of an Unknown Bat: Field Recording in Vietnamese Caves",
+    date: "2026-04-17",
+    excerpt:
+        "Hunting for bat calls with a 256kHz ultrasonic microphone — from neighborhood parks to pitch-black caves in the Marble Mountains.",
+    tags: [
+      "Python",
+      "DSP",
+      "Machine Learning",
+      "Bioacoustics",
+      "Wildlife",
+      "Series",
+      "Field Recording",
+    ],
+    content: `
+# The Tale of an Unknown Bat #1: Field Recording in Vietnamese Caves
+
+---
+
+As with any machine learning project — **data is king**, and having plenty of it can make the journey significantly smoother.
+
+For BatSonar, the data primarily consists of WAVE files capturing bat vocalizations recorded using an ultrasonic microphone. This is a niche piece of tech you won't find at your local electronics store. I sourced mine — a **Pettersson Elektronik U256** — all the way from Uppsala, Sweden, and had it shipped to Da Nang, Vietnam.
+
+The U256 offers a sampling rate of **256 kHz**, providing a comfortable and reliable target frequency range just below the Nyquist limit — around **20–105 kHz**. This range is ample for most bat species.
+
+## Scouting Locations
+
+With the microphone in hand, I mapped out my local area and identified three "prime" locations for recording:
+
+- A **neighborhood park** with a pond and a golf course
+- A **sprawling rice field** about 20 km away in Hoi An
+- A **massive cave** at the base of the Marble Mountains
+
+---
+
+## First Stop: The Park
+
+I started at the park around 6 p.m., a time I had noted as prime bat-spotting from seeing them zip past my window at dusk. It was drizzling lightly, but I figured the rain wouldn't be an issue.
+
+Once there, I plugged in the mic and began monitoring. The mic captured a medley of sounds — cicadas, crickets, and frogs — but nothing ultrasonic.
+
+A bit discouraged, I scanned the skies and noticed enormous birds circling silently and ominously overhead. Could these predators be keeping the bats away? Perhaps.
+
+I decided to call it a night at the park and headed for my next destination.
+
+---
+
+## Into the Cave
+
+I arrived at the cave entrance around 8 p.m. It was technically "closed" but with no physical barriers, I ventured inside.
+
+It was dark — no, **pitch black** — and the echo of raindrops sounded like distant fireworks in the cavern's halls. Navigating a narrow passage, I emerged into a vast chamber, dimly lit by a single candle near a statue of Lady Buddha.
+
+*(As I'd learned during a recent visit to the Marble Mountains, the Vietnamese often depict Buddha as female — a fascinating cultural nuance.)*
+
+I set up the mic, hit "record," and voilà — there it was on the sonogram: the characteristic **"triangles"** of bat calls. The bats were definitely here, chattering away, possibly gossiping about the intruder who dared enter their lair.
+
+Curious, I explored deeper into the cave, where the chambers grew increasingly larger. After two solid hours of recording bat vocalizations, I decided to call it a night.
+
+On my way out, I bumped into a security guard making his rounds. The mutual surprise of encountering someone in such a setting at that hour made the interaction feel oddly surreal.
+
+---
+
+## A Mind-Blowing Discovery
+
+The following day would prove unforgettable.
+
+As much as I would love to dive into it all today, let me pause at a cliffhanger.
+
+*Next up: What I found when I analyzed the recordings — and why it changed everything.*
+    `.trim(),
+  },
+  {
     favorite: true,
     slug: "first-200ft-dive",
     title: "My First 200ft Dive Was My First Close Call",
     date: "2026-04-05",
     excerpt:
-      "Side mount diving gave me confidence, redundancy, and perfect trim. It also gave me the audacity to solo-descend to 60 meters — and learn why the ocean does not care about your gear.",
+        "Side mount diving gave me confidence, redundancy, and perfect trim. It also gave me the audacity to solo-descend to 60 meters — and learn why the ocean does not care about your gear.",
     tags: ["Diving", "Side Mount", "Technical Diving", "Deep Diving"],
     content: `
 # My First 200ft Dive Was My First Close Call
@@ -76,7 +149,7 @@ Side mount diving remains one of the best decisions I have made. But the gear di
     title: "The Bat Sonar Project: Hearing What We Cannot",
     date: "2026-04-02",
     excerpt:
-      "Introducing an open-source ultrasonic bat detection system — where math, physics, programming, and machine learning collide.",
+        "Introducing an open-source ultrasonic bat detection system — where math, physics, programming, and machine learning collide.",
     tags: ["Python", "DSP", "Machine Learning", "Wildlife", "Series"],
     content: `
 # The Bat Sonar Project: Hearing What We Cannot
@@ -146,7 +219,7 @@ Gathering bat noise is definitely one of the best parts of this.
     title: "The Himalayas Called — And I Answered with a Laptop",
     date: "2026-03-27",
     excerpt:
-      "Remote work in Nepal sounds insane — until you try it. Affordable, connected, serene, and utterly unlike any digital nomad destination you have been to.",
+        "Remote work in Nepal sounds insane — until you try it. Affordable, connected, serene, and utterly unlike any digital nomad destination you have been to.",
     tags: [
       "Digital Nomad",
       "Nomad Atlas",
@@ -222,7 +295,7 @@ If you do decide to go, [Nomad Atlas](https://nomadatlas.dev) will do its best t
     title: "Why Bats? A Scuba Diver's Path to Bioacoustics",
     date: "2026-03-25",
     excerpt:
-      "From hunting in darkness underwater to building ultrasonic bat detectors in Vietnamese caves — the science of echolocation.",
+        "From hunting in darkness underwater to building ultrasonic bat detectors in Vietnamese caves — the science of echolocation.",
     tags: ["Python", "DSP", "Bioacoustics", "Wildlife", "Science"],
     content: `
 # Why Bats? A Scuba Diver's Path to Bioacoustics
@@ -399,7 +472,7 @@ Coming up: FFT implementation details, spectrogram generation, and the neural ne
     title: "Building NomadAtlas: A Finance Dashboard for Digital Nomads",
     date: "2026-03-20",
     excerpt:
-      "How I built a personal finance and lifestyle dashboard using React 19, Vite, and real-time APIs.",
+        "How I built a personal finance and lifestyle dashboard using React 19, Vite, and real-time APIs.",
     tags: ["React", "TypeScript", "Nomad Atlas", "Digital Nomad"],
     content: `
 # Building NomadAtlas: A Finance Dashboard for Digital Nomads
@@ -439,7 +512,7 @@ Check it out at [nomadatlas.dev](https://nomadatlas.dev).
     title: "Building a Real-Time Ultrasonic Bat Detector with Python",
     date: "2026-03-15",
     excerpt:
-      "Capturing bat calls at 192kHz and using DSP techniques for species identification.",
+        "Capturing bat calls at 192kHz and using DSP techniques for species identification.",
     tags: ["Python", "DSP", "Audio", "Wildlife"],
     content: `
 # Building a Real-Time Ultrasonic Bat Detector with Python
@@ -496,7 +569,7 @@ I'm building a neural network classifier using spectrograms to automate species 
     title: "Beautiful, Brutal, Honest — The Other Side of Nepal",
     date: "2026-03-31",
     excerpt:
-      "Nepal is stunning. It is also dangerous, polluted, heartbreaking, and boring after dark. Five reasons remote work in Nepal will never go mainstream.",
+        "Nepal is stunning. It is also dangerous, polluted, heartbreaking, and boring after dark. Five reasons remote work in Nepal will never go mainstream.",
     tags: [
       "Digital Nomad",
       "Nomad Atlas",
