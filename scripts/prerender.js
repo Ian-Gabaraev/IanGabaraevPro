@@ -76,7 +76,7 @@ const routes = [
     og: { type: "website" },
   },
   ...guideRoutes,
-  ...posts.map((post) => ({
+  ...posts.filter((post) => !post.hidden).map((post) => ({
     path: `/blog/${post.slug}`,
     title: `${post.title} | Ian Gabaraev`,
     description: post.excerpt,
@@ -346,7 +346,7 @@ console.log(`\nPrerendered ${routes.length} routes with body content.`);
 
 // --- Generate RSS feed ---
 
-const sortedPosts = [...posts].sort(
+const sortedPosts = [...posts].filter((p) => !p.hidden).sort(
   (a, b) => new Date(b.date) - new Date(a.date),
 );
 

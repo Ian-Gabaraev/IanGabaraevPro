@@ -6,6 +6,7 @@ export interface BlogPost {
   tags: string[];
   content: string;
   favorite?: boolean;
+  hidden?: boolean;
 }
 
 export const posts: BlogPost[] = [
@@ -1093,11 +1094,11 @@ Read the Nepal series for another off-the-beaten-path comparison: [Nepal: Pros](
 ];
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  return posts.find((post) => post.slug === slug);
+  return posts.find((post) => post.slug === slug && !post.hidden);
 }
 
 export function getAllPosts(): BlogPost[] {
-  return posts.sort((a, b) => {
+  return posts.filter((p) => !p.hidden).sort((a, b) => {
     if (a.favorite && !b.favorite) return -1;
     if (!a.favorite && b.favorite) return 1;
     return new Date(b.date).getTime() - new Date(a.date).getTime();
