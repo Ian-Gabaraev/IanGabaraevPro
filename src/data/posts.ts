@@ -1056,7 +1056,7 @@ Petra does not need introductions. It needs legs. Good ones.
 The entire site is spread across a massive valley, and the only way to see it is on foot. I walked 25 kilometers in a single day there. My legs had opinions about that for the rest of the week.
 
 <img src="/images/jordan/petra3.webp" alt="Rocky landscape viewed through a stone arch in Wadi Musa, Petra, Jordan" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
-<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Petra through the rock.</p>
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">I saw this can every single day, and months later it showed up on someone's Pexels profile!</p>
 
 <img src="/images/jordan/petra4.webp" alt="Carved tombs and rock architecture deep inside the Petra archaeological site" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
 <p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The deeper you go, the more you find. Entire neighborhoods carved from solid rock.</p>
