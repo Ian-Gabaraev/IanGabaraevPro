@@ -10,7 +10,7 @@ export interface BlogPost {
 
 export const posts: BlogPost[] = [
   {
-    favorite: true,
+    favorite: false,
     slug: "upgrading-to-django-6",
     title: "Upgrading to Django 6: Everything That Went Wrong",
     date: "2026-04-25",
@@ -921,6 +921,173 @@ If astrophotography is your thing, I may have just sold you on the idea of going
 Nepal is not a digital nomad destination — not in the way Bali, Lisbon, or Bangkok are. It has no digital nomad visa program, limited coworking infrastructure, unreliable roads, and a cost of living that is low for a reason. But it has something those places will never have: an unfiltered, unkempt, unapologetic honesty. Nepal does not try to sell itself to you. It just exists — and if you can handle what it is, working remotely from the Himalayas will give you something no coworking space ever will.
 
 Read the first part of this series: [The Himalayas Called — And I Answered with a Laptop](/blog/nepal-pros).
+    `.trim(),
+  },
+  {
+    slug: "jordan-digital-nomad",
+    favorite: true,
+    title: "Jordan for Digital Nomads: Holy, Expensive, and Worth Every Dinar",
+    date: "2026-04-19",
+    excerpt:
+      "From sleepless nights in Amman to 25km walks through Petra — Jordan is not cheap, not easy, and not for everyone. But it has something most nomad destinations do not: soul.",
+    tags: [
+      "Digital Nomad",
+      "Jordan",
+      "Remote Work",
+      "Travel",
+      "Middle East",
+    ],
+    content: `
+# Jordan for Digital Nomads: Holy, Expensive, and Worth Every Dinar
+
+<img src="/images/jordan/pegasus.webp" alt="Pegasus Airlines jet at Antalya Airport at night before a flight to Amman, Jordan" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">2 AM at Antalya. The yellow Pegasus jet — on time for once — waiting to take me to Amman.</p>
+
+---
+
+It was 2 AM at Antalya International Airport. I was sitting by the gate with a mild flu I had caught during 90 days of complete isolation in Antalya's mountains — that deserves its own post. The yellow Pegasus jet was already waiting outside. A few minutes later we started boarding. Pegasus was not like its usual self that day. It departed and arrived right on the clock.
+
+I remember the first breath of air I took outside Queen Alia Airport. Cold, fresh, piercing. I looked up — a bright crescent moon with a myriad of stars scattered across the early morning sky. In the middle of a busy airport. I had never seen skies that clear in a city. I immediately regretted not bringing my tripod, which I had left in Kuala Lumpur. I still had my Sony A7M4 with the 24mm f/1.4, though. I figured I could put together a "tripod" with rocks and sticks if needed.
+
+---
+
+## The First Morning
+
+The first morning in Amman was simple and spectacular. Mind you — I had spent three months in a village in the mountains. There were barely any people there, but many dogs and even more cats. To be sitting outside McDonalds in Amman with a cup of warm coffee and watch the early morning traffic felt euphoric. I was back. Back to being around humans.
+
+<img src="/images/jordan/coffee.webp" alt="Morning coffee in Amman, Jordan — first morning after arriving from Turkey" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">First morning in Amman. Coffee, traffic, humans. Everything I had missed for three months.</p>
+
+Jordan made me feel something I had never felt before. There is a serenity about it. A better word would be "holiness." Walking the streets there for the first time feels like walking into a church. I loved that. My original plan was to stay for a week. After that cup of coffee I decided I was staying a full month.
+
+<img src="/images/jordan/holy.webp" alt="A street in Amman, Jordan with a serene, reverent atmosphere" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Something about Amman feels sacred. I do not know how else to describe it.</p>
+
+---
+
+## The Money Trap
+
+That meant looking for a place to stay. The Radisson in Amman runs about $150 a night — not cheap when you spend most of your time in Asia. In fact, Jordan is not "affordable" in the digital nomad sense at all. Housing, food, transport — everything costs more than you expect. But before we get into that, let me save you some money.
+
+> **Do not use ATMs in Jordan.** Any bank, local or international. The fees are predatory. I felt robbed when a Kasikorn Bank ATM in Bangkok charged me USD 10 for a withdrawal. I do not even know what I felt when an ATM in one of Amman's many malls charged me **USD 40 to withdraw USD 200**. Avoid ATMs entirely. Bring cash. Go to any "Abu Sheikha Exchange" — their rates are excellent and they are everywhere.
+
+---
+
+## Housing: The Noise Problem
+
+Back to housing. AirBnBs in Amman are plentiful. I found a good option, booked it for three days. My Egyptian landlord Muhammad met me downstairs, I checked in. Gorgeous room. I immediately thought I would extend.
+
+That night was horrendous. The bedroom windows faced the road, and I could not sleep a wink. Honking, shouting, wind — everything was playing its own Drum & Bass concert. I woke up groggy, found a hotel, and moved that morning.
+
+This is an issue that is very common in Amman. Your place might look amazing, but the chances of it being quiet are not high. **Before you pay for anything, go see the place in person. If it is close to the road — forget about it.**
+
+So what area would I recommend? The "Embassy Street" of Amman. Quiet, clean, very safe. There are some AirBnBs there, but you are looking at $2,000–$3,000 a month. My hotel — a simple room with a bathroom and daily cleaning — cost $1,500 a month.
+
+---
+
+## Food: The Best Problem to Have
+
+This is where you can go overboard easily. It is hard to lose weight in Amman, let me put it this way. Jordanian, Lebanese, Palestinian, Turkish, Greek, Italian — restaurants are everywhere, and they are all good. An amazing meal will cost you about $15–20. That includes hummus, meat, salad, a Coke, and dessert.
+
+---
+
+## Exploring Amman
+
+Now that you have eaten, you are going to feel adventurous. Lucky for you — there is plenty to see.
+
+Start with the **Amman Citadel**. See the ruins, and then walk outside and sit on the porch, pet a cat, and let the cold January air calm you down.
+
+<img src="/images/jordan/ruins.webp" alt="Ancient Roman ruins at the Amman Citadel in Jordan" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The Citadel. Two thousand years of history and one very friendly stray cat.</p>
+
+Next, walk ten minutes and you will be at the **ancient amphitheatre**. Climb the stairs all the way to the top and enjoy the view.
+
+<img src="/images/jordan/theatre1.webp" alt="Ancient Roman amphitheatre in Amman, Jordan — view from the top rows" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The amphitheatre from the top. It still hosts events to this day.</p>
+
+<img src="/images/jordan/theatre2.webp" alt="Panoramic view of Amman from the ancient amphitheatre" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The view from the amphitheatre steps. Amman spreads in every direction.</p>
+
+Wrap your day up with some hummus and warm bread at a Lebanese spot.
+
+---
+
+## The Verdict on Amman
+
+Is Amman a good place for a digital nomad? Here is the honest answer:
+
+If you do not mind paying for 5-star hotels — yes. You will enjoy it. The city has character, the food is outstanding, and the history is everywhere.
+
+If you want your own place, do not want to spend thousands, and do not tolerate noise — make it a vacation instead. A week, not a month.
+
+---
+
+## Petra: A Different Story
+
+But wait. There is more to Jordan than Amman. What about Petra?
+
+Now we are talking.
+
+A ride from Amman to Petra takes four hours by bus and costs about $10. Use the **Jett Bus** — it is reliable and comfortable. When you arrive, get yourself a 60 JOD three-day pass, and make sure you have the whole weekend to explore. Petra is enormous, and you will not see everything even in three days.
+
+<img src="/images/jordan/petra1.webp" alt="The ancient rock-carved Treasury building at Petra, Jordan" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The Treasury. No photograph prepares you for the scale of this.</p>
+
+Petra does not need introductions. It needs legs. Good ones.
+
+<img src="/images/jordan/petra2.webp" alt="Narrow canyon passage (the Siq) leading to Petra, Jordan" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The walk in. Every turn reveals something new carved into the rock face.</p>
+
+The entire site is spread across a massive valley, and the only way to see it is on foot. I walked 25 kilometers in a single day there. My legs had opinions about that for the rest of the week.
+
+<img src="/images/jordan/petra3.webp" alt="Panoramic view of the ancient ruins and rock formations at Petra" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+
+<img src="/images/jordan/petra4.webp" alt="Carved tombs and rock architecture deep inside the Petra archaeological site" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The deeper you go, the more you find. Entire neighborhoods carved from solid rock.</p>
+
+<img src="/images/jordan/petra5.webp" alt="Desert landscape and ancient structures in the far reaches of Petra" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">The far edge of the site. Most tourists never make it this far. Their loss.</p>
+
+---
+
+## Petra for Digital Nomads
+
+What about Petra — or rather, Wadi Musa, the town you actually live in — for remote work?
+
+Better than Amman in some ways. It is quieter. It is smaller. The food costs the same and is just as good. It is walkable — but it is hilly.
+
+<img src="/images/jordan/petrawalk.webp" alt="Hilly street in Wadi Musa near Petra, Jordan" style="width:100%;border-radius:8px;margin:1.5rem 0;" />
+<p style="font-size:0.875rem;color:#737373;margin-top:-1rem;margin-bottom:2rem;">Wadi Musa. It will get your cardio in check — whether you want it to or not.</p>
+
+It will get your cardio in check, that is for sure. But if you need a cab to go anywhere — that is where you realize the city was never meant for long-term tourists. Cab prices are insane. I got asked 15 JOD for a one-kilometer ride. I negotiated down to 5, and even that was a lot. I was simply too exhausted to argue after 25km on foot in Petra.
+
+There are AirBnBs in Wadi Musa. I never rented one, but I stayed at a newly opened hotel for just $50 a night. Beautiful building, great rooms, 5-star level service. The name was **Petra Legacy Luxury**. Check them out if you are heading there.
+
+---
+
+## The Bottom Line
+
+Is Jordan good for digital nomads? Yes — but not for everyone. Not for budget travelers. Not for people who need nightlife, cheap rent, or a coworking scene.
+
+Jordan does not yet have a digital nomad visa. There is a way to stay for 90 days, but it will cost you close to $100 to set up. The country is not optimized for remote workers the way Thailand or Portugal are. It does not try to be.
+
+What Jordan has instead is something harder to quantify. A sense of history that seeps into everything. Streets that feel ancient because they are. Food that makes you forget you are working. Skies that make you wish you had brought a tripod.
+
+If you can afford it, and you do not need the comforts of a well-trodden nomad hub — Jordan will surprise you.
+
+| Category | Details |
+|---|---|
+| **Monthly Budget** | $2,500–$4,500 (hotel + food + transport) |
+| **Best Area in Amman** | Embassy Street — quiet, safe, walkable |
+| **Housing** | $1,500–$3,000/month (hotel or AirBnB) |
+| **Food** | $15–20/meal, outstanding quality |
+| **Internet** | Adequate — hotel Wi-Fi + local SIM |
+| **Visa** | Tourist visa on arrival, extendable to 90 days (~$100) |
+| **ATM Warning** | Avoid ATMs — use Abu Sheikha Exchange |
+| **Day Trip** | Petra — $10 bus, 60 JOD 3-day pass |
+| **Best Hotel in Petra** | Petra Legacy Luxury — $50/night |
+
+Read the Nepal series for another off-the-beaten-path comparison: [Nepal: Pros](/blog/nepal-pros) · [Nepal: Cons](/blog/nepal-cons)
     `.trim(),
   },
 ];
