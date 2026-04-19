@@ -208,6 +208,64 @@ function getBodyContent(route) {
   return "";
 }
 
+// --- JSON-LD structured data ---
+
+const AUTHOR_LD = {
+  "@type": "Person",
+  name: "Ian Gabaraev",
+  url: BASE_URL,
+  jobTitle: "Lead Software Development Engineer",
+  sameAs: [
+    "https://www.linkedin.com/in/iangabaraev/",
+    "https://github.com/iangabaraev",
+  ],
+};
+
+function buildJsonLd(route) {
+  const post = posts.find((p) => route.path === `/blog/${p.slug}`);
+  if (post) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.date,
+      dateModified: post.date,
+      author: AUTHOR_LD,
+      publisher: { "@type": "Person", name: "Ian Gabaraev" },
+      mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}${route.path}` },
+      url: `${BASE_URL}${route.path}`,
+      keywords: post.tags.join(", "),
+    };
+  }
+
+  const guide = guides.find((g) => route.path === `/learn/${g.slug}`);
+  if (guide) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: guide.title,
+      description: guide.excerpt,
+      author: AUTHOR_LD,
+      mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}${route.path}` },
+      url: `${BASE_URL}${route.path}`,
+    };
+  }
+
+  if (route.path === "/" || route.path === "") {
+    return {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Ian Gabaraev",
+      url: BASE_URL,
+      author: AUTHOR_LD,
+      description: route.description,
+    };
+  }
+
+  return null;
+}
+
 // --- Generate HTML with meta tags + body content ---
 
 function generateHTML(route) {
@@ -254,6 +312,15 @@ function generateHTML(route) {
     /<meta name="twitter:url" content="[^"]*"/,
     `<meta name="twitter:url" content="${BASE_URL}${route.path}"`,
   );
+
+  // Inject JSON-LD structured data
+  const jsonLd = buildJsonLd(route);
+  if (jsonLd) {
+    html = html.replace(
+      '</head>',
+      `<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>\n</head>`,
+    );
+  }
 
   // Inject body content into <div id="root">
   const body = getBodyContent(route);
