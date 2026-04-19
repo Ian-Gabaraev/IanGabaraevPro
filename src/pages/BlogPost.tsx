@@ -44,11 +44,13 @@ const BlogPost = () => {
   const renderContent = (content: string) => {
     const lines = content.split("\n");
     const elements: React.ReactElement[] = [];
+    const skipLines = new Set<number>();
     let inCodeBlock = false;
     let codeContent: string[] = [];
     let codeLanguage = "";
 
     lines.forEach((line, index) => {
+      if (skipLines.has(index)) return;
       // Code blocks
       if (line.startsWith("```")) {
         if (!inCodeBlock) {
@@ -125,6 +127,50 @@ const BlogPost = () => {
       if (numberedMatch) {
         elements.push(
           <li key={index}>{parseInlineMarkdown(numberedMatch[2])}</li>,
+        );
+        return;
+      }
+
+      // Tables
+      if (
+        line.includes("|") &&
+        index + 1 < lines.length &&
+        /^\s*\|?[\s:-]+\|[\s|:-]*$/.test(lines[index + 1])
+      ) {
+        const parseRow = (r: string) =>
+          r.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+        const header = parseRow(line);
+        skipLines.add(index + 1);
+        const rows: string[][] = [];
+        for (let j = index + 2; j < lines.length; j++) {
+          if (lines[j].includes("|") && lines[j].trim() !== "") {
+            rows.push(parseRow(lines[j]));
+            skipLines.add(j);
+          } else {
+            break;
+          }
+        }
+        elements.push(
+          <div key={`table-${index}`} className="blog-table-wrap">
+            <table className="blog-table">
+              <thead>
+                <tr>
+                  {header.map((cell, ci) => (
+                    <th key={ci}>{parseInlineMarkdown(cell)}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row, ri) => (
+                  <tr key={ri}>
+                    {row.map((cell, ci) => (
+                      <td key={ci}>{parseInlineMarkdown(cell)}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>,
         );
         return;
       }

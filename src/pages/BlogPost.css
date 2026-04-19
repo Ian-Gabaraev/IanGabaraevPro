@@ -159,6 +159,33 @@
   font-size: 1.1em;
 }
 
+.blog-table-wrap {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.blog-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.blog-table th,
+.blog-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.blog-table th {
+  background: rgba(99, 102, 241, 0.08);
+  font-weight: 600;
+}
+
+.blog-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
 @media (max-width: 768px) {
   .post-header h1 {
     font-size: 1.75rem;

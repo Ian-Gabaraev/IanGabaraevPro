@@ -344,6 +344,8 @@ The following day would prove unforgettable.
 As much as I would love to dive into it all today, let me pause at a cliffhanger.
 
 *Next up: What I found when I analyzed the recordings — and why it changed everything.*
+
+Read the full series: [Why Bats?](/blog/why-bats) · [The Bat Sonar Project](/blog/bat-sonar-p2) · [Building a Real-Time Detector](/blog/ultrasonic-bat-detection)
     `.trim(),
   },
   {
@@ -474,7 +476,9 @@ This will be a series of posts. I'll be describing the development of the projec
 
 Gathering bat noise is definitely one of the best parts of this.
 
-*Next up: Sound fundamentals — wavelength, sampling rate, Nyquist, and FFT.*
+*Next up: [Field Recording in Vietnamese Caves](/blog/unknown-bat) — where I take the mic into the Marble Mountains.*
+
+Read the full series: [Why Bats?](/blog/why-bats) · [Building a Real-Time Detector](/blog/ultrasonic-bat-detection)
     `.trim(),
   },
   {
@@ -552,6 +556,8 @@ So here is the question: would you ever be brave enough to try remote work in Ne
 Nepal does not yet have a dedicated digital nomad visa — you will enter on a standard tourist visa, which is straightforward and available on arrival. That alone puts it ahead of many countries that make visa processes a nightmare for location-independent workers.
 
 If you do decide to go, [Nomad Atlas](https://nomadatlas.dev) will do its best to give you smart recommendations, help you make better travel decisions, and warn you about severe weather before it becomes your problem.
+
+Read the other side of the story: [Beautiful, Brutal, Honest — The Other Side of Nepal](/blog/nepal-cons)
     `.trim(),
   },
   {
@@ -729,6 +735,10 @@ My approach: **FD for live preview, TE for analysis**. Store originals in a fold
 I'm training neural networks on spectrogram images for automated species classification. Dataset: my recordings from Vietnam plus public bat call libraries.
 
 Coming up: FFT implementation details, spectrogram generation, and the neural network architecture.
+
+---
+
+Read the rest of the Bat Sonar series: [The Bat Sonar Project](/blog/bat-sonar-p2) · [Field Recording in Vietnamese Caves](/blog/unknown-bat) · [Building a Real-Time Detector](/blog/ultrasonic-bat-detection)
     `.trim(),
   },
   {
@@ -825,6 +835,10 @@ Different bat species have distinct call patterns:
 ## Next Steps
 
 I'm building a neural network classifier using spectrograms to automate species ID. More on that in a future post.
+
+---
+
+Read the full series: [Why Bats?](/blog/why-bats) · [The Bat Sonar Project](/blog/bat-sonar-p2) · [Field Recording in Vietnamese Caves](/blog/unknown-bat)
     `.trim(),
   },
   {
@@ -1078,9 +1092,9 @@ If you can afford it, and you do not need the comforts of a well-trodden nomad h
 
 | Category | Details |
 |---|---|
-| **Monthly Budget** | $2,500–$4,500 (hotel + food + transport) |
+| **Monthly Budget** | $2,500–4,500 (hotel + food + transport) |
 | **Best Area in Amman** | Embassy Street — quiet, safe, walkable |
-| **Housing** | $1,500–$3,000/month (hotel or AirBnB) |
+| **Housing** | $1,500–3,000/month (hotel or AirBnB) |
 | **Food** | $15–20/meal, outstanding quality |
 | **Internet** | Adequate — hotel Wi-Fi + local SIM |
 | **Visa** | Tourist visa on arrival, extendable to 90 days (~$100) |
