@@ -81,13 +81,13 @@ const LearnGuide = () => {
         <meta name="keywords" content={guide.tags.join(", ")} />
         <link
           rel="canonical"
-          href={`https://iangabaraev.com/learn/${guide.slug}`}
+          href={`https://iangabaraev.com/learn/${guide.slug}/`}
         />
         <meta property="og:title" content={`${guide.title} | Ian Gabaraev`} />
         <meta property="og:description" content={guide.excerpt} />
         <meta
           property="og:url"
-          content={`https://iangabaraev.com/learn/${guide.slug}`}
+          content={`https://iangabaraev.com/learn/${guide.slug}/`}
         />
         <meta property="og:type" content="article" />
         <meta property="og:image" content="https://iangabaraev.com/og-image.png" />
