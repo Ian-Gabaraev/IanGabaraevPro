@@ -31,13 +31,13 @@ const Learn = () => {
           name="description"
           content="Learning guides on JavaScript, TypeScript, React, Node.js, and practical full stack engineering topics."
         />
-        <link rel="canonical" href="https://iangabaraev.com/learn" />
+        <link rel="canonical" href="https://iangabaraev.com/learn/" />
         <meta property="og:title" content="Learn | Ian Gabaraev" />
         <meta
           property="og:description"
           content="Practical learning guides for JavaScript, TypeScript, React, and Node.js."
         />
-        <meta property="og:url" content="https://iangabaraev.com/learn" />
+        <meta property="og:url" content="https://iangabaraev.com/learn/" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://iangabaraev.com/og-image.png" />
       </Helmet>

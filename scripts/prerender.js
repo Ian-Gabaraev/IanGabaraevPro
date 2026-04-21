@@ -233,8 +233,8 @@ function buildJsonLd(route) {
       dateModified: post.date,
       author: AUTHOR_LD,
       publisher: { "@type": "Person", name: "Ian Gabaraev" },
-      mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}${route.path}` },
-      url: `${BASE_URL}${route.path}`,
+      mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}${route.path}/` },
+      url: `${BASE_URL}${route.path}/`,
       keywords: post.tags.join(", "),
     };
   }
@@ -247,8 +247,8 @@ function buildJsonLd(route) {
       headline: guide.title,
       description: guide.excerpt,
       author: AUTHOR_LD,
-      mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}${route.path}` },
-      url: `${BASE_URL}${route.path}`,
+      mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}${route.path}/` },
+      url: `${BASE_URL}${route.path}/`,
     };
   }
 
@@ -282,11 +282,11 @@ function generateHTML(route) {
   );
   html = html.replace(
     /<link rel="canonical" href="[^"]*"/,
-    `<link rel="canonical" href="${BASE_URL}${route.path}"`,
+    `<link rel="canonical" href="${BASE_URL}${route.path}/"`,
   );
   html = html.replace(
     /<meta property="og:url" content="[^"]*"/,
-    `<meta property="og:url" content="${BASE_URL}${route.path}"`,
+    `<meta property="og:url" content="${BASE_URL}${route.path}/"`,
   );
   html = html.replace(
     /<meta property="og:title" content="[^"]*"/,
@@ -310,7 +310,7 @@ function generateHTML(route) {
   );
   html = html.replace(
     /<meta name="twitter:url" content="[^"]*"/,
-    `<meta name="twitter:url" content="${BASE_URL}${route.path}"`,
+    `<meta name="twitter:url" content="${BASE_URL}${route.path}/"`,
   );
 
   // Inject JSON-LD structured data
@@ -355,8 +355,8 @@ const rssItems = sortedPosts
     (post) =>
       `    <item>
       <title>${escapeHtml(post.title)}</title>
-      <link>${BASE_URL}/blog/${post.slug}</link>
-      <guid isPermaLink="true">${BASE_URL}/blog/${post.slug}</guid>
+      <link>${BASE_URL}/blog/${post.slug}/</link>
+      <guid isPermaLink="true">${BASE_URL}/blog/${post.slug}/</guid>
       <description>${escapeHtml(post.excerpt)}</description>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
       <author>iandevhkt@gmail.com (Ian Gabaraev)</author>

@@ -55,13 +55,13 @@ const Blog = () => {
           name="description"
           content="Articles by Ian Gabaraev on software engineering, full stack development, bioacoustics, DSP, machine learning, React, Python, and cloud architecture."
         />
-        <link rel="canonical" href="https://iangabaraev.com/blog" />
+        <link rel="canonical" href="https://iangabaraev.com/blog/" />
         <meta property="og:title" content="Blog | Ian Gabaraev" />
         <meta
           property="og:description"
           content="Articles on software engineering, full stack development, bioacoustics, DSP, machine learning, and cloud architecture."
         />
-        <meta property="og:url" content="https://iangabaraev.com/blog" />
+        <meta property="og:url" content="https://iangabaraev.com/blog/" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://iangabaraev.com/og-image.png" />
         <script type="application/ld+json">

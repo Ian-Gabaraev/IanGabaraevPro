@@ -209,13 +209,13 @@ const BlogPost = () => {
         <meta name="description" content={post.excerpt} />
         <link
           rel="canonical"
-          href={`https://iangabaraev.com/blog/${post.slug}`}
+          href={`https://iangabaraev.com/blog/${post.slug}/`}
         />
         <meta property="og:title" content={`${post.title} | Ian Gabaraev`} />
         <meta property="og:description" content={post.excerpt} />
         <meta
           property="og:url"
-          content={`https://iangabaraev.com/blog/${post.slug}`}
+          content={`https://iangabaraev.com/blog/${post.slug}/`}
         />
         <meta property="og:type" content="article" />
         <meta property="og:image" content="https://iangabaraev.com/og-image.png" />

@@ -127,7 +127,7 @@ const Quiz = () => {
           name="description"
           content="Free interactive quizzes on JavaScript, TypeScript, React, Node.js, CSS, and AWS. Test your frontend development and cloud skills with 200+ questions."
         />
-        <link rel="canonical" href="https://iangabaraev.com/quiz" />
+        <link rel="canonical" href="https://iangabaraev.com/quiz/" />
         <meta
           property="og:title"
           content="Quiz | Test Your Frontend & AWS Skills"
@@ -136,7 +136,7 @@ const Quiz = () => {
           property="og:description"
           content="Free interactive quizzes on JavaScript, TypeScript, React, Node.js, and AWS. 200+ questions to test your skills."
         />
-        <meta property="og:url" content="https://iangabaraev.com/quiz" />
+        <meta property="og:url" content="https://iangabaraev.com/quiz/" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://iangabaraev.com/og-image.png" />
         <script type="application/ld+json">
