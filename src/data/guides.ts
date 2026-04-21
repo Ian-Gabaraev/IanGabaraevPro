@@ -10,6 +10,16 @@ export interface Guide {
 
 export const guides: Guide[] = [
   {
+    slug: "aws-dva-c02",
+    title: "AWS DVA-C02 Developer Associate Exam Guide",
+    date: "2026-04-20",
+    excerpt:
+      "Complete study notes for the AWS Developer Associate certification covering compute, storage, databases, serverless, CI/CD, monitoring, security, and 100+ self-exam questions.",
+    tags: ["AWS", "Cloud", "Certification", "Serverless", "DevOps"],
+    markdownPath: "/aws-dva-c02.md",
+    featured: true,
+  },
+  {
     slug: "full-stack-interview-prep",
     title: "Frontend Interview Prep: JavaScript & TypeScript",
     date: "2026-03-29",

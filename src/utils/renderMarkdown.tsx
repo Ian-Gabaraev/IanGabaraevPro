@@ -298,6 +298,55 @@ export const renderMarkdownContent = (content: string): ReactElement[] => {
       continue;
     }
 
+    if (trimmed.startsWith("<details>") || trimmed === "<details>") {
+      const summaryMatch = trimmed.match(
+        /<summary>(.+?)<\/summary>/,
+      );
+      let summaryText = "";
+      const bodyLines: string[] = [];
+      index += 1;
+
+      if (summaryMatch) {
+        summaryText = summaryMatch[1];
+      }
+
+      if (!summaryText && index < lines.length) {
+        const nextLine = lines[index].trim();
+        const sm = nextLine.match(/<summary>(.+?)<\/summary>/);
+        if (sm) {
+          summaryText = sm[1];
+          index += 1;
+        }
+      }
+
+      while (index < lines.length && !lines[index].trim().startsWith("</details>")) {
+        bodyLines.push(lines[index]);
+        index += 1;
+      }
+      if (index < lines.length) {
+        index += 1;
+      }
+
+      const bodyContent = bodyLines
+        .filter((l) => l.trim() !== "")
+        .map((l) => l.trim().replace(/^>\s?/, ""))
+        .join(" ");
+
+      elements.push(
+        <details key={`details-${index}`} className="learn-details">
+          <summary>
+            {renderInlineMarkdown(summaryText, `summary-${index}`)}
+          </summary>
+          <div className="learn-details-body">
+            <p>
+              {renderInlineMarkdown(bodyContent, `details-body-${index}`)}
+            </p>
+          </div>
+        </details>,
+      );
+      continue;
+    }
+
     if (trimmed.startsWith("<")) {
       const htmlLines: string[] = [];
       while (index < lines.length && lines[index].trim() !== "") {

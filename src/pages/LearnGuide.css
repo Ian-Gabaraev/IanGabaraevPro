@@ -180,6 +180,54 @@
   margin: 2rem 0;
 }
 
+.learn-details {
+  margin: 1rem 0;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.learn-details summary {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  transition: background 0.2s;
+  list-style: none;
+}
+
+.learn-details summary::before {
+  content: "▶";
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 0.75rem;
+  transition: transform 0.2s;
+}
+
+.learn-details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.learn-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.learn-details summary:hover {
+  background: var(--bg-tertiary, var(--bg-secondary));
+}
+
+.learn-details-body {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.learn-details-body p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 @media (max-width: 768px) {
   .learn-guide-header h1 {
     font-size: 1.8rem;
