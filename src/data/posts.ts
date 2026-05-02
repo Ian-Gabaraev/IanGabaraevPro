@@ -12,6 +12,7 @@ export interface BlogPost {
 export const posts: BlogPost[] = [
   {
     favorite: false,
+    hidden: true,
     slug: "upgrading-to-django-6",
     title: "Upgrading to Django 6: Everything That Went Wrong",
     date: "2026-04-25",
