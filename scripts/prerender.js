@@ -386,3 +386,44 @@ ${rssItems}
 writeFileSync(join(DIST, "feed.xml"), rssFeed);
 console.log("  ✓ /feed.xml (RSS feed)");
 
+// --- Generate sitemap.xml ---
+// Generated from the same posts/guides data used for prerendering + RSS, so it can
+// never drift out of sync (e.g. missing new content or listing hidden posts).
+
+const today = new Date().toISOString().slice(0, 10);
+
+const sortedGuides = [...guides].sort(
+  (a, b) => new Date(b.date) - new Date(a.date),
+);
+
+function urlEntry(loc, lastmod, changefreq, priority) {
+  return `  <url>
+    <loc>${loc}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+}
+
+const sitemapUrls = [
+  urlEntry(`${BASE_URL}/`, today, "monthly", "1.0"),
+  urlEntry(`${BASE_URL}/blog/`, today, "weekly", "0.9"),
+  ...sortedPosts.map((post) =>
+    urlEntry(`${BASE_URL}/blog/${post.slug}/`, post.date, "monthly", "0.8"),
+  ),
+  urlEntry(`${BASE_URL}/quiz/`, today, "weekly", "0.9"),
+  urlEntry(`${BASE_URL}/learn/`, today, "weekly", "0.9"),
+  ...sortedGuides.map((guide) =>
+    urlEntry(`${BASE_URL}/learn/${guide.slug}/`, guide.date, "monthly", "0.8"),
+  ),
+];
+
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls.join("\n")}
+</urlset>
+`;
+
+writeFileSync(join(DIST, "sitemap.xml"), sitemapXml);
+console.log(`  ✓ /sitemap.xml (${sitemapUrls.length} URLs)`);
+
