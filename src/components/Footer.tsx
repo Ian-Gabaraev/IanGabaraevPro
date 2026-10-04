@@ -5,8 +5,16 @@ const Footer = () => {
 
   return (
     <footer className="footer">
-      <div className="container">
+      <div className="container footer-content">
         <p>&copy; {year} Ian Gabaraev</p>
+        <a
+          href="https://iangabaraev.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-link"
+        >
+          Technical Blog
+        </a>
       </div>
     </footer>
   );

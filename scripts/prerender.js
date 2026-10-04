@@ -218,6 +218,7 @@ const AUTHOR_LD = {
   sameAs: [
     "https://www.linkedin.com/in/iangabaraev/",
     "https://github.com/iangabaraev",
+    "https://iangabaraev.dev",
   ],
 };
 

@@ -3,7 +3,26 @@
   border-top: 1px solid var(--border-color);
 }
 
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
 .footer p {
   color: var(--text-secondary);
   font-size: 0.875rem;
+}
+
+.footer-link {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: var(--text-primary, var(--accent-color, #fff));
 }

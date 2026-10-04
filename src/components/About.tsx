@@ -61,7 +61,17 @@ const About = () => {
                   Bat Sonar
                 </a>
                 , the ultrasonic bat detection systems combining DSP with
-                machine learning.
+                machine learning. I also write about backend architecture,
+                cloud systems, and software engineering practice on my{" "}
+                <a
+                  href="https://iangabaraev.dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-link"
+                >
+                  technical blog
+                </a>
+                .
               </p>
             </div>
 
