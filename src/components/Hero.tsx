@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "./Icons";
+import { GithubIcon, LinkedinIcon, ShutterstockIcon } from "./Icons";
 import "./Hero.css";
 
 const Hero = () => {
@@ -62,6 +62,14 @@ const Hero = () => {
             className="hero-social"
           >
             <LinkedinIcon size={20} />
+          </a>
+          <a
+            href="https://www.shutterstock.com/g/Ian+Gabaraev/about"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-social"
+          >
+            <ShutterstockIcon size={20} />
           </a>
         </motion.div>
       </div>

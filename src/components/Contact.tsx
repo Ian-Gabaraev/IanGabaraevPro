@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "./Icons";
+import { GithubIcon, LinkedinIcon, ShutterstockIcon } from "./Icons";
 import "./Contact.css";
 
 const Contact = () => {
@@ -43,6 +43,14 @@ const Contact = () => {
             >
               <LinkedinIcon size={20} />
               <span>LinkedIn</span>
+            </a>
+            <a
+              href="https://www.shutterstock.com/g/Ian+Gabaraev/about"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ShutterstockIcon size={20} />
+              <span>Shutterstock</span>
             </a>
           </div>
         </motion.div>

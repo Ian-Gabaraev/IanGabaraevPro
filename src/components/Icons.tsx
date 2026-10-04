@@ -21,6 +21,22 @@ export const GithubIcon: React.FC<IconProps> = ({
   </svg>
 );
 
+export const ShutterstockIcon: React.FC<IconProps> = ({
+  size = 24,
+  className = "",
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.97 8.374c-.517-.615-1.302-.979-2.253-.979-1.635 0-2.646 1.056-2.646 2.302 0 1.14.732 1.737 2.253 2.129l.84.212c2.013.512 3.329 1.49 3.329 3.42 0 2.311-1.953 3.845-4.823 3.845-2.272 0-3.98-.904-4.95-2.469l1.883-1.368c.6.942 1.569 1.566 2.981 1.566 1.329 0 2.218-.614 2.218-1.504 0-.86-.6-1.287-2.1-1.671l-.84-.212c-2.218-.567-3.482-1.681-3.482-3.558 0-2.159 1.788-3.792 4.483-3.792 1.995 0 3.504.804 4.464 2.144l-1.857 1.935z" />
+  </svg>
+);
+
 export const LinkedinIcon: React.FC<IconProps> = ({
   size = 24,
   className = "",
